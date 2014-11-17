@@ -137,6 +137,38 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9A0F68701A1A7A210088146F /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0AA8B77F1A1A75EE00A23C39 /* ViewController.h */,
+				0AA8B7801A1A75EE00A23C39 /* ViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		9A0F68711A1A7A280088146F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		9A0F68721A1A7A2D0088146F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9A0F68741A1A7B190088146F /* SMNetworkController.h */,
+				9A0F68751A1A7B190088146F /* SMNetworkController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		9A0F68731A1A7A330088146F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
