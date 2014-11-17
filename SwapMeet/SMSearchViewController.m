@@ -19,6 +19,10 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ADDED_FAVORITE" object:self userInfo:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
