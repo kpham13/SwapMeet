@@ -12,9 +12,9 @@
 
 @interface Match : NSManagedObject
 
-@property (nonatomic, retain) NSString * destination_email;
-@property (nonatomic, retain) NSNumber * destination_game_id;
-@property (nonatomic, retain) NSString * origin_email;
-@property (nonatomic, retain) NSNumber * origin_game_id;
+@property (nonatomic, retain) NSString * destinationEmail;
+@property (nonatomic, retain) NSNumber * destinationGameID;
+@property (nonatomic, retain) NSString * originEmail;
+@property (nonatomic, retain) NSNumber * originGameID;
 
 @end
