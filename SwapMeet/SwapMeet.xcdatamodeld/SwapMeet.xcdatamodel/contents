@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Game" representedClassName="SwapMeet.Game" syncable="YES">
+    <entity name="Game" representedClassName="Game" syncable="YES">
         <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="gameID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="platform" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Match" representedClassName="SwapMeet.Match" syncable="YES">
-        <attribute name="destination_email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="destination_game_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="origin_email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="origin_game_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    <entity name="Match" representedClassName="Match" syncable="YES">
+        <attribute name="destinationEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="destinationGameID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="originEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="originGameID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
         <element name="Game" positionX="-54" positionY="-9" width="128" height="103"/>
