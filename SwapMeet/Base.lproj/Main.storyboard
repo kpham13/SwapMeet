@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Favorites View Controller-->
         <scene sceneID="nqS-Br-kP9">
             <objects>
-                <viewController id="9Rh-R8-wMw" sceneMemberID="viewController">
+                <viewController id="9Rh-R8-wMw" customClass="SMFavoritesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8xh-Rz-3Wq"/>
                         <viewControllerLayoutGuide type="bottom" id="H4r-c8-JsF"/>
@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="944" y="1112"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="Kzl-UZ-a6w">
             <objects>
-                <viewController id="Yb5-xL-fHA" sceneMemberID="viewController">
+                <viewController id="Yb5-xL-fHA" customClass="SMProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YWz-NM-qLU"/>
                         <viewControllerLayoutGuide type="bottom" id="ZZC-ef-0kN"/>
@@ -36,16 +36,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Z7B-g6-gV2"/>
+                    <tabBarItem key="tabBarItem" title="Profile" id="Z7B-g6-gV2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKT-h8-SzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="570" y="2445"/>
         </scene>
-        <!--View Controller-->
+        <!--Matches View Controller-->
         <scene sceneID="XYp-Tr-tdH">
             <objects>
-                <viewController id="kDX-me-hVu" sceneMemberID="viewController">
+                <viewController id="kDX-me-hVu" customClass="SMMatchesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C9J-9S-1N3"/>
                         <viewControllerLayoutGuide type="bottom" id="xrY-Y8-j2z"/>
@@ -61,10 +61,10 @@
             </objects>
             <point key="canvasLocation" x="944" y="1786"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="UH3-VE-eS5">
             <objects>
-                <viewController id="hRt-Hz-bhQ" sceneMemberID="viewController">
+                <viewController id="hRt-Hz-bhQ" customClass="SMSearchViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fuF-dq-4QH"/>
                         <viewControllerLayoutGuide type="bottom" id="Lri-JK-G0o"/>

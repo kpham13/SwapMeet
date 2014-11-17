@@ -14,6 +14,10 @@
 		0AA8B7861A1A75EE00A23C39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7851A1A75EE00A23C39 /* Images.xcassets */; };
 		0AA8B7891A1A75EE00A23C39 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */; };
 		0AA8B7951A1A75EE00A23C39 /* SwapMeetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7941A1A75EE00A23C39 /* SwapMeetTests.m */; };
+		287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */; };
+		287BF0C41A1A7BC9008C3CCD /* SMFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C31A1A7BC9008C3CCD /* SMFavoritesViewController.m */; };
+		287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */; };
+		287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +43,14 @@
 		0AA8B78E1A1A75EE00A23C39 /* SwapMeetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapMeetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA8B7931A1A75EE00A23C39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA8B7941A1A75EE00A23C39 /* SwapMeetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwapMeetTests.m; sourceTree = "<group>"; };
+		287BF0BF1A1A7BA9008C3CCD /* SMProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProfileViewController.h; sourceTree = "<group>"; };
+		287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProfileViewController.m; sourceTree = "<group>"; };
+		287BF0C21A1A7BC9008C3CCD /* SMFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMFavoritesViewController.h; sourceTree = "<group>"; };
+		287BF0C31A1A7BC9008C3CCD /* SMFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMFavoritesViewController.m; sourceTree = "<group>"; };
+		287BF0C51A1A7BDB008C3CCD /* SMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSearchViewController.h; sourceTree = "<group>"; };
+		287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSearchViewController.m; sourceTree = "<group>"; };
+		287BF0C81A1A7BF1008C3CCD /* SMMatchesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMMatchesViewController.h; sourceTree = "<group>"; };
+		287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMMatchesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +94,14 @@
 			children = (
 				0AA8B7791A1A75ED00A23C39 /* AppDelegate.h */,
 				0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */,
+				287BF0BF1A1A7BA9008C3CCD /* SMProfileViewController.h */,
+				287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */,
+				287BF0C21A1A7BC9008C3CCD /* SMFavoritesViewController.h */,
+				287BF0C31A1A7BC9008C3CCD /* SMFavoritesViewController.m */,
+				287BF0C51A1A7BDB008C3CCD /* SMSearchViewController.h */,
+				287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */,
+				287BF0C81A1A7BF1008C3CCD /* SMMatchesViewController.h */,
+				287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */,
 				0AA8B7821A1A75EE00A23C39 /* Main.storyboard */,
 				0AA8B7851A1A75EE00A23C39 /* Images.xcassets */,
 				0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */,
@@ -217,6 +237,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */,
+				287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */,
+				287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */,
+				287BF0C41A1A7BC9008C3CCD /* SMFavoritesViewController.m in Sources */,
 				0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */,
 				0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */,
 				0AA8B7781A1A75ED00A23C39 /* main.m in Sources */,
