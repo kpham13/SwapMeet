@@ -10,4 +10,8 @@
 
 @interface SMProfileViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *userImageView;
+@property (weak, nonatomic) IBOutlet UITextView *lookingForTextField;
+
 @end

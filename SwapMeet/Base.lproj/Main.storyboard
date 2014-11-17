@@ -35,9 +35,64 @@
                     <view key="view" contentMode="scaleToFill" id="ykx-1P-cb1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bws-pR-8aT">
+                                <rect key="frame" x="16" y="28" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="aFc-iL-v5L"/>
+                                    <constraint firstAttribute="width" constant="150" id="qCd-gl-uZP"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FNX-m8-JZ8">
+                                <rect key="frame" x="0.0" y="186" width="600" height="414"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking For:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pw-fI-Dxc">
+                                <rect key="frame" x="174" y="57" width="410" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKL-8s-GZ5">
+                                <rect key="frame" x="174" y="80" width="410" height="98"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOz-Eu-WCb">
+                                <rect key="frame" x="174" y="28" width="410" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BKL-8s-GZ5" firstAttribute="trailing" secondItem="ykx-1P-cb1" secondAttribute="trailingMargin" id="Bk1-of-nH2"/>
+                            <constraint firstItem="gOz-Eu-WCb" firstAttribute="top" secondItem="YWz-NM-qLU" secondAttribute="bottom" constant="8" id="C7Y-RH-xvY"/>
+                            <constraint firstItem="gOz-Eu-WCb" firstAttribute="trailing" secondItem="ykx-1P-cb1" secondAttribute="trailingMargin" id="C8t-uZ-QS9"/>
+                            <constraint firstItem="0pw-fI-Dxc" firstAttribute="trailing" secondItem="ykx-1P-cb1" secondAttribute="trailingMargin" id="CLW-IQ-LSp"/>
+                            <constraint firstItem="0pw-fI-Dxc" firstAttribute="top" secondItem="gOz-Eu-WCb" secondAttribute="bottom" constant="8" id="Cl9-Oy-jAg"/>
+                            <constraint firstItem="gOz-Eu-WCb" firstAttribute="leading" secondItem="Bws-pR-8aT" secondAttribute="trailing" constant="8" id="GOh-P1-Ehf"/>
+                            <constraint firstItem="Bws-pR-8aT" firstAttribute="top" secondItem="YWz-NM-qLU" secondAttribute="bottom" constant="8" id="Kyx-hS-CSw"/>
+                            <constraint firstItem="BKL-8s-GZ5" firstAttribute="top" secondItem="0pw-fI-Dxc" secondAttribute="bottom" constant="8" id="UHI-EK-8bs"/>
+                            <constraint firstItem="BKL-8s-GZ5" firstAttribute="leading" secondItem="Bws-pR-8aT" secondAttribute="trailing" constant="8" id="WwM-c8-J8p"/>
+                            <constraint firstItem="0pw-fI-Dxc" firstAttribute="leading" secondItem="Bws-pR-8aT" secondAttribute="trailing" constant="8" id="aQ2-N2-Zyj"/>
+                            <constraint firstItem="FNX-m8-JZ8" firstAttribute="top" secondItem="Bws-pR-8aT" secondAttribute="bottom" constant="8" id="dcR-ah-jBm"/>
+                            <constraint firstItem="FNX-m8-JZ8" firstAttribute="leading" secondItem="ykx-1P-cb1" secondAttribute="leadingMargin" constant="-16" id="ezy-Fn-fbJ"/>
+                            <constraint firstItem="FNX-m8-JZ8" firstAttribute="bottom" secondItem="ykx-1P-cb1" secondAttribute="bottomMargin" id="lUe-rP-orQ"/>
+                            <constraint firstItem="Bws-pR-8aT" firstAttribute="leading" secondItem="ykx-1P-cb1" secondAttribute="leadingMargin" id="nJJ-bX-aiO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FNX-m8-JZ8" secondAttribute="trailing" constant="-16" id="wOK-Yr-gLv"/>
+                            <constraint firstItem="FNX-m8-JZ8" firstAttribute="top" secondItem="BKL-8s-GZ5" secondAttribute="bottom" constant="8" id="xxy-eb-e2Z"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="ProfileTabIcon" id="Z7B-g6-gV2"/>
+                    <connections>
+                        <outlet property="lookingForTextField" destination="BKL-8s-GZ5" id="SH8-EG-WdM"/>
+                        <outlet property="userImageView" destination="Bws-pR-8aT" id="FN5-zA-KWg"/>
+                        <outlet property="userNameLabel" destination="gOz-Eu-WCb" id="efZ-3o-Ra4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKT-h8-SzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
