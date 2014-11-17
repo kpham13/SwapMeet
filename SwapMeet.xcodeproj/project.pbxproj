@@ -10,11 +10,16 @@
 		0AA8B7781A1A75ED00A23C39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7771A1A75ED00A23C39 /* main.m */; };
 		0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */; };
 		0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B77C1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld */; };
-		0AA8B7811A1A75EE00A23C39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7801A1A75EE00A23C39 /* ViewController.m */; };
 		0AA8B7841A1A75EE00A23C39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7821A1A75EE00A23C39 /* Main.storyboard */; };
 		0AA8B7861A1A75EE00A23C39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7851A1A75EE00A23C39 /* Images.xcassets */; };
 		0AA8B7891A1A75EE00A23C39 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */; };
 		0AA8B7951A1A75EE00A23C39 /* SwapMeetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7941A1A75EE00A23C39 /* SwapMeetTests.m */; };
+		0AAE32771A1AB4B20022476E /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE32761A1AB4B20022476E /* Match.m */; };
+		0AAE327A1A1AB4B30022476E /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE32791A1AB4B30022476E /* Game.m */; };
+		287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */; };
+		287BF0C41A1A7BC9008C3CCD /* SMFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C31A1A7BC9008C3CCD /* SMFavoritesViewController.m */; };
+		287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */; };
+		287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */; };
 		9A0F68761A1A7B190088146F /* SMNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68751A1A7B190088146F /* SMNetworkController.m */; };
 /* End PBXBuildFile section */
 
@@ -35,14 +40,24 @@
 		0AA8B7791A1A75ED00A23C39 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0AA8B77D1A1A75EE00A23C39 /* SwapMeet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwapMeet.xcdatamodel; sourceTree = "<group>"; };
-		0AA8B77F1A1A75EE00A23C39 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0AA8B7801A1A75EE00A23C39 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0AA8B7831A1A75EE00A23C39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0AA8B7851A1A75EE00A23C39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0AA8B7881A1A75EE00A23C39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0AA8B78E1A1A75EE00A23C39 /* SwapMeetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapMeetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA8B7931A1A75EE00A23C39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA8B7941A1A75EE00A23C39 /* SwapMeetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwapMeetTests.m; sourceTree = "<group>"; };
+		0AAE32751A1AB4B20022476E /* Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Match.h; sourceTree = "<group>"; };
+		0AAE32761A1AB4B20022476E /* Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Match.m; sourceTree = "<group>"; };
+		0AAE32781A1AB4B30022476E /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		0AAE32791A1AB4B30022476E /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		287BF0BF1A1A7BA9008C3CCD /* SMProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProfileViewController.h; sourceTree = "<group>"; };
+		287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProfileViewController.m; sourceTree = "<group>"; };
+		287BF0C21A1A7BC9008C3CCD /* SMFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMFavoritesViewController.h; sourceTree = "<group>"; };
+		287BF0C31A1A7BC9008C3CCD /* SMFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMFavoritesViewController.m; sourceTree = "<group>"; };
+		287BF0C51A1A7BDB008C3CCD /* SMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSearchViewController.h; sourceTree = "<group>"; };
+		287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSearchViewController.m; sourceTree = "<group>"; };
+		287BF0C81A1A7BF1008C3CCD /* SMMatchesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMMatchesViewController.h; sourceTree = "<group>"; };
+		287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMMatchesViewController.m; sourceTree = "<group>"; };
 		9A0F68741A1A7B190088146F /* SMNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNetworkController.h; sourceTree = "<group>"; };
 		9A0F68751A1A7B190088146F /* SMNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworkController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,9 +107,7 @@
 				9A0F68731A1A7A330088146F /* Models */,
 				9A0F68721A1A7A2D0088146F /* Controllers */,
 				9A0F68711A1A7A280088146F /* Views */,
-				0AA8B7821A1A75EE00A23C39 /* Main.storyboard */,
 				0AA8B7851A1A75EE00A23C39 /* Images.xcassets */,
-				0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */,
 				0AA8B77C1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld */,
 				0AA8B7751A1A75ED00A23C39 /* Supporting Files */,
 			);
@@ -130,8 +143,14 @@
 		9A0F68701A1A7A210088146F /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0AA8B77F1A1A75EE00A23C39 /* ViewController.h */,
-				0AA8B7801A1A75EE00A23C39 /* ViewController.m */,
+				287BF0BF1A1A7BA9008C3CCD /* SMProfileViewController.h */,
+				287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */,
+				287BF0C21A1A7BC9008C3CCD /* SMFavoritesViewController.h */,
+				287BF0C31A1A7BC9008C3CCD /* SMFavoritesViewController.m */,
+				287BF0C51A1A7BDB008C3CCD /* SMSearchViewController.h */,
+				287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */,
+				287BF0C81A1A7BF1008C3CCD /* SMMatchesViewController.h */,
+				287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -139,6 +158,8 @@
 		9A0F68711A1A7A280088146F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0AA8B7821A1A75EE00A23C39 /* Main.storyboard */,
+				0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -155,6 +176,10 @@
 		9A0F68731A1A7A330088146F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0AAE32781A1AB4B30022476E /* Game.h */,
+				0AAE32791A1AB4B30022476E /* Game.m */,
+				0AAE32751A1AB4B20022476E /* Match.h */,
+				0AAE32761A1AB4B20022476E /* Match.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -259,10 +284,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */,
+				287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */,
+				287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */,
+				287BF0C41A1A7BC9008C3CCD /* SMFavoritesViewController.m in Sources */,
 				9A0F68761A1A7B190088146F /* SMNetworkController.m in Sources */,
+				0AAE327A1A1AB4B30022476E /* Game.m in Sources */,
 				0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */,
+				0AAE32771A1AB4B20022476E /* Match.m in Sources */,
 				0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */,
-				0AA8B7811A1A75EE00A23C39 /* ViewController.m in Sources */,
 				0AA8B7781A1A75ED00A23C39 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
