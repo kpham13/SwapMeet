@@ -10,7 +10,6 @@
 		0AA8B7781A1A75ED00A23C39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7771A1A75ED00A23C39 /* main.m */; };
 		0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */; };
 		0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B77C1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld */; };
-		0AA8B7811A1A75EE00A23C39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7801A1A75EE00A23C39 /* ViewController.m */; };
 		0AA8B7841A1A75EE00A23C39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7821A1A75EE00A23C39 /* Main.storyboard */; };
 		0AA8B7861A1A75EE00A23C39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7851A1A75EE00A23C39 /* Images.xcassets */; };
 		0AA8B7891A1A75EE00A23C39 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */; };
@@ -34,8 +33,6 @@
 		0AA8B7791A1A75ED00A23C39 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0AA8B77D1A1A75EE00A23C39 /* SwapMeet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwapMeet.xcdatamodel; sourceTree = "<group>"; };
-		0AA8B77F1A1A75EE00A23C39 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0AA8B7801A1A75EE00A23C39 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0AA8B7831A1A75EE00A23C39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0AA8B7851A1A75EE00A23C39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0AA8B7881A1A75EE00A23C39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -85,8 +82,6 @@
 			children = (
 				0AA8B7791A1A75ED00A23C39 /* AppDelegate.h */,
 				0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */,
-				0AA8B77F1A1A75EE00A23C39 /* ViewController.h */,
-				0AA8B7801A1A75EE00A23C39 /* ViewController.m */,
 				0AA8B7821A1A75EE00A23C39 /* Main.storyboard */,
 				0AA8B7851A1A75EE00A23C39 /* Images.xcassets */,
 				0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */,
@@ -224,7 +219,6 @@
 			files = (
 				0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */,
 				0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */,
-				0AA8B7811A1A75EE00A23C39 /* ViewController.m in Sources */,
 				0AA8B7781A1A75ED00A23C39 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +412,7 @@
 				0AA8B79A1A1A75EE00A23C39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0AA8B79B1A1A75EE00A23C39 /* Build configuration list for PBXNativeTarget "SwapMeetTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +421,7 @@
 				0AA8B79D1A1A75EE00A23C39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
