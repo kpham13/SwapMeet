@@ -17,8 +17,24 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
 @end
 @implementation NSDictionary (SMNetworkController)
 - (NSString *)encodedStringForHTTPBody {
-    // TODO: Implement
-    return @"";
+    NSMutableArray *partsArray = [NSMutableArray array];
+    for (id key in self) {
+        if ([key isKindOfClass:[NSString class]]) {
+            id value = self[key];
+            if ([value isKindOfClass:[NSString class]]) {
+                [partsArray addObject:[NSString stringWithFormat:@"%@=%@", [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+            }
+            else if ([value isKindOfClass:[NSNumber class]]) {
+                [partsArray addObject:[NSString stringWithFormat:@"%@=%@", [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], value]];
+            }
+            else
+                return nil;
+        }
+        else
+            return nil;
+    }
+    
+    return [partsArray componentsJoinedByString:@"&"];
 }
 @end
 
@@ -53,30 +69,46 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     return instance;
 }
 
-//func performRequestWithURLString(URLString: String, method: String = "GET", parameters: [NSString: AnyObject]? = nil, acceptJSONResponse: Bool = false, sendBodyAsJSON: Bool = false, completion: (data: NSData!, errorString: String!) -> Void) {
-
-//    
-//    session.dataTaskWithRequest(request, completionHandler: { (data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
-//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//            if let errorString = self.processResponse(response, error: error) {
-//                completion(data: data, errorString: errorString)
-//                return
-//            }
-//            
-//            if data == nil {
-//                completion(data: nil, errorString: "Fatal error! Request succeed, but data is nil!")
-//                return
-//            }
-//            
-//            completion(data: data, errorString: nil)
-//        })
-//    }).resume()
-//}
-
-
 + (NSString *)processResponse:(NSURLResponse *)response error:(NSError *)error {
-    // TODO: Implement
-    return @"";
+    if (error)
+        return error.localizedDescription;
+    
+    NSInteger code = ((NSHTTPURLResponse *)response).statusCode;
+    NSString *errorString = nil;
+    if (!((code >= 200) && (code < 300))) {
+        if ((code >= 400) && (code < 500)) {
+            errorString = @"Client error";
+        } else if ((code >= 500) && (code < 600)) {
+            errorString = @"Server error";
+        } else {
+            errorString = @"Unknown error";
+        }
+    }
+
+    if (errorString)
+        return [NSString stringWithFormat:@"%@: %ld", errorString, (long)code];
+    
+    return nil;
+}
+
++ (NSURLSessionDataTask *)performRequestWithURLPathString:(NSString *)URLPath
+                                                 method:(NSString *)method
+                                             parameters:(NSDictionary *)params
+                                     acceptJSONResponse:(BOOL)acceptJSONResponse
+                                         sendBodyAsJSON:(BOOL)bodyAsJSON
+                                             completion:(void(^)(NSData *data, NSString *errorString))completion {
+    NSString *baseURLString = [[self controller] baseURLString];
+    if (baseURLString) {
+        return [self performRequestWithURLString:[baseURLString stringByAppendingPathComponent:URLPath]
+                                          method:method parameters:params
+                              acceptJSONResponse:acceptJSONResponse
+                                  sendBodyAsJSON:bodyAsJSON
+                                      completion:completion];
+    }
+    else {
+        completion(nil, @"Base URL not set");
+        return nil;
+    }
 }
 
 + (NSURLSessionDataTask *)performRequestWithURLString:(NSString *)URLString
@@ -96,6 +128,8 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:kSMNetworkingDefaultTimeout];
     if (!request) {
         // TODO: Error
+        completion(nil, [NSString stringWithFormat:@"Couldn't form the request: %@", URLString]);
+        return nil;
     }
     
     request.HTTPMethod = method;
@@ -109,9 +143,11 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
             if (encodedString) {
                 request.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", URLString, encodedString]];
             } else {
-                // TODO: Error
+                completion(nil, [NSString stringWithFormat:@"Couldn't encode parameters: %@", params]);
+                return nil;
             }
-        } else if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"] || [method isEqualToString:@"PATCH"]) {
+        }
+        else if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"] || [method isEqualToString:@"PATCH"]) {
             NSData *bodyData = nil;
             if (bodyAsJSON) {
                 NSError *error;
@@ -141,8 +177,19 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
                                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
     {
         __block NSString *errorString = [self processResponse:response error:error];
+        __block void(^completionBlock)(NSData *data, NSString *errorString) = completion;
         dispatch_async(dispatch_get_main_queue(), ^{
-            //if (errorString)
+            if (errorString) {
+                completionBlock(nil, errorString);
+                return;
+            }
+            
+            if (!data) {
+                completionBlock(nil, @"Fatal error! Request succeed, but data is nil!");
+                return;
+            }
+            
+            completionBlock(data, nil);
         });
     }];
     

@@ -11,5 +11,6 @@
 @interface SMNetworkController : NSObject
 
 @property NSURLSession *session;
+@property NSString *baseURLString;
 
 @end
