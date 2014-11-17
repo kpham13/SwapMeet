@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jU2-Ea-ddM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Favorites-->
@@ -72,9 +73,32 @@
                     <view key="view" contentMode="scaleToFill" id="QRm-6m-Kdf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GA1-W7-NHP">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="tCd-C4-PaH">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GA1-W7-NHP" firstAttribute="leading" secondItem="QRm-6m-Kdf" secondAttribute="leadingMargin" constant="-16" id="17k-pH-bAm"/>
+                            <constraint firstItem="Lri-JK-G0o" firstAttribute="top" secondItem="GA1-W7-NHP" secondAttribute="bottom" id="4XK-gu-UwI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GA1-W7-NHP" secondAttribute="trailing" constant="-16" id="MAp-a1-MRE"/>
+                            <constraint firstItem="tCd-C4-PaH" firstAttribute="leading" secondItem="QRm-6m-Kdf" secondAttribute="leadingMargin" constant="-16" id="dkQ-zC-BxU"/>
+                            <constraint firstItem="GA1-W7-NHP" firstAttribute="top" secondItem="tCd-C4-PaH" secondAttribute="bottom" id="jxZ-uR-1Do"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tCd-C4-PaH" secondAttribute="trailing" constant="-16" id="uQO-0r-OGc"/>
+                            <constraint firstItem="tCd-C4-PaH" firstAttribute="top" secondItem="fuF-dq-4QH" secondAttribute="bottom" id="wz8-cm-ijj"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Search" image="SearchTabIcon" id="RSt-FK-LeQ"/>
+                    <connections>
+                        <outlet property="searchBar" destination="tCd-C4-PaH" id="fea-WS-7cZ"/>
+                        <outlet property="tableView" destination="GA1-W7-NHP" id="70k-Bq-0ns"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37A-Vv-tmC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
