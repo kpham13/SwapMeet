@@ -1,22 +1,22 @@
 //
-//  SMMatchesViewController.m
+//  SMLoginViewController.m
 //  SwapMeet
 //
-//  Created by Reid Weber on 11/17/14.
+//  Created by Kevin Pham on 11/17/14.
 //  Copyright (c) 2014 SwapMeet. All rights reserved.
 //
 
-#import "SMMatchesViewController.h"
+#import "SMLoginViewController.h"
 
-@interface SMMatchesViewController ()
+@interface SMLoginViewController ()
 
 @end
 
-@implementation SMMatchesViewController
+@implementation SMLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {

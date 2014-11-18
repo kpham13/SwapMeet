@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SMLoginViewController.h"
 
 @interface SMProfileViewController : UIViewController
 
