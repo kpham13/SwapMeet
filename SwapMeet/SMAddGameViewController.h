@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *titleTextView;
 @property (weak, nonatomic) IBOutlet UIPickerView *consolePickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *conditionPickerView;
 
 @end
