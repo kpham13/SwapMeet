@@ -99,10 +99,8 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     
     NSInteger code = ((NSHTTPURLResponse *)response).statusCode;
     NSString *errorString = nil;
-    if (!((code >= 200) && (code < 300))) {
-        if ((code >= 400) && (code < 500)) {
-            errorString = @"Client error";
-        } else if ((code >= 500) && (code < 600)) {
+    if (!((code >= 200) && (code < 500))) {
+        if ((code >= 500) && (code < 600)) {
             errorString = @"Server error";
         } else {
             errorString = @"Unknown error";

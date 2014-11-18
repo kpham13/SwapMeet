@@ -68,12 +68,15 @@
             if (error) {
                 errorString = [NSString stringWithFormat:@"Error converting JSON object: %@", error.localizedDescription];
             } else {
-                token = JSONObject[@"jwt"];
-                if (!token) {
-                    errorString = [NSString stringWithFormat:@"No token.\n%@", JSONObject];
-                } else {
-                    [[self controller] setToken:token];
-                    [[self controller] setValue:token forHTTPHeaderField:@"token"];
+                errorString = [self checkJSONResponse:JSONObject];
+                if (!errorString) {
+                    token = JSONObject[@"jwt"];
+                    if (!token) {
+                        errorString = [NSString stringWithFormat:@"No token.\n%@", JSONObject];
+                    } else {
+                        [[self controller] setToken:token];
+                        [[self controller] setValue:token forHTTPHeaderField:@"token"];
+                    }
                 }
             }
         }
@@ -109,10 +112,8 @@
             if (error) {
                 errorString = [NSString stringWithFormat:@"Error converting JSON object: %@", error.localizedDescription];
             } else {
-                NSNumber *errorNumber = JSONDic[@"error"];
-                if (!errorNumber) {
-                    errorString = @"No 'error' object in response";
-                } else {
+                errorString = [self checkJSONResponse:JSONDic];
+                if (!errorString) {
                     itemsLeft = [JSONDic[@"items_left"] integerValue];
                     JSONObjects = JSONDic[@"items"];
                 }
@@ -121,6 +122,41 @@
         
         completionBlock(JSONObjects, itemsLeft, errorString);
     }];
+}
+
++ (NSString *)checkJSONResponse:(NSDictionary *)JSONDic {
+    NSString *retVal = nil;
+    NSNumber *errorNumber = JSONDic[@"error"];
+    if (!errorNumber) {
+        retVal = @"No 'error' object in response";
+    } else {
+        NSInteger err = [errorNumber integerValue];
+        switch (err) {
+            case 0:
+                break;
+            case 1:
+                retVal = @"Fatal server error";
+                break;
+            case 2:
+                retVal = @"Cannot create user";
+                break;
+            case 3:
+                retVal = @"email and password cannot be the same";
+                break;
+            case 4:
+                retVal = @"Invalid password";
+                break;
+            case 5:
+                retVal = @"No data to return";
+                break;
+                
+            default:
+                retVal = @"Unknown server error";
+                break;
+        }
+    }
+    
+    return retVal;
 }
 
 #pragma mark - Life Cycle
