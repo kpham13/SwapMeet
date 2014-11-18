@@ -11,9 +11,9 @@
 
 @implementation Match
 
-@dynamic destination_email;
-@dynamic destination_game_id;
-@dynamic origin_email;
-@dynamic origin_game_id;
+@dynamic destinationEmail;
+@dynamic destinationGameID;
+@dynamic originEmail;
+@dynamic originGameID;
 
 @end

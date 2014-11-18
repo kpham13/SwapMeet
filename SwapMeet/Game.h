@@ -13,7 +13,7 @@
 @interface Game : NSManagedObject
 
 @property (nonatomic, retain) NSString * condition;
-@property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSNumber * gameID;
 @property (nonatomic, retain) NSString * platform;
 @property (nonatomic, retain) NSString * title;
 

@@ -12,7 +12,7 @@
 @implementation Game
 
 @dynamic condition;
-@dynamic id;
+@dynamic gameID;
 @dynamic platform;
 @dynamic title;
 
