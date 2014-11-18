@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SMProfileViewController : UIViewController
+@interface SMProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UITextView *lookingForTextField;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

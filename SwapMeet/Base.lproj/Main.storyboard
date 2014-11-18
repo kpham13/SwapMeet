@@ -38,6 +38,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bws-pR-8aT">
                                 <rect key="frame" x="16" y="28" width="150" height="150"/>
+                                <color key="backgroundColor" red="0.15000000599999999" green="0.15000000599999999" blue="0.15000000599999999" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="aFc-iL-v5L"/>
                                     <constraint firstAttribute="width" constant="150" id="qCd-gl-uZP"/>
@@ -90,6 +91,7 @@
                     <tabBarItem key="tabBarItem" title="Profile" image="ProfileTabIcon" id="Z7B-g6-gV2"/>
                     <connections>
                         <outlet property="lookingForTextField" destination="BKL-8s-GZ5" id="SH8-EG-WdM"/>
+                        <outlet property="tableView" destination="FNX-m8-JZ8" id="aeE-hl-Row"/>
                         <outlet property="userImageView" destination="Bws-pR-8aT" id="FN5-zA-KWg"/>
                         <outlet property="userNameLabel" destination="gOz-Eu-WCb" id="efZ-3o-Ra4"/>
                     </connections>
@@ -109,13 +111,53 @@
                     <view key="view" contentMode="scaleToFill" id="f2p-IJ-66r">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Games" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojx-C3-Mzw">
+                                <rect key="frame" x="16" y="20" width="530" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jh-8A-qDO">
+                                <rect key="frame" x="554" y="20" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="57g-bJ-ria"/>
+                                    <constraint firstAttribute="width" constant="30" id="KGF-ZT-lIy"/>
+                                </constraints>
+                                <state key="normal" title="Add">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addButtonClicked:" destination="kDX-me-hVu" eventType="touchUpInside" id="sf7-Zc-dQf"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zqz-Bf-Bj6">
+                                <rect key="frame" x="0.0" y="49" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ojx-C3-Mzw" firstAttribute="top" secondItem="C9J-9S-1N3" secondAttribute="bottom" id="0rI-8p-vvE"/>
+                            <constraint firstItem="2Jh-8A-qDO" firstAttribute="top" secondItem="C9J-9S-1N3" secondAttribute="bottom" id="CuI-6A-Xyk"/>
+                            <constraint firstItem="2Jh-8A-qDO" firstAttribute="leading" secondItem="ojx-C3-Mzw" secondAttribute="trailing" constant="8" id="DBx-ap-UBt"/>
+                            <constraint firstItem="2Jh-8A-qDO" firstAttribute="trailing" secondItem="f2p-IJ-66r" secondAttribute="trailingMargin" id="EDz-ng-GfS"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="leading" secondItem="f2p-IJ-66r" secondAttribute="leadingMargin" constant="-16" id="SZb-u6-MqX"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="bottom" secondItem="f2p-IJ-66r" secondAttribute="bottomMargin" id="TM1-7m-zgc"/>
+                            <constraint firstItem="ojx-C3-Mzw" firstAttribute="leading" secondItem="f2p-IJ-66r" secondAttribute="leadingMargin" id="Tfc-PT-Hc6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zqz-Bf-Bj6" secondAttribute="trailing" constant="-16" id="TiE-Fb-TDN"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="top" secondItem="ojx-C3-Mzw" secondAttribute="bottom" constant="8" id="cJ8-5D-ok7"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Games" image="MyGamesTabIcon" id="Es1-sK-I2A"/>
+                    <connections>
+                        <outlet property="addButton" destination="2Jh-8A-qDO" id="AKN-dJ-Frf"/>
+                        <outlet property="tableView" destination="Zqz-Bf-Bj6" id="mYz-SM-xUA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HiA-Bc-RkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944" y="1786"/>
+            <point key="canvasLocation" x="944" y="1791"/>
         </scene>
         <!--Search-->
         <scene sceneID="UH3-VE-eS5">
