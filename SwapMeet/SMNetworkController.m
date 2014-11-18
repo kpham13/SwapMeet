@@ -177,7 +177,7 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     }
     
     if (params) {
-        if ([method isEqualToString:@"GET"]) {
+        if (!bodyAsJSON) {
             NSString *encodedString = [params encodedStringForHTTPBody];
             if (encodedString) {
                 request.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", URLString, encodedString]];
@@ -187,19 +187,11 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
             }
         }
         else if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"] || [method isEqualToString:@"PATCH"]) {
-            NSData *bodyData = nil;
-            if (bodyAsJSON) {
-                NSError *error;
-                bodyData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
-                if (error) {
-                    completion(nil, [NSString stringWithFormat:@"Error building JSON object: %@", error.localizedDescription]);
-                    return nil;
-                }
-            }
-            else {
-                NSString *encodedString = [params encodedStringForHTTPBody];
-                if (encodedString)
-                    bodyData = [encodedString dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error;
+            NSData *bodyData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
+            if (error) {
+                completion(nil, [NSString stringWithFormat:@"Error building JSON object: %@", error.localizedDescription]);
+                return nil;
             }
             
             if (!bodyData) {
@@ -210,6 +202,8 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
             [request setBodyData:bodyData bodyAsJSON:bodyAsJSON];
         }
     }
+    
+    NSLog(@"URL: %@; method: %@", request.URL, request.HTTPMethod);
     
     NSURLSession *session = [[self controller] session];
     NSURLSessionDataTask *retVal = [session dataTaskWithRequest:request

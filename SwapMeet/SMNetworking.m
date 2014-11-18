@@ -24,7 +24,11 @@ NSString * const kSMDefaultsKeyToken = @"token";
 
 - (void)setToken:(NSString *)token {
     _token = token;
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:kSMDefaultsKeyToken];
+    if (token) {
+        [[NSUserDefaults standardUserDefaults] setObject:token forKey:kSMDefaultsKeyToken];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyToken];
+    }
 }
 
 - (NSString *)token {
@@ -36,6 +40,10 @@ NSString * const kSMDefaultsKeyToken = @"token";
 }
 
 #pragma mark - Public Methods
+
++ (void)invalidateToken {
+    [[self controller] setToken:nil];
+}
 
 + (NSURLSessionDataTask *)signUpWithEmail:(NSString *)email
                               andPassword:(NSString *)password
@@ -59,7 +67,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
     NSDictionary *params = @{@"email": email, @"password": password, @"zip": zip};
     __block void(^completionBlock)(BOOL successful, NSString *errorString) = completion;
     
-    return [self performRequestWithURLPathString:@"user" method:@"POST" parameters:params acceptJSONResponse:YES sendBodyAsJSON:YES completion:^(NSData *data, NSString *errorString)
+    return [self performRequestWithURLPathString:@"user" method:@"POST" parameters:params acceptJSONResponse:YES sendBodyAsJSON:NO completion:^(NSData *data, NSString *errorString)
     {
         NSString *token = [self tokenByProcessingResponse:&errorString data:data];
         completionBlock(token != nil, errorString);
@@ -85,7 +93,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
     NSDictionary *params = @{@"email": email, @"password": password};
     __block void(^completionBlock)(BOOL successful, NSString *errorString) = completion;
     
-    return [self performRequestWithURLPathString:@"user" method:@"GET" parameters:params acceptJSONResponse:YES sendBodyAsJSON:YES completion:^(NSData *data, NSString *errorString)
+    return [self performRequestWithURLPathString:@"user" method:@"GET" parameters:params acceptJSONResponse:YES sendBodyAsJSON:NO completion:^(NSData *data, NSString *errorString)
             {
                 NSString *token = [self tokenByProcessingResponse:&errorString data:data];
                 completionBlock(token != nil, errorString);
@@ -179,6 +187,12 @@ NSString * const kSMDefaultsKeyToken = @"token";
                 break;
             case 5:
                 retVal = @"No data to return";
+                break;
+            case 6:
+                retVal = @"No user by that name";
+                break;
+            case 7:
+                retVal = @"Access denied";
                 break;
                 
             default:

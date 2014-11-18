@@ -21,4 +21,6 @@ extern NSString * const kSMDefaultsKeyToken;
                              andPassword:(NSString *)password
                               completion:(void(^)(BOOL successful, NSString *errorString))completion;
 
++ (void)invalidateToken;
+
 @end
