@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SMAddGameViewController">
+            <connections>
+                <outlet property="consolePickerView" destination="MPl-Rs-MSB" id="ZeI-8o-bi4"/>
+                <outlet property="titleTextView" destination="rh0-C8-vzz" id="Uej-lU-DQ3"/>
+                <outlet property="view" destination="3bB-oH-pds" id="oL1-3B-Qm2"/>
+            </connections>
+        </placeholder>
+        <view contentMode="scaleToFill" id="3bB-oH-pds">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add A Game" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zt6-RV-eJY">
+                    <rect key="frame" x="16" y="20" width="98" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rh0-C8-vzz">
+                    <rect key="frame" x="16" y="74" width="568" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIo-ym-op6">
+                    <rect key="frame" x="16" y="49" width="74" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MPl-Rs-MSB">
+                    <rect key="frame" x="0.0" y="137" width="600" height="162"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="162" id="pKU-vd-kqd"/>
+                    </constraints>
+                </pickerView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Colsole:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPw-3s-24B">
+                    <rect key="frame" x="16" y="112" width="53" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="MPl-Rs-MSB" firstAttribute="top" secondItem="gPw-3s-24B" secondAttribute="bottom" constant="8" id="2Lj-Yv-scy"/>
+                <constraint firstItem="rh0-C8-vzz" firstAttribute="leading" secondItem="3bB-oH-pds" secondAttribute="leading" constant="16" id="5wk-U0-LBc"/>
+                <constraint firstItem="GIo-ym-op6" firstAttribute="top" secondItem="zt6-RV-eJY" secondAttribute="bottom" constant="8" id="Al0-Qv-nOo"/>
+                <constraint firstItem="zt6-RV-eJY" firstAttribute="top" secondItem="3bB-oH-pds" secondAttribute="top" constant="20" id="Ibb-7v-jEf"/>
+                <constraint firstItem="gPw-3s-24B" firstAttribute="top" secondItem="rh0-C8-vzz" secondAttribute="bottom" constant="8" id="KBP-Dj-jf9"/>
+                <constraint firstAttribute="trailing" secondItem="rh0-C8-vzz" secondAttribute="trailing" constant="16" id="Ka1-HK-mfk"/>
+                <constraint firstItem="rh0-C8-vzz" firstAttribute="top" secondItem="GIo-ym-op6" secondAttribute="bottom" constant="8" id="RsJ-Tv-h3c"/>
+                <constraint firstItem="zt6-RV-eJY" firstAttribute="leading" secondItem="3bB-oH-pds" secondAttribute="leading" constant="16" id="dVZ-zv-HlB"/>
+                <constraint firstItem="MPl-Rs-MSB" firstAttribute="leading" secondItem="3bB-oH-pds" secondAttribute="leading" id="eH5-xm-y86"/>
+                <constraint firstItem="gPw-3s-24B" firstAttribute="leading" secondItem="3bB-oH-pds" secondAttribute="leading" constant="16" id="gEn-QE-EjG"/>
+                <constraint firstAttribute="trailing" secondItem="MPl-Rs-MSB" secondAttribute="trailing" id="rO3-4A-DJT"/>
+                <constraint firstItem="GIo-ym-op6" firstAttribute="leading" secondItem="3bB-oH-pds" secondAttribute="leading" constant="16" id="uVJ-ht-CcR"/>
+            </constraints>
+        </view>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+    </objects>
+</document>

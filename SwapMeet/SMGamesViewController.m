@@ -1,36 +1,29 @@
 //
-//  SMProfileViewController.m
+//  SMGamesViewController.m
 //  SwapMeet
 //
 //  Created by Reid Weber on 11/17/14.
 //  Copyright (c) 2014 SwapMeet. All rights reserved.
 //
 
-#import "SMProfileViewController.h"
+#import "SMGamesViewController.h"
+#import "SMAddGameViewController.h"
 
-@interface SMProfileViewController ()
+@interface SMGamesViewController ()
 
 @end
 
-@implementation SMProfileViewController
+@implementation SMGamesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.lookingForTextField.text = @"Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games";
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    SMLoginViewController *loginViewController = [[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]];
-    [self presentViewController:loginViewController animated:true completion:^{
-        //[loginViewController release];
-    }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteAdded:) name:@"ADDED_FAVORITE" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -41,6 +34,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
+}
+
+- (IBAction)addButtonClicked:(id)sender {
+    SMAddGameViewController *addGameVC = [[SMAddGameViewController alloc] initWithNibName:@"SMAddGameViewController" bundle:[NSBundle mainBundle]];
+    [self presentViewController:addGameVC animated:YES completion:nil];
+    
+    NSLog(@"Add Button Clicked");
+}
+
+- (void) favoriteAdded:(NSNotification *)notification {
+    NSLog(@"Favorite Added");
 }
 
 @end
