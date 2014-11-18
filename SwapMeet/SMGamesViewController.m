@@ -7,6 +7,7 @@
 //
 
 #import "SMGamesViewController.h"
+#import "SMAddGameViewController.h"
 
 @interface SMGamesViewController ()
 
@@ -36,6 +37,9 @@
 }
 
 - (IBAction)addButtonClicked:(id)sender {
+    SMAddGameViewController *addGameVC = [[SMAddGameViewController alloc] initWithNibName:@"SMAddGameViewController" bundle:[NSBundle mainBundle]];
+    [self presentViewController:addGameVC animated:YES completion:nil];
+    
     NSLog(@"Add Button Clicked");
 }
 

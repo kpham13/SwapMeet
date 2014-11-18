@@ -28,12 +28,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
-}
-
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return [self.consoles count];
+    return 1;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -41,7 +37,11 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 1;
+    return [self.consoles count];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    NSLog(@"Selected Row");
 }
 
 @end
