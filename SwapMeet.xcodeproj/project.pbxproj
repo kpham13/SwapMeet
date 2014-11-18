@@ -14,8 +14,8 @@
 		0AA8B7861A1A75EE00A23C39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7851A1A75EE00A23C39 /* Images.xcassets */; };
 		0AA8B7891A1A75EE00A23C39 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */; };
 		0AA8B7951A1A75EE00A23C39 /* SwapMeetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7941A1A75EE00A23C39 /* SwapMeetTests.m */; };
-		0AAE32771A1AB4B20022476E /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE32761A1AB4B20022476E /* Match.m */; };
-		0AAE327A1A1AB4B30022476E /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE32791A1AB4B30022476E /* Game.m */; };
+		0AAE327D1A1AB78C0022476E /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE327C1A1AB78C0022476E /* Match.m */; };
+		0AAE32801A1AB78C0022476E /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE327F1A1AB78C0022476E /* Game.m */; };
 		287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */; };
 		287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */; };
 		287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */; };
@@ -23,6 +23,7 @@
 		287BF0D11A1ACA2C008C3CCD /* SMAddGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0CF1A1ACA2C008C3CCD /* SMAddGameViewController.m */; };
 		287BF0D21A1ACA2C008C3CCD /* SMAddGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287BF0D01A1ACA2C008C3CCD /* SMAddGameViewController.xib */; };
 		9A0F68761A1A7B190088146F /* SMNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68751A1A7B190088146F /* SMNetworkController.m */; };
+		9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68781A1ABBA90088146F /* SMNetworking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,10 +49,10 @@
 		0AA8B78E1A1A75EE00A23C39 /* SwapMeetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwapMeetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA8B7931A1A75EE00A23C39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA8B7941A1A75EE00A23C39 /* SwapMeetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwapMeetTests.m; sourceTree = "<group>"; };
-		0AAE32751A1AB4B20022476E /* Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Match.h; sourceTree = "<group>"; };
-		0AAE32761A1AB4B20022476E /* Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Match.m; sourceTree = "<group>"; };
-		0AAE32781A1AB4B30022476E /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		0AAE32791A1AB4B30022476E /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		0AAE327B1A1AB78C0022476E /* Match.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Match.h; sourceTree = "<group>"; };
+		0AAE327C1A1AB78C0022476E /* Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Match.m; sourceTree = "<group>"; };
+		0AAE327E1A1AB78C0022476E /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		0AAE327F1A1AB78C0022476E /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		287BF0BF1A1A7BA9008C3CCD /* SMProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProfileViewController.h; sourceTree = "<group>"; };
 		287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProfileViewController.m; sourceTree = "<group>"; };
 		287BF0C51A1A7BDB008C3CCD /* SMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSearchViewController.h; sourceTree = "<group>"; };
@@ -65,6 +66,8 @@
 		287BF0D01A1ACA2C008C3CCD /* SMAddGameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMAddGameViewController.xib; sourceTree = "<group>"; };
 		9A0F68741A1A7B190088146F /* SMNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNetworkController.h; sourceTree = "<group>"; };
 		9A0F68751A1A7B190088146F /* SMNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworkController.m; sourceTree = "<group>"; };
+		9A0F68771A1ABBA90088146F /* SMNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNetworking.h; sourceTree = "<group>"; };
+		9A0F68781A1ABBA90088146F /* SMNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworking.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +178,8 @@
 		9A0F68721A1A7A2D0088146F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9A0F68771A1ABBA90088146F /* SMNetworking.h */,
+				9A0F68781A1ABBA90088146F /* SMNetworking.m */,
 				9A0F68741A1A7B190088146F /* SMNetworkController.h */,
 				9A0F68751A1A7B190088146F /* SMNetworkController.m */,
 			);
@@ -184,10 +189,10 @@
 		9A0F68731A1A7A330088146F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0AAE32781A1AB4B30022476E /* Game.h */,
-				0AAE32791A1AB4B30022476E /* Game.m */,
-				0AAE32751A1AB4B20022476E /* Match.h */,
-				0AAE32761A1AB4B20022476E /* Match.m */,
+				0AAE327E1A1AB78C0022476E /* Game.h */,
+				0AAE327F1A1AB78C0022476E /* Game.m */,
+				0AAE327B1A1AB78C0022476E /* Match.h */,
+				0AAE327C1A1AB78C0022476E /* Match.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -293,11 +298,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */,
 				287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */,
 				287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */,
 				287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */,
 				9A0F68761A1A7B190088146F /* SMNetworkController.m in Sources */,
-				0AAE327A1A1AB4B30022476E /* Game.m in Sources */,
+				0AAE32801A1AB78C0022476E /* Game.m in Sources */,
 				0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */,
 				287BF0D11A1ACA2C008C3CCD /* SMAddGameViewController.m in Sources */,
 				0AAE32771A1AB4B20022476E /* Match.m in Sources */,
