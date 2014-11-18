@@ -21,9 +21,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     SMLoginViewController *loginViewController = [[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]];
-    [self presentViewController:loginViewController animated:true completion:^{
-        //[loginViewController release];
-    }];
+    [self presentViewController:loginViewController animated:true completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
