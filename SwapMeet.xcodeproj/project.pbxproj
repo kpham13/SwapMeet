@@ -307,6 +307,7 @@
 				0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */,
 				287BF0D11A1ACA2C008C3CCD /* SMAddGameViewController.m in Sources */,
 				0AAE32771A1AB4B20022476E /* Match.m in Sources */,
+				0AAE327D1A1AB78C0022476E /* Match.m in Sources */,
 				0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */,
 				287BF0CD1A1AC5A7008C3CCD /* SMGamesViewController.m in Sources */,
 				0AA8B7781A1A75ED00A23C39 /* main.m in Sources */,
