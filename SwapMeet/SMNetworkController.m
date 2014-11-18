@@ -52,14 +52,20 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
 #pragma mark - SMNetworkController
 
 @interface SMNetworkController ()
+@property NSMutableDictionary *HTTPHeaderParameters;
 @end
 
 @implementation SMNetworkController
 
 #pragma mark - Public Class Methods
 
-
-#pragma mark - Private Class Methods
++ (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
+    if (![[self controller] HTTPHeaderParameters]) {
+        [[self controller] setHTTPHeaderParameters:[NSMutableDictionary dictionary]];
+    }
+    
+    [[[self controller] HTTPHeaderParameters] setObject:value forKey:field];
+}
 
 + (instancetype)controller {
     static id instance = nil;
@@ -69,6 +75,8 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     });
     return instance;
 }
+
+#pragma mark - Private Class Methods
 
 + (NSString *)processBadJSONResponse:(NSData *)data {
     if (!data)
@@ -146,6 +154,24 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     }
     
     request.HTTPMethod = method;
+    NSDictionary *HTTPHeaderParameters = [[self controller] HTTPHeaderParameters];
+    if (HTTPHeaderParameters) {
+        for (NSString *key in HTTPHeaderParameters) {
+            if ([key isKindOfClass:[NSString class]]) {
+                NSString *value = HTTPHeaderParameters[key];
+                if ([value isKindOfClass:[NSString class]]) {
+                    [request setValue:value forHTTPHeaderField:key];
+                } else {
+                    completion(nil, [NSString stringWithFormat:@"HTTPHeaderParameters value is not a string: %@", value]);
+                    return nil;
+                }
+            } else {
+                completion(nil, [NSString stringWithFormat:@"HTTPHeaderParameters key is not a string: %@", key]);
+                return nil;
+            }
+        }
+    }
+    
     if (acceptJSONResponse) {
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     }

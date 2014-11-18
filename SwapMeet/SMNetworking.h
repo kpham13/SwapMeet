@@ -13,6 +13,6 @@
 + (NSURLSessionDataTask *)signUpWithEmail:(NSString *)email
                               andPassword:(NSString *)password
                                 zipNumber:(NSNumber *)zip
-                               completion:(void(^)(NSString *token, NSString *errorString))completion;
+                               completion:(void(^)(BOOL successful, NSString *errorString))completion;
 
 @end
