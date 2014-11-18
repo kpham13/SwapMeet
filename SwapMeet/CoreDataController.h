@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "Game.h"
+#import "Match.h"
 
 @interface CoreDataController : NSObject
 

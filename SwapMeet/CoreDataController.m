@@ -109,6 +109,10 @@
 
 - (void) newGameAdded:(NSNotification *)notificaiton {
     NSLog(@"Core Data Controller: New Game Added!");
+    Game *game = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
+    game.title = [notificaiton.userInfo objectForKey:@"title"];
+    game.condition = [notificaiton.userInfo objectForKey:@"condition"];
+    game.platform = [notificaiton.userInfo objectForKey:@"platform"];
 }
 
 @end

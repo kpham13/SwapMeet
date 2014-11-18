@@ -13,7 +13,6 @@
 
 @property (strong, nonatomic) NSArray *consoles;
 @property (strong, nonatomic) NSArray *conditions;
-//@property (strong, nonatomic) Game *game;
 @property (strong, nonatomic) NSString *console;
 @property (strong, nonatomic) NSString *condition;
 @property (strong, nonatomic) NSMutableArray *photos;
@@ -26,10 +25,8 @@
     [super viewDidLoad];
     self.consolePickerView.delegate = self;
     self.consolePickerView.dataSource = self;
-    self.conditionPickerView.delegate = self;
-    self.conditionPickerView.dataSource = self;
     self.consoles = [[NSArray alloc] initWithObjects:@"Xbox One", @"PS4", @"Xbox 360", @"PS3", nil];
-    self.conditions = [[NSArray alloc] initWithObjects:@"Mint", @"Slightly Used", @"Noticably Used", @"At Least It Still Works...", nil];
+    self.conditions = [[NSArray alloc] initWithObjects:@"Mint", @"Newish", @"Used", @"Still Works...", nil];
     self.photos = [[NSMutableArray alloc] init];
     self.imageView1.userInteractionEnabled = YES;
     self.imageView2.userInteractionEnabled = YES;
@@ -42,13 +39,13 @@
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
+    return 2;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (pickerView == self.consolePickerView) {
+    if (component == 0) {
         return [self.consoles objectAtIndex:row];
-    } else if (pickerView == self.conditionPickerView) {
+    } else if (component == 1) {
         return [self.conditions objectAtIndex:row];
     } else {
         return @"ERROR";
@@ -56,17 +53,19 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if (pickerView == self.consolePickerView) {
+    if (component == 0) {
         return [self.consoles count];
-    } else {
+    } else if (component == 1) {
         return [self.conditions count];
+    } else {
+        return 0;
     }
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (pickerView == self.consolePickerView) {
+    if (component == 0) {
         self.console = [self.consoles objectAtIndex:row];
-    } else {
+    } else if (component == 1) {
         self.condition = [self.conditions objectAtIndex:row];
     }
 }
@@ -125,7 +124,6 @@
                 self.imageView1.image = image;
                 UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image1Tapped:)];
                 [self.imageView1 addGestureRecognizer:touch];
-                NSLog(@"Set Image #1");
                 index++;
             } else if (index == 2) {
                 self.imageView2.image = image;
@@ -178,9 +176,10 @@
 }
 
 - (void)addSelectedImageAlert: (UIImageView *) imageView {
-    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Chose An Option" message:@"Would you like to select this photo for your thumbnail? Or would you like to delete it?" preferredStyle:UIAlertControllerStyleAlert] init];
+    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Choose An Option" message:@"Would you like to select this photo for your thumbnail? Or would you like to delete it?" preferredStyle:UIAlertControllerStyleAlert] init];
     UIAlertAction *thumbnailAction = [UIAlertAction actionWithTitle:@"Select As Thumbnail" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [alertController dismissViewControllerAnimated:true completion:nil];
+        [self generateThumbnail:imageView.image];
     }];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         NSMutableArray *tempPhotos = [[NSMutableArray alloc] initWithArray:self.photos];
@@ -197,6 +196,13 @@
     [alertController addAction:thumbnailAction];
     [alertController addAction:deleteAction];
     [self presentViewController:alertController animated:true completion:nil];
+}
+
+- (UIImage *) generateThumbnail:(UIImage *) image {
+    UIGraphicsBeginImageContext(CGSizeMake(75, 75));
+    [image drawInRect:CGRectMake(0, 0, 75, 75)];
+    UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+    return thumbnail;
 }
 
 @end
