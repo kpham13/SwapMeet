@@ -31,6 +31,9 @@
     self.consoles = [[NSArray alloc] initWithObjects:@"Xbox One", @"PS4", @"Xbox 360", @"PS3", nil];
     self.conditions = [[NSArray alloc] initWithObjects:@"Mint", @"Slightly Used", @"Noticably Used", @"At Least It Still Works...", nil];
     self.photos = [[NSMutableArray alloc] init];
+    self.imageView1.userInteractionEnabled = YES;
+    self.imageView2.userInteractionEnabled = YES;
+    self.imageView3.userInteractionEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,24 +86,115 @@
 }
 
 - (IBAction)addPhotosButtonClicked:(id)sender {
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    [self presentViewController:imagePicker animated:true completion:nil];
+    if ([self.photos count] >= 3) {
+        [self maxImagesReached];
+    } else {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        [self presentViewController:imagePicker animated:true completion:nil];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
     [self.photos addObject:image];
+    [self setImages];
     [picker dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self.photos addObject:[info objectForKey:UIImagePickerControllerOriginalImage]];
-    self.imageView1.image = [self.photos firstObject];
+    [self.photos insertObject:[info objectForKey:UIImagePickerControllerOriginalImage] atIndex:[self.photos count]];
     [picker dismissViewControllerAnimated:true completion:nil];
+    [self setImages];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)setImages {
+    NSInteger index = 0;
+    if ([self.photos count] != 0) {
+        self.imageView1.image = nil;
+        self.imageView2.image = nil;
+        self.imageView3.image = nil;
+        index++;
+        for (UIImage *image in self.photos) {
+            if (index == 1) {
+                self.imageView1.image = image;
+                UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image1Tapped:)];
+                [self.imageView1 addGestureRecognizer:touch];
+                NSLog(@"Set Image #1");
+                index++;
+            } else if (index == 2) {
+                self.imageView2.image = image;
+                UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image2Tapped:)];
+                [self.imageView2 addGestureRecognizer:touch];
+                index++;
+            } else if (index == 3) {
+                self.imageView3.image = image;
+                UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image3Tapped:)];
+                [self.imageView3 addGestureRecognizer:touch];
+                [self.addImagesButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            }
+        }
+    }
+}
+
+- (void)maxImagesReached {
+    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Too Many Photos" message:@"Sorry, You Can Only Add 3 Photos" preferredStyle:UIAlertControllerStyleAlert] init];
+    UIAlertAction *alertAction = [[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertController dismissViewControllerAnimated:true completion:nil];
+    }] init];
+    [alertController addAction:alertAction];
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
+- (void)addTouchGestures {
+    UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] init];
+    [self.imageView1 addGestureRecognizer:touch];
+}
+
+- (void) image1Tapped:(UITapGestureRecognizer *) recognizer {
+    if (self.imageView1.image) {
+        NSLog(@"Image Tapped");
+        [self addSelectedImageAlert:self.imageView1];
+    }
+}
+
+- (void) image2Tapped:(UITapGestureRecognizer *) recognizer {
+    if (self.imageView2.image) {
+        NSLog(@"Image Tapped");
+        [self addSelectedImageAlert:self.imageView2];
+    }
+}
+
+- (void) image3Tapped:(UITapGestureRecognizer *) recognizer {
+    if (self.imageView3.image) {
+        NSLog(@"Image Tapped");
+        [self addSelectedImageAlert:self.imageView3];
+    }
+}
+
+- (void)addSelectedImageAlert: (UIImageView *) imageView {
+    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Chose An Option" message:@"Would you like to select this photo for your thumbnail? Or would you like to delete it?" preferredStyle:UIAlertControllerStyleAlert] init];
+    UIAlertAction *thumbnailAction = [UIAlertAction actionWithTitle:@"Select As Thumbnail" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertController dismissViewControllerAnimated:true completion:nil];
+    }];
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        NSMutableArray *tempPhotos = [[NSMutableArray alloc] initWithArray:self.photos];
+        for (UIImage *image in tempPhotos) {
+            if (image == imageView.image) {
+                [self.photos removeObject:image];
+                [self setImages];
+                [self.addImagesButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+                break;
+            }
+        }
+        [alertController dismissViewControllerAnimated:true completion:nil];
+    }];
+    [alertController addAction:thumbnailAction];
+    [alertController addAction:deleteAction];
+    [self presentViewController:alertController animated:true completion:nil];
 }
 
 @end

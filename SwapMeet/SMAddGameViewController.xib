@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SMAddGameViewController">
             <connections>
+                <outlet property="addImagesButton" destination="BYp-Mb-RNo" id="CXa-Bs-8sL"/>
                 <outlet property="conditionPickerView" destination="gOf-Nk-Ts5" id="vdR-ps-5ju"/>
                 <outlet property="consolePickerView" destination="MPl-Rs-MSB" id="ZeI-8o-bi4"/>
                 <outlet property="imageView1" destination="uKZ-8m-8mH" id="PGZ-VU-VkR"/>
