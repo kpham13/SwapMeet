@@ -41,10 +41,11 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
 @interface NSMutableURLRequest (SMNetworkController)
 @end
 @implementation NSMutableURLRequest (SMNetworkController)
-- (void)setBodyData:(NSData *)data {
+- (void)setBodyData:(NSData *)data bodyAsJSON:(BOOL)asJSON {
     self.HTTPBody = data;
     [self setValue:[NSString stringWithFormat:@"%lu", (unsigned long)data.length] forHTTPHeaderField:@"Content-Length"];
-    [self setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSString *format = [NSString stringWithFormat:@"%@; charset=utf-8", asJSON ? @"application/json" : @"application/x-www-form-urlencoded"];
+    [self setValue:format forHTTPHeaderField:@"Content-Type"];
 }
 @end
 
@@ -67,6 +68,19 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
         instance = [self new];
     });
     return instance;
+}
+
++ (NSString *)processBadJSONResponse:(NSData *)data {
+    if (!data)
+        return nil;
+    
+    NSError *error;
+    id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    if (error) {
+        return [NSString stringWithFormat:@"\n%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]];
+    }
+    
+    return [NSString stringWithFormat:@"\n%@", JSONObject];
 }
 
 + (NSString *)processResponse:(NSURLResponse *)response error:(NSError *)error {
@@ -122,12 +136,11 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
         return nil;
     }
     
-    method = method? @"GET" : [method uppercaseString];
+    method = method ? [method uppercaseString] : @"GET";
     
     NSURL *URL = [NSURL URLWithString:URLString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:kSMNetworkingDefaultTimeout];
     if (!request) {
-        // TODO: Error
         completion(nil, [NSString stringWithFormat:@"Couldn't form the request: %@", URLString]);
         return nil;
     }
@@ -164,11 +177,11 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
             }
             
             if (!bodyData) {
-                completion(nil, @"Couln't create bodyData");
+                completion(nil, @"Couldn't create bodyData");
                 return nil;
             }
             
-            [request setBodyData:bodyData];
+            [request setBodyData:bodyData bodyAsJSON:bodyAsJSON];
         }
     }
     
@@ -180,6 +193,10 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
         __block void(^completionBlock)(NSData *data, NSString *errorString) = completion;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (errorString) {
+                NSString *serverResponseString = [self processBadJSONResponse:data];
+                if (serverResponseString)
+                    errorString = [errorString stringByAppendingString:serverResponseString];
+                
                 completionBlock(nil, errorString);
                 return;
             }

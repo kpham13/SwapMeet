@@ -21,6 +21,7 @@
 		287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */; };
 		287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */; };
 		9A0F68761A1A7B190088146F /* SMNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68751A1A7B190088146F /* SMNetworkController.m */; };
+		9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68781A1ABBA90088146F /* SMNetworking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMMatchesViewController.m; sourceTree = "<group>"; };
 		9A0F68741A1A7B190088146F /* SMNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNetworkController.h; sourceTree = "<group>"; };
 		9A0F68751A1A7B190088146F /* SMNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworkController.m; sourceTree = "<group>"; };
+		9A0F68771A1ABBA90088146F /* SMNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNetworking.h; sourceTree = "<group>"; };
+		9A0F68781A1ABBA90088146F /* SMNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworking.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +170,8 @@
 		9A0F68721A1A7A2D0088146F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9A0F68771A1ABBA90088146F /* SMNetworking.h */,
+				9A0F68781A1ABBA90088146F /* SMNetworking.m */,
 				9A0F68741A1A7B190088146F /* SMNetworkController.h */,
 				9A0F68751A1A7B190088146F /* SMNetworkController.m */,
 			);
@@ -284,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */,
 				287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */,
 				287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */,
 				287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */,
