@@ -8,11 +8,17 @@
 
 #import "SMNetworkController.h"
 
+extern NSString * const kSMDefaultsKeyToken;
+
 @interface SMNetworking : SMNetworkController
 
 + (NSURLSessionDataTask *)signUpWithEmail:(NSString *)email
                               andPassword:(NSString *)password
                                 zipNumber:(NSNumber *)zip
                                completion:(void(^)(BOOL successful, NSString *errorString))completion;
+
++ (NSURLSessionDataTask *)loginWithEmail:(NSString *)email
+                             andPassword:(NSString *)password
+                              completion:(void(^)(BOOL successful, NSString *errorString))completion;
 
 @end

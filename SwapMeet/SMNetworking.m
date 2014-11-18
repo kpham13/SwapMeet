@@ -8,6 +8,8 @@
 
 #import "SMNetworking.h"
 
+NSString * const kSMDefaultsKeyToken = @"token";
+
 @interface SMNetworking ()
 
 @property NSString *token;
@@ -22,12 +24,12 @@
 
 - (void)setToken:(NSString *)token {
     _token = token;
-    [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"token"];
+    [[NSUserDefaults standardUserDefaults] setObject:token forKey:kSMDefaultsKeyToken];
 }
 
 - (NSString *)token {
     if (!_token) {
-        _token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+        _token = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyToken];
     }
     
     return _token;
@@ -54,37 +56,40 @@
         return nil;
     }
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:email, @"email",
-                            password, @"password",
-                            zip, @"zip", nil];
+    NSDictionary *params = @{@"email": email, @"password": password, @"zip": zip};
     __block void(^completionBlock)(BOOL successful, NSString *errorString) = completion;
     
     return [self performRequestWithURLPathString:@"user" method:@"POST" parameters:params acceptJSONResponse:YES sendBodyAsJSON:YES completion:^(NSData *data, NSString *errorString)
     {
-        NSString *token = nil;
-        if (!errorString) {
-            NSError *error;
-            id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-            if (error) {
-                errorString = [NSString stringWithFormat:@"Error converting JSON object: %@", error.localizedDescription];
-            } else {
-                errorString = [self checkJSONResponse:JSONObject];
-                if (!errorString) {
-                    token = JSONObject[@"jwt"];
-                    if (!token) {
-                        errorString = [NSString stringWithFormat:@"No token.\n%@", JSONObject];
-                    } else {
-                        [[self controller] setToken:token];
-                        [[self controller] setValue:token forHTTPHeaderField:@"token"];
-                    }
-                }
-            }
-        }
-        
-        NSLog(@"Token: %@. Error: %@", token, errorString);
-        
+        NSString *token = [self tokenByProcessingResponse:&errorString data:data];
         completionBlock(token != nil, errorString);
     }];
+}
+
++ (NSURLSessionDataTask *)loginWithEmail:(NSString *)email
+                              andPassword:(NSString *)password
+                               completion:(void(^)(BOOL successful, NSString *errorString))completion
+{
+    NSString *errorString = nil;
+    if (!email) {
+        errorString = @"No 'email' object";
+    } else if (!password) {
+        errorString = @"No 'password' object";
+    }
+    
+    if (errorString) {
+        completion(NO, errorString);
+        return nil;
+    }
+    
+    NSDictionary *params = @{@"email": email, @"password": password};
+    __block void(^completionBlock)(BOOL successful, NSString *errorString) = completion;
+    
+    return [self performRequestWithURLPathString:@"user" method:@"GET" parameters:params acceptJSONResponse:YES sendBodyAsJSON:YES completion:^(NSData *data, NSString *errorString)
+            {
+                NSString *token = [self tokenByProcessingResponse:&errorString data:data];
+                completionBlock(token != nil, errorString);
+            }];
 }
 
 + (NSURLSessionDataTask *)JSONGamesAtOffset:(NSInteger)offset
@@ -95,6 +100,32 @@
 }
 
 #pragma mark - Private Methods
+
++ (NSString *)tokenByProcessingResponse:(NSString **)errorString_p data:(NSData *)data
+{
+    NSString *token = nil;
+    if (!(*errorString_p)) {
+        NSError *error;
+        id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        if (error) {
+            *errorString_p = [NSString stringWithFormat:@"Error converting JSON object: %@. %@", error.localizedDescription, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+        } else {
+            *errorString_p = [self checkJSONResponse:JSONObject];
+            if (!(*errorString_p)) {
+                token = JSONObject[@"jwt"];
+                if (!token) {
+                    *errorString_p = [NSString stringWithFormat:@"No token.\n%@", JSONObject];
+                } else {
+                    [[self controller] setToken:token];
+                    [[self controller] setValue:token forHTTPHeaderField:@"token"];
+                }
+            }
+        }
+    }
+    
+    NSLog(@"Token: %@. Error: %@", token, *errorString_p);
+    return token;
+}
 
 + (NSURLSessionDataTask *)performJSONRequestAtPath:(NSString *)path
                                     withMethod:(NSString *)method
