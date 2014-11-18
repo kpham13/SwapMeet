@@ -113,6 +113,22 @@
     game.title = [notificaiton.userInfo objectForKey:@"title"];
     game.condition = [notificaiton.userInfo objectForKey:@"condition"];
     game.platform = [notificaiton.userInfo objectForKey:@"platform"];
+    [self saveContext];
+}
+
+- (NSArray *) fetchUserGames {
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Game"];
+    request.sortDescriptors = [[NSArray alloc] initWithObjects:[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:false] init], nil];
+    NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSError *error = nil;
+    [controller performFetch: &error];
+    if (!error) {
+        NSArray *games = controller.fetchedObjects;
+        return games;
+    } else {
+        NSLog(@"Error in fetch request");
+        return nil;
+    }
 }
 
 @end

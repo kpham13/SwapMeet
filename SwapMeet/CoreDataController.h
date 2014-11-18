@@ -20,5 +20,6 @@
 + (instancetype)controller;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (NSMutableArray *) fetchUserGames;
 
 @end
