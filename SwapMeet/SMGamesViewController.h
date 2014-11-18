@@ -1,5 +1,5 @@
 //
-//  SMMatchesViewController.h
+//  SMGamesViewController.h
 //  SwapMeet
 //
 //  Created by Reid Weber on 11/17/14.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SMMatchesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SMGamesViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 @end

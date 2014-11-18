@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Favorites-->
+        <!--Matches-->
         <scene sceneID="nqS-Br-kP9">
             <objects>
-                <viewController id="9Rh-R8-wMw" customClass="SMFavoritesViewController" sceneMemberID="viewController">
+                <viewController id="9Rh-R8-wMw" customClass="SMMatchesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8xh-Rz-3Wq"/>
                         <viewControllerLayoutGuide type="bottom" id="H4r-c8-JsF"/>
@@ -16,9 +16,32 @@
                     <view key="view" contentMode="scaleToFill" id="O6X-cu-n6Z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Matches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWS-Yx-wcl">
+                                <rect key="frame" x="16" y="20" width="95" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aDv-a1-aUi">
+                                <rect key="frame" x="0.0" y="49" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="aDv-a1-aUi" secondAttribute="trailing" constant="-16" id="Bwp-xa-zUQ"/>
+                            <constraint firstItem="aDv-a1-aUi" firstAttribute="bottom" secondItem="O6X-cu-n6Z" secondAttribute="bottomMargin" id="WJj-y5-edb"/>
+                            <constraint firstItem="DWS-Yx-wcl" firstAttribute="top" secondItem="8xh-Rz-3Wq" secondAttribute="bottom" id="esC-xB-aEa"/>
+                            <constraint firstItem="aDv-a1-aUi" firstAttribute="top" secondItem="DWS-Yx-wcl" secondAttribute="bottom" constant="8" id="fNc-iF-CDn"/>
+                            <constraint firstItem="aDv-a1-aUi" firstAttribute="leading" secondItem="O6X-cu-n6Z" secondAttribute="leadingMargin" constant="-16" id="hnB-ad-pTH"/>
+                            <constraint firstItem="DWS-Yx-wcl" firstAttribute="leading" secondItem="O6X-cu-n6Z" secondAttribute="leadingMargin" id="nGP-7g-Ad8"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="FavoriteTabIcon" id="kCI-BA-oYF"/>
+                    <tabBarItem key="tabBarItem" title="Matches" image="FavoriteTabIcon" id="kCI-BA-oYF"/>
+                    <connections>
+                        <outlet property="tableView" destination="aDv-a1-aUi" id="gkX-P4-IQ0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0H-Rz-YJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -103,7 +126,7 @@
         <!--My Games-->
         <scene sceneID="XYp-Tr-tdH">
             <objects>
-                <viewController id="kDX-me-hVu" customClass="SMMatchesViewController" sceneMemberID="viewController">
+                <viewController id="kDX-me-hVu" customClass="SMGamesViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="C9J-9S-1N3"/>
                         <viewControllerLayoutGuide type="bottom" id="xrY-Y8-j2z"/>
@@ -128,7 +151,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addButtonClicked:" destination="kDX-me-hVu" eventType="touchUpInside" id="sf7-Zc-dQf"/>
+                                    <action selector="addButtonClicked:" destination="kDX-me-hVu" eventType="touchUpInside" id="V5i-QE-WwV"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zqz-Bf-Bj6">
@@ -151,8 +174,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="My Games" image="MyGamesTabIcon" id="Es1-sK-I2A"/>
                     <connections>
-                        <outlet property="addButton" destination="2Jh-8A-qDO" id="AKN-dJ-Frf"/>
-                        <outlet property="tableView" destination="Zqz-Bf-Bj6" id="mYz-SM-xUA"/>
+                        <outlet property="addButton" destination="2Jh-8A-qDO" id="RQh-Pz-v1T"/>
+                        <outlet property="tableView" destination="Zqz-Bf-Bj6" id="tpm-Qj-Fy7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HiA-Bc-RkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
