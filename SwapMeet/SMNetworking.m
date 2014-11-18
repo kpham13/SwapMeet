@@ -72,8 +72,8 @@
                 if (!token) {
                     errorString = [NSString stringWithFormat:@"No token.\n%@", JSONObject];
                 } else {
-                    //[[self controller] setToken:token];
-                    [self setValue:token forHTTPHeaderField:@"token"];
+                    [[self controller] setToken:token];
+                    [[self controller] setValue:token forHTTPHeaderField:@"token"];
                 }
             }
         }
@@ -130,10 +130,10 @@
     self = [super init];
     if (self) {
         self.baseURLString = @"https://cryptic-savannah-2534.herokuapp.com/api/";
-        [SMNetworking setValue:@"someFancyKey" forHTTPHeaderField:@"key"];
+        [self setValue:@"someFancyKey" forHTTPHeaderField:@"key"];
         NSString *token = [self token];
         if (token) {
-            [SMNetworking setValue:token forHTTPHeaderField:@"token"];
+            [self setValue:token forHTTPHeaderField:@"token"];
         }
     }
     return self;

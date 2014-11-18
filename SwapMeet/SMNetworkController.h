@@ -13,7 +13,7 @@
 @property NSURLSession *session;
 @property NSString *baseURLString;
 
-+ (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
 
 + (NSURLSessionDataTask *)performRequestWithURLPathString:(NSString *)URLPath
                                                    method:(NSString *)method
@@ -21,6 +21,6 @@
                                        acceptJSONResponse:(BOOL)acceptJSONResponse
                                            sendBodyAsJSON:(BOOL)bodyAsJSON
                                                completion:(void(^)(NSData *data, NSString *errorString))completion;
-//+ (instancetype)controller;
++ (instancetype)controller;
 
 @end

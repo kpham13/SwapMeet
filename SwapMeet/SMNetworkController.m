@@ -57,15 +57,17 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
 
 @implementation SMNetworkController
 
-#pragma mark - Public Class Methods
+#pragma mark - Public Methods
 
-+ (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
-    if (![[self controller] HTTPHeaderParameters]) {
-        [[self controller] setHTTPHeaderParameters:[NSMutableDictionary dictionary]];
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
+    if (!self.HTTPHeaderParameters) {
+        [self setHTTPHeaderParameters:[NSMutableDictionary dictionary]];
     }
     
-    [[[self controller] HTTPHeaderParameters] setObject:value forKey:field];
+    [self.HTTPHeaderParameters setObject:value forKey:field];
 }
+
+#pragma mark - Public Class Methods
 
 + (instancetype)controller {
     static id instance = nil;
