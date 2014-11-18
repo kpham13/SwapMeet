@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) NSArray *consoles;
 @property (strong, nonatomic) NSArray *conditions;
-@property (strong, nonatomic) Game *game;
+//@property (strong, nonatomic) Game *game;
 @property (strong, nonatomic) NSString *console;
 @property (strong, nonatomic) NSString *condition;
 @property (strong, nonatomic) NSMutableArray *photos;
@@ -72,11 +72,13 @@
 }
 
 - (IBAction)submitButtonClicked:(id)sender {
-    self.game = [[Game alloc] init];
-    self.game.title = self.titleTextView.text;
-    self.game.platform = self.console;
-    self.game.condition = self.condition;
-    NSDictionary *gameDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"game", self.game, nil];
+    if (!self.console) {
+        self.console = [self.consoles firstObject];
+    }
+    if (!self.condition) {
+        self.condition = [self.conditions firstObject];
+    }
+    NSDictionary *gameDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"title", self.titleTextView.text, @"platform", self.console, @"condition", self.condition, nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
     [self dismissViewControllerAnimated:true completion:nil];
 }

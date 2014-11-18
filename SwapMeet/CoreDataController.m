@@ -10,13 +10,25 @@
 
 @implementation CoreDataController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newGameAdded:) name:@"GAME_ADDED" object:nil];
+    }
+    return self;
+}
+
 + (instancetype)controller {
     static id instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [self new];
+        instance = [[self alloc] init];
     });
     return instance;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -93,6 +105,10 @@
             abort();
         }
     }
+}
+
+- (void) newGameAdded:(NSNotification *)notificaiton {
+    NSLog(@"Core Data Controller: New Game Added!");
 }
 
 @end
