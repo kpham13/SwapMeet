@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SMLoginViewController">
             <connections>
+                <outlet property="emailTextField" destination="7Vl-R1-zGd" id="wSx-og-DqS"/>
+                <outlet property="passwordTextField" destination="k5Z-MG-a2a" id="hxF-E3-d4s"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,8 +19,12 @@
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDg-xz-SXh">
                     <rect key="frame" x="0.0" y="16" width="600" height="44"/>
                     <items>
-                        <navigationItem title="Title" id="haO-wF-R1D">
-                            <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="pdO-jn-ej1"/>
+                        <navigationItem title="Login VC" id="haO-wF-R1D">
+                            <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="pdO-jn-ej1">
+                                <connections>
+                                    <action selector="cancelButton:" destination="-1" id="OOi-Ee-9ak"/>
+                                </connections>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>
@@ -37,6 +43,9 @@
                     <state key="normal" title="Login">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="loginButton:" destination="-1" eventType="touchUpInside" id="nSP-OZ-1F0"/>
+                    </connections>
                 </button>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8D-Ug-PnT">
                     <rect key="frame" x="297" y="571" width="7" height="21"/>
@@ -49,6 +58,9 @@
                     <state key="normal" title="Register now">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="registerButton:" destination="-1" eventType="touchUpInside" id="YjO-hW-ONy"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZjC-Wt-Lbw">
                     <rect key="frame" x="209" y="574" width="88" height="18"/>

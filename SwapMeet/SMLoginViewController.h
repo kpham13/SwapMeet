@@ -10,4 +10,11 @@
 
 @interface SMLoginViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+- (IBAction)loginButton:(id)sender;
+- (IBAction)registerButton:(id)sender;
+- (IBAction)cancelButton:(id)sender;
+
 @end
