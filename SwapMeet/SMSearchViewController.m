@@ -7,8 +7,12 @@
 //
 
 #import "SMSearchViewController.h"
+#import "SMNetworking.h"
+#import "SearchTableViewCell.h"
 
 @interface SMSearchViewController ()
+
+@property (strong, nonatomic) NSMutableArray *games;
 
 @end
 
@@ -19,6 +23,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate =self;
+    [self.tableView registerNib:[UINib nibWithNibName:@"SearchTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"GAME_CELL"];
+    self.tableView.rowHeight = 150;
     [self.tableView reloadData];
 }
 
@@ -30,9 +36,14 @@
     [super didReceiveMemoryWarning];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 150;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SEARCH_CELL"];
-    cell.backgroundColor = [UIColor blueColor];
+    SearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GAME_CELL"];
+    cell.titleLabel.text = @"Game Title";
+    cell.imageView.backgroundColor = [UIColor blackColor];
     return cell;
 }
 
@@ -42,6 +53,12 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"SEARCH CLICKED");
+    [SMNetworking gamesContaining:self.searchBar.text forPlatform:nil atOffset:10 completion:^(NSArray *objects, NSInteger itemsLeft, NSString *errorString) {
+        self.games = [[NSMutableArray alloc] initWithArray:objects];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.tableView reloadData];
+        }];
+    }];
 }
 
 @end
