@@ -19,6 +19,8 @@
 		0AAE327D1A1AB78C0022476E /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE327C1A1AB78C0022476E /* Match.m */; };
 		0AAE32801A1AB78C0022476E /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE327F1A1AB78C0022476E /* Game.m */; };
 		281B3C151A1BEB7F003C9D1C /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281B3C141A1BEB7F003C9D1C /* CoreDataController.m */; };
+		281B3C191A1D13A2003C9D1C /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 281B3C171A1D13A2003C9D1C /* SearchTableViewCell.m */; };
+		281B3C1A1A1D13A2003C9D1C /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */; };
 		287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */; };
 		287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */; };
 		287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */; };
@@ -61,6 +63,9 @@
 		0AAE327F1A1AB78C0022476E /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		281B3C131A1BEB7F003C9D1C /* CoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataController.h; sourceTree = "<group>"; };
 		281B3C141A1BEB7F003C9D1C /* CoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataController.m; sourceTree = "<group>"; };
+		281B3C161A1D13A2003C9D1C /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
+		281B3C171A1D13A2003C9D1C /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
+		281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		287BF0BF1A1A7BA9008C3CCD /* SMProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProfileViewController.h; sourceTree = "<group>"; };
 		287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProfileViewController.m; sourceTree = "<group>"; };
 		287BF0C51A1A7BDB008C3CCD /* SMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSearchViewController.h; sourceTree = "<group>"; };
@@ -182,6 +187,9 @@
 				287BF0D01A1ACA2C008C3CCD /* SMAddGameViewController.xib */,
 				0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */,
 				0A8BD5B71A1AD3E700D5A8BB /* SMLoginViewController.xib */,
+				281B3C161A1D13A2003C9D1C /* SearchTableViewCell.h */,
+				281B3C171A1D13A2003C9D1C /* SearchTableViewCell.m */,
+				281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -295,6 +303,7 @@
 				0A8BD5B91A1AD3E700D5A8BB /* SMLoginViewController.xib in Resources */,
 				287BF0D21A1ACA2C008C3CCD /* SMAddGameViewController.xib in Resources */,
 				0AA8B7861A1A75EE00A23C39 /* Images.xcassets in Resources */,
+				281B3C1A1A1D13A2003C9D1C /* SearchTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +335,7 @@
 				287BF0CD1A1AC5A7008C3CCD /* SMGamesViewController.m in Sources */,
 				281B3C151A1BEB7F003C9D1C /* CoreDataController.m in Sources */,
 				0AA8B7781A1A75ED00A23C39 /* main.m in Sources */,
+				281B3C191A1D13A2003C9D1C /* SearchTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
