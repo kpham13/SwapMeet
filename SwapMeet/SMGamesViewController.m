@@ -77,6 +77,8 @@
     }
 }
 
+#pragma mark NSFetchedResultsController Delegate Methods
+
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
