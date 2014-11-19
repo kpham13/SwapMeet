@@ -52,14 +52,22 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
 #pragma mark - SMNetworkController
 
 @interface SMNetworkController ()
+@property NSMutableDictionary *HTTPHeaderParameters;
 @end
 
 @implementation SMNetworkController
 
+#pragma mark - Public Methods
+
+- (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field {
+    if (!self.HTTPHeaderParameters) {
+        [self setHTTPHeaderParameters:[NSMutableDictionary dictionary]];
+    }
+    
+    [self.HTTPHeaderParameters setObject:value forKey:field];
+}
+
 #pragma mark - Public Class Methods
-
-
-#pragma mark - Private Class Methods
 
 + (instancetype)controller {
     static id instance = nil;
@@ -69,6 +77,8 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     });
     return instance;
 }
+
+#pragma mark - Private Class Methods
 
 + (NSString *)processBadJSONResponse:(NSData *)data {
     if (!data)
@@ -89,10 +99,8 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     
     NSInteger code = ((NSHTTPURLResponse *)response).statusCode;
     NSString *errorString = nil;
-    if (!((code >= 200) && (code < 300))) {
-        if ((code >= 400) && (code < 500)) {
-            errorString = @"Client error";
-        } else if ((code >= 500) && (code < 600)) {
+    if (!((code >= 200) && (code < 500))) {
+        if ((code >= 500) && (code < 600)) {
             errorString = @"Server error";
         } else {
             errorString = @"Unknown error";
@@ -146,12 +154,30 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     }
     
     request.HTTPMethod = method;
+    NSDictionary *HTTPHeaderParameters = [[self controller] HTTPHeaderParameters];
+    if (HTTPHeaderParameters) {
+        for (NSString *key in HTTPHeaderParameters) {
+            if ([key isKindOfClass:[NSString class]]) {
+                NSString *value = HTTPHeaderParameters[key];
+                if ([value isKindOfClass:[NSString class]]) {
+                    [request setValue:value forHTTPHeaderField:key];
+                } else {
+                    completion(nil, [NSString stringWithFormat:@"HTTPHeaderParameters value is not a string: %@", value]);
+                    return nil;
+                }
+            } else {
+                completion(nil, [NSString stringWithFormat:@"HTTPHeaderParameters key is not a string: %@", key]);
+                return nil;
+            }
+        }
+    }
+    
     if (acceptJSONResponse) {
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     }
     
     if (params) {
-        if ([method isEqualToString:@"GET"]) {
+        if (!bodyAsJSON) {
             NSString *encodedString = [params encodedStringForHTTPBody];
             if (encodedString) {
                 request.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@", URLString, encodedString]];
@@ -161,19 +187,11 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
             }
         }
         else if ([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"] || [method isEqualToString:@"PATCH"]) {
-            NSData *bodyData = nil;
-            if (bodyAsJSON) {
-                NSError *error;
-                bodyData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
-                if (error) {
-                    completion(nil, [NSString stringWithFormat:@"Error building JSON object: %@", error.localizedDescription]);
-                    return nil;
-                }
-            }
-            else {
-                NSString *encodedString = [params encodedStringForHTTPBody];
-                if (encodedString)
-                    bodyData = [encodedString dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error;
+            NSData *bodyData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
+            if (error) {
+                completion(nil, [NSString stringWithFormat:@"Error building JSON object: %@", error.localizedDescription]);
+                return nil;
             }
             
             if (!bodyData) {
@@ -184,6 +202,8 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
             [request setBodyData:bodyData bodyAsJSON:bodyAsJSON];
         }
     }
+    
+    NSLog(@"URL: %@; method: %@", request.URL, request.HTTPMethod);
     
     NSURLSession *session = [[self controller] session];
     NSURLSessionDataTask *retVal = [session dataTaskWithRequest:request

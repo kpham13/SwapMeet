@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SMLoginViewController">
+            <connections>
+                <outlet property="emailTextField" destination="7Vl-R1-zGd" id="wSx-og-DqS"/>
+                <outlet property="passwordTextField" destination="k5Z-MG-a2a" id="hxF-E3-d4s"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDg-xz-SXh">
+                    <rect key="frame" x="0.0" y="16" width="600" height="44"/>
+                    <items>
+                        <navigationItem title="Login VC" id="haO-wF-R1D">
+                            <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="pdO-jn-ej1">
+                                <connections>
+                                    <action selector="cancelButton:" destination="-1" id="OOi-Ee-9ak"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Vl-R1-zGd">
+                    <rect key="frame" x="8" y="101" width="584" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5Z-MG-a2a">
+                    <rect key="frame" x="8" y="139" width="584" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyU-iP-Mms">
+                    <rect key="frame" x="281" y="177" width="38" height="30"/>
+                    <state key="normal" title="Login">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="loginButton:" destination="-1" eventType="touchUpInside" id="nSP-OZ-1F0"/>
+                    </connections>
+                </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8D-Ug-PnT">
+                    <rect key="frame" x="297" y="571" width="7" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWB-KN-26z">
+                    <rect key="frame" x="304" y="568" width="90" height="30"/>
+                    <state key="normal" title="Register now">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="registerButton:" destination="-1" eventType="touchUpInside" id="YjO-hW-ONy"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZjC-Wt-Lbw">
+                    <rect key="frame" x="209" y="574" width="88" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nDg-xz-SXh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="16" id="250-VN-URx"/>
+                <constraint firstItem="i8D-Ug-PnT" firstAttribute="leading" secondItem="ZjC-Wt-Lbw" secondAttribute="trailing" id="345-mp-BQ8"/>
+                <constraint firstAttribute="bottom" secondItem="i8D-Ug-PnT" secondAttribute="bottom" constant="8" id="5IR-2S-cfu"/>
+                <constraint firstAttribute="bottom" secondItem="KWB-KN-26z" secondAttribute="bottom" constant="2" id="6cY-6M-Woz"/>
+                <constraint firstItem="k5Z-MG-a2a" firstAttribute="top" secondItem="7Vl-R1-zGd" secondAttribute="bottom" constant="8" id="6ih-d2-ePA"/>
+                <constraint firstItem="7Vl-R1-zGd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="GY9-Zx-Fnh"/>
+                <constraint firstItem="7Vl-R1-zGd" firstAttribute="top" secondItem="nDg-xz-SXh" secondAttribute="bottom" constant="41" id="H5b-wU-0Xv"/>
+                <constraint firstAttribute="centerX" secondItem="i8D-Ug-PnT" secondAttribute="centerX" id="JWW-nH-ss9"/>
+                <constraint firstAttribute="trailing" secondItem="k5Z-MG-a2a" secondAttribute="trailing" constant="8" id="LFS-JF-UjC"/>
+                <constraint firstItem="gyU-iP-Mms" firstAttribute="top" secondItem="k5Z-MG-a2a" secondAttribute="bottom" constant="8" id="MW1-oL-dNG"/>
+                <constraint firstAttribute="trailing" secondItem="7Vl-R1-zGd" secondAttribute="trailing" constant="8" id="YxU-Bt-nHn"/>
+                <constraint firstItem="KWB-KN-26z" firstAttribute="leading" secondItem="i8D-Ug-PnT" secondAttribute="trailing" id="Z0i-J5-akl"/>
+                <constraint firstItem="k5Z-MG-a2a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="d2P-Kh-xX8"/>
+                <constraint firstAttribute="centerX" secondItem="gyU-iP-Mms" secondAttribute="centerX" id="kUC-PF-pcP"/>
+                <constraint firstItem="nDg-xz-SXh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="njL-1P-MML"/>
+                <constraint firstAttribute="bottom" secondItem="ZjC-Wt-Lbw" secondAttribute="bottom" constant="8" id="u6e-zL-t0B"/>
+                <constraint firstAttribute="trailing" secondItem="nDg-xz-SXh" secondAttribute="trailing" id="wXM-uw-sNF"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

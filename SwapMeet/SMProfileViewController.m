@@ -21,6 +21,11 @@
     self.lookingForTextField.text = @"Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games";
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    SMLoginViewController *loginViewController = [[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]];
+    [self presentViewController:loginViewController animated:true completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
