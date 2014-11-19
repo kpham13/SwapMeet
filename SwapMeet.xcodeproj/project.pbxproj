@@ -200,6 +200,7 @@
 				281B3C161A1D13A2003C9D1C /* SearchTableViewCell.h */,
 				281B3C171A1D13A2003C9D1C /* SearchTableViewCell.m */,
 				281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */,
+				0AFEF7E01A1D01B900F5B83A /* SMSignUpViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
