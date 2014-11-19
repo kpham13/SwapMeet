@@ -7,6 +7,7 @@
 //
 
 #import "SMMatchesViewController.h"
+#import "SMMatchDetailViewController.h"
 
 @interface SMMatchesViewController ()
 
@@ -32,6 +33,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SMMatchDetailViewController *destinationViewController = [[SMMatchDetailViewController alloc] initWithNibName:@"SMMatchDetailViewController" bundle:[NSBundle mainBundle]];
+    [self presentViewController:destinationViewController animated:true completion:nil];
 }
 
 @end
