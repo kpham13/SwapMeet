@@ -7,6 +7,7 @@
 //
 
 #import "SMProfileViewController.h"
+#import "SMNetworking.h"
 
 @interface SMProfileViewController ()
 
@@ -20,6 +21,22 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.lookingForTextField.text = @"Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games";
+    
+    UIAlertController *logoutAlert = [UIAlertController alertControllerWithTitle:@"Temp Logout" message:@"Temporary way to logout." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"Logout" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [SMNetworking invalidateToken];
+        
+        NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
+        NSLog(@"%@", token);
+    }];
+    
+    [logoutAlert addAction:cancelButton];
+    [logoutAlert addAction:logoutAction];
+    [self presentViewController:logoutAlert animated:true completion:nil];
+    
+//    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logoutUser:)];
+//    [self.navigationItem setRightBarButtonItem:logoutButton animated:true];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -37,6 +54,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
+}
+
+- (void)logoutUser:(id)sender {
+    [SMNetworking invalidateToken];
 }
 
 @end
