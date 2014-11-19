@@ -108,7 +108,7 @@
 }
 
 - (void) newGameAdded:(NSNotification *)notificaiton {
-    NSLog(@"Core Data Controller: New Game Added!");
+    NSLog(@"newGameAdded: %@", notificaiton.userInfo);
     Game *game = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
     game.title = [notificaiton.userInfo objectForKey:@"title"];
     game.condition = [notificaiton.userInfo objectForKey:@"condition"];
@@ -116,19 +116,23 @@
     [self saveContext];
 }
 
-- (NSArray *) fetchUserGames {
+- (NSFetchedResultsController *) fetchUserGames {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Game"];
     request.sortDescriptors = [[NSArray alloc] initWithObjects:[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:false] init], nil];
     NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     NSError *error = nil;
     [controller performFetch: &error];
     if (!error) {
-        NSArray *games = controller.fetchedObjects;
-        return games;
+        return controller;
     } else {
         NSLog(@"Error in fetch request");
         return nil;
     }
+}
+
+- (void) deleteGame:(Game *)game {
+    [self.managedObjectContext deleteObject: game];
+    [self saveContext];
 }
 
 @end

@@ -9,6 +9,8 @@
 #import "SMAddGameViewController.h"
 #import "Game.h"
 
+#pragma mark - Properties
+
 @interface SMAddGameViewController ()
 
 @property (strong, nonatomic) NSArray *consoles;
@@ -20,6 +22,8 @@
 @end
 
 @implementation SMAddGameViewController
+
+#pragma mark - ViewController LifeCycle Methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,14 +79,14 @@
 #pragma mark - UIButton IBActions
 
 - (IBAction)submitButtonClicked:(id)sender {
-    if (!self.titleTextView.text) {
+    if (![self.titleTextView.text isEqual: @""]) {
         if (!self.console) {
             self.console = [self.consoles firstObject];
         }
         if (!self.condition) {
             self.condition = [self.conditions firstObject];
         }
-        NSDictionary *gameDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"title", self.titleTextView.text, @"platform", self.console, @"condition", self.condition, nil];
+        NSDictionary *gameDict = @{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition};
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
         [self dismissViewControllerAnimated:true completion:nil];
     } else {
