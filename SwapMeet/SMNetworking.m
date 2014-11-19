@@ -131,18 +131,22 @@ NSString * const kSMDefaultsKeyToken = @"token";
                                  atOffset:(NSInteger)offset
                                completion:(void(^)(NSArray *objects, NSInteger itemsLeft, NSString *errorString))completion
 {
-    if (!query || [query isEqualToString:@""]) {
-        completion(nil, 0, @"Query string can not be empty!");
-        return nil;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    if (query) {
+        params[@"q"] = query;
     }
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"q": query}];
     if (platform) {
         params[@"p"] = platform;
     }
     
     if (offset > 0) {
         params[@"s"] = @(offset);
+    }
+    
+    if ([params count] == 0) {
+        params = nil;
     }
     
     __block void(^completionBlock)(NSArray *objects, NSInteger itemsLeft, NSString *errorString) = completion;
