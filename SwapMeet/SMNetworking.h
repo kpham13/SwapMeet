@@ -21,6 +21,11 @@ extern NSString * const kSMDefaultsKeyToken;
                              andPassword:(NSString *)password
                               completion:(void(^)(BOOL successful, NSString *errorString))completion;
 
++ (NSURLSessionDataTask *)gamesContaining:(NSString *)query
+                              forPlatform:(NSString *)platform
+                                 atOffset:(NSInteger)offset
+                               completion:(void(^)(NSArray *objects, NSInteger itemsLeft, NSString *errorString))completion;
+
 + (void)invalidateToken;
 
 @end

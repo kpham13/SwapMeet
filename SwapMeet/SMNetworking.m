@@ -100,11 +100,26 @@ NSString * const kSMDefaultsKeyToken = @"token";
             }];
 }
 
-+ (NSURLSessionDataTask *)JSONGamesAtOffset:(NSInteger)offset
-                                 completion:(void(^)(NSArray *JSONObjects, NSInteger itemsLeft, NSString *errorString))completion
++ (NSURLSessionDataTask *)gamesContaining:(NSString *)query
+                              forPlatform:(NSString *)platform
+                                 atOffset:(NSInteger)offset
+                               completion:(void(^)(NSArray *objects, NSInteger itemsLeft, NSString *errorString))completion
 {
-    // TODO: Implement
-    return nil;
+    if (!query || [query isEqualToString:@""]) {
+        completion(nil, 0, @"Query string can not be empty!");
+        return nil;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"q": query}];
+    if (platform) {
+        params[@"p"] = platform;
+    }
+    
+    if (offset > 0) {
+        params[@"s"] = @(offset);
+    }
+    
+    return [self performJSONRequestAtPath:@"wantsgames" withMethod:@"GET" andParameters:params sendBodyAsJSON:NO completion:completion];
 }
 
 #pragma mark - Private Methods
@@ -125,7 +140,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
                     *errorString_p = [NSString stringWithFormat:@"No token.\n%@", JSONObject];
                 } else {
                     [[self controller] setToken:token];
-                    [[self controller] setValue:token forHTTPHeaderField:@"token"];
+                    [[self controller] setValue:token forHTTPHeaderField:@"jwt"];
                 }
             }
         }
@@ -214,7 +229,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
         [self setValue:@"someFancyKey" forHTTPHeaderField:@"key"];
         NSString *token = [self token];
         if (token) {
-            [self setValue:token forHTTPHeaderField:@"token"];
+            [self setValue:token forHTTPHeaderField:@"jwt"];
         }
     }
     return self;
