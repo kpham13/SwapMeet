@@ -14,6 +14,7 @@
 @property NSString *baseURLString;
 
 - (void)setValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
+- (void)removeHTTPHeaderField:(NSString *)field;
 
 + (NSURLSessionDataTask *)performRequestWithURLPathString:(NSString *)URLPath
                                                    method:(NSString *)method

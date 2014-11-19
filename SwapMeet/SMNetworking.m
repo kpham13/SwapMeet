@@ -28,6 +28,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
         [[NSUserDefaults standardUserDefaults] setObject:token forKey:kSMDefaultsKeyToken];
     } else {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyToken];
+        [self removeHTTPHeaderField:@"jwt"];
     }
 }
 
@@ -40,6 +41,31 @@ NSString * const kSMDefaultsKeyToken = @"token";
 }
 
 #pragma mark - Public Methods
+
++ (NSURLSessionDataTask *)addGameToFavoritesWithID:(NSString *)gameID
+                                        completion:(void(^)(BOOL success, NSString *errorString))completion
+{
+    if (!gameID || [gameID isEqualToString:@""]) {
+        completion(NO, @"gameID cannot be empty");
+        return nil;
+    }
+    __block void(^completionBlock)(BOOL success, NSString *errorString) = completion;
+    return [self performJSONRequestAtPath:@"games/wantsgames" withMethod:@"POST" andParameters:@{@"id": gameID} sendBodyAsJSON:YES completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        completionBlock(errorString == nil, errorString);
+    }];
+}
+
++ (NSURLSessionDataTask *)addNewGame:(NSDictionary *)gameDictionary
+                          completion:(void(^)(BOOL success, NSString *errorString))completion {
+    if (!gameDictionary) {
+        completion(NO, @"Game dictionary can't be nil");
+    }
+    
+    __block void(^completionBlock)(BOOL success, NSString *errorString) = completion;
+    return [self performJSONRequestAtPath:@"games/hasgames" withMethod:@"POST" andParameters:gameDictionary sendBodyAsJSON:YES completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        completionBlock(errorString == nil, errorString);
+    }];
+}
 
 + (void)invalidateToken {
     [[self controller] setToken:nil];
@@ -119,7 +145,17 @@ NSString * const kSMDefaultsKeyToken = @"token";
         params[@"s"] = @(offset);
     }
     
-    return [self performJSONRequestAtPath:@"wantsgames" withMethod:@"GET" andParameters:params sendBodyAsJSON:NO completion:completion];
+    __block void(^completionBlock)(NSArray *objects, NSInteger itemsLeft, NSString *errorString) = completion;
+    return [self performJSONRequestAtPath:@"wantsgames" withMethod:@"GET" andParameters:params sendBodyAsJSON:NO completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        NSInteger itemsLeft = 0;
+        NSArray *objects = nil;
+        if (!errorString) {
+            itemsLeft = [JSONDic[@"items_left"] integerValue];
+            objects = JSONDic[@"items"];
+        }
+        
+        completionBlock(objects, itemsLeft, errorString);        
+    }];
 }
 
 #pragma mark - Private Methods
@@ -154,27 +190,25 @@ NSString * const kSMDefaultsKeyToken = @"token";
                                     withMethod:(NSString *)method
                                  andParameters:(NSDictionary *)params
                                 sendBodyAsJSON:(BOOL)bodyAsJSON
-                                    completion:(void(^)(NSArray *JSONObjects, NSInteger itemsLeft, NSString *errorString))completion
+                                    completion:(void(^)(NSDictionary *JSONDic, NSString *errorString))completion
 {
-    __block void(^completionBlock)(NSArray *JSONObjects, NSInteger itemsLeft, NSString *errorString) = completion;
+    __block void(^completionBlock)(NSDictionary *JSONDic, NSString *errorString) = completion;
     return [self performRequestWithURLPathString:path method:method parameters:params acceptJSONResponse:YES sendBodyAsJSON:bodyAsJSON completion:^(NSData *data, NSString *errorString) {
-        NSArray *JSONObjects = 0;
-        NSInteger itemsLeft = 0;
+        NSDictionary *JSONDic = nil;
         if (!errorString) {
             NSError *error;
-            NSDictionary *JSONDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            JSONDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             if (error) {
                 errorString = [NSString stringWithFormat:@"Error converting JSON object: %@", error.localizedDescription];
             } else {
                 errorString = [self checkJSONResponse:JSONDic];
-                if (!errorString) {
-                    itemsLeft = [JSONDic[@"items_left"] integerValue];
-                    JSONObjects = JSONDic[@"items"];
+                if (errorString) {
+                    JSONDic = nil;
                 }
             }
         }
         
-        completionBlock(JSONObjects, itemsLeft, errorString);
+        completionBlock(JSONDic, errorString);
     }];
 }
 
@@ -208,6 +242,15 @@ NSString * const kSMDefaultsKeyToken = @"token";
                 break;
             case 7:
                 retVal = @"Access denied";
+                break;
+            case 8:
+                retVal = @"Game already in favorites";
+                break;
+            case 9:
+                retVal = @"Game not found in user's list";
+                break;
+            case 10:
+                retVal = @"Invalid game id";
                 break;
                 
             default:

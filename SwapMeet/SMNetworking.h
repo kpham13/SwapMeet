@@ -26,6 +26,12 @@ extern NSString * const kSMDefaultsKeyToken;
                                  atOffset:(NSInteger)offset
                                completion:(void(^)(NSArray *objects, NSInteger itemsLeft, NSString *errorString))completion;
 
++ (NSURLSessionDataTask *)addGameToFavoritesWithID:(NSString *)gameID
+                                        completion:(void(^)(BOOL success, NSString *errorString))completion;
+
++ (NSURLSessionDataTask *)addNewGame:(NSDictionary *)gameDictionary
+                          completion:(void(^)(BOOL success, NSString *errorString))completion;
+
 + (void)invalidateToken;
 
 @end

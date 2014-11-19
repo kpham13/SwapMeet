@@ -67,6 +67,10 @@ const NSTimeInterval kSMNetworkingDefaultTimeout = 10;
     [self.HTTPHeaderParameters setObject:value forKey:field];
 }
 
+- (void)removeHTTPHeaderField:(NSString *)field {
+    [self.HTTPHeaderParameters removeObjectForKey:field];
+}
+
 #pragma mark - Public Class Methods
 
 + (instancetype)controller {
