@@ -7,6 +7,7 @@
 //
 
 #import "SMLoginViewController.h"
+#import "SMSignUpViewController.h"
 
 @interface SMLoginViewController ()
 
@@ -16,21 +17,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)loginButton:(id)sender {
 }
 
 - (IBAction)registerButton:(id)sender {
+    SMSignUpViewController *signUpViewController = [[SMSignUpViewController alloc] initWithNibName:@"SMSignUpViewController" bundle:[NSBundle mainBundle]];
+    [self presentViewController:signUpViewController animated:true completion:nil];
 }
 
 - (IBAction)cancelButton:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 @end

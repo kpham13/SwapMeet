@@ -227,7 +227,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="8Dn-dw-6ar">
             <objects>
-                <tabBarController id="jU2-Ea-ddM" sceneMemberID="viewController">
+                <tabBarController id="jU2-Ea-ddM" customClass="SMTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="PMI-gc-3vy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
