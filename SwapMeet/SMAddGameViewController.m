@@ -38,6 +38,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - PickerView Delegate Methods
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 2;
 }
@@ -70,16 +72,22 @@
     }
 }
 
+#pragma mark - UIButton IBActions
+
 - (IBAction)submitButtonClicked:(id)sender {
-    if (!self.console) {
-        self.console = [self.consoles firstObject];
+    if (!self.titleTextView.text) {
+        if (!self.console) {
+            self.console = [self.consoles firstObject];
+        }
+        if (!self.condition) {
+            self.condition = [self.conditions firstObject];
+        }
+        NSDictionary *gameDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"title", self.titleTextView.text, @"platform", self.console, @"condition", self.condition, nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
+        [self dismissViewControllerAnimated:true completion:nil];
+    } else {
+        [self noTitleAlertController];
     }
-    if (!self.condition) {
-        self.condition = [self.conditions firstObject];
-    }
-    NSDictionary *gameDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"title", self.titleTextView.text, @"platform", self.console, @"condition", self.condition, nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
-    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (IBAction)cancelButtonClicked:(id)sender {
@@ -96,6 +104,8 @@
     }
 }
 
+#pragma mark - UIImagePickerController Delegate Methods
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
     [self.photos addObject:image];
     [self setImages];
@@ -111,6 +121,8 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:true completion:nil];
 }
+
+#pragma mark - ImageView and Tap Gesture Methods
 
 - (void)setImages {
     NSInteger index = 0;
@@ -140,15 +152,6 @@
     }
 }
 
-- (void)maxImagesReached {
-    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Too Many Photos" message:@"Sorry, You Can Only Add 3 Photos" preferredStyle:UIAlertControllerStyleAlert] init];
-    UIAlertAction *alertAction = [[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [alertController dismissViewControllerAnimated:true completion:nil];
-    }] init];
-    [alertController addAction:alertAction];
-    [self presentViewController:alertController animated:true completion:nil];
-}
-
 - (void)addTouchGestures {
     UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] init];
     [self.imageView1 addGestureRecognizer:touch];
@@ -175,6 +178,8 @@
     }
 }
 
+#pragma mark - Alert Controller Methods
+
 - (void)addSelectedImageAlert: (UIImageView *) imageView {
     UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Choose An Option" message:@"Would you like to select this photo for your thumbnail? Or would you like to delete it?" preferredStyle:UIAlertControllerStyleAlert] init];
     UIAlertAction *thumbnailAction = [UIAlertAction actionWithTitle:@"Select As Thumbnail" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -197,6 +202,26 @@
     [alertController addAction:deleteAction];
     [self presentViewController:alertController animated:true completion:nil];
 }
+
+- (void)maxImagesReached {
+    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Too Many Photos" message:@"Sorry, You Can Only Add 3 Photos" preferredStyle:UIAlertControllerStyleAlert] init];
+    UIAlertAction *alertAction = [[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertController dismissViewControllerAnimated:true completion:nil];
+    }] init];
+    [alertController addAction:alertAction];
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
+- (void)noTitleAlertController {
+    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"No Title!" message:@"You need at least a game title to continue" preferredStyle:UIAlertControllerStyleAlert] init];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertController dismissViewControllerAnimated:true completion:nil];
+    }];
+    [alertController addAction: action];
+    [self presentViewController:alertController animated:true completion:nil];
+}
+
+#pragma mark - Generate Thumbnail Method
 
 - (UIImage *) generateThumbnail:(UIImage *) image {
     UIGraphicsBeginImageContext(CGSizeMake(75, 75));
