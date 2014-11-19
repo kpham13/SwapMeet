@@ -155,13 +155,14 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zqz-Bf-Bj6">
-                                <rect key="frame" x="0.0" y="49" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="58" width="600" height="542"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ojx-C3-Mzw" firstAttribute="top" secondItem="C9J-9S-1N3" secondAttribute="bottom" id="0rI-8p-vvE"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="top" secondItem="2Jh-8A-qDO" secondAttribute="bottom" constant="8" id="1Ad-Pd-rY5"/>
                             <constraint firstItem="2Jh-8A-qDO" firstAttribute="top" secondItem="C9J-9S-1N3" secondAttribute="bottom" id="CuI-6A-Xyk"/>
                             <constraint firstItem="2Jh-8A-qDO" firstAttribute="leading" secondItem="ojx-C3-Mzw" secondAttribute="trailing" constant="8" id="DBx-ap-UBt"/>
                             <constraint firstItem="2Jh-8A-qDO" firstAttribute="trailing" secondItem="f2p-IJ-66r" secondAttribute="trailingMargin" id="EDz-ng-GfS"/>
@@ -169,7 +170,6 @@
                             <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="bottom" secondItem="f2p-IJ-66r" secondAttribute="bottomMargin" id="TM1-7m-zgc"/>
                             <constraint firstItem="ojx-C3-Mzw" firstAttribute="leading" secondItem="f2p-IJ-66r" secondAttribute="leadingMargin" id="Tfc-PT-Hc6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Zqz-Bf-Bj6" secondAttribute="trailing" constant="-16" id="TiE-Fb-TDN"/>
-                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="top" secondItem="ojx-C3-Mzw" secondAttribute="bottom" constant="8" id="cJ8-5D-ok7"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Games" image="MyGamesTabIcon" id="Es1-sK-I2A"/>
