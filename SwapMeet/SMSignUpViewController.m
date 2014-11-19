@@ -8,6 +8,7 @@
 
 #import "SMSignUpViewController.h"
 #import "SMNetworking.h"
+#import "AppDelegate.h"
 
 @interface SMSignUpViewController ()
 
@@ -36,13 +37,23 @@
     self.zipCode = [formatter numberFromString:self.zipCodeTextField.text];
 
     [SMNetworking signUpWithEmail:self.email andPassword:self.password zipNumber:self.zipCode completion:^(BOOL successful, NSString *errorString) {
-        //NSLog(@"Did this work?");
         if (successful == YES) {
             NSLog(@"Account created");
-            // NetworkController method to retrieve user information & populate NSUserDefaults
+            
+            [SMNetworking loginWithEmail:self.email andPassword:self.password completion:^(BOOL successful, NSString *errorString) {
+                // Switch to delegation in the future
+                AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
+                [tabBarController setSelectedIndex:3];
+            }];
+            
             [self dismissViewControllerAnimated:true completion:nil];
         } else {
-            NSLog(@"%@", errorString);
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login failed" message:errorString preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *OKButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            
+            [alert addAction:OKButton];
+            [self presentViewController:alert animated:true completion:nil];
         }
     }];
 }

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "CoreDataController.h"
 #import "SMProfileViewController.h"
+#import "SMNetworking.h"
 
 @interface AppDelegate ()
 
@@ -131,13 +132,13 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     
-    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
+    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:kSMDefaultsKeyToken];
     //NSLog(@"%@", token);
     
     SMProfileViewController *profileViewController = tabBarController.viewControllers[3];
     if ([viewController isEqual:profileViewController]) {
         if (!token) {
-            NSLog(@"No token");
+            //NSLog(@"No token");
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login required" message:@"Please log in to view your profile." preferredStyle: UIAlertControllerStyleAlert];
             UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *loginButton = [UIAlertAction actionWithTitle:@"Login" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -150,7 +151,7 @@
             [self.window.rootViewController presentViewController:alert animated:true completion:nil];
             return false;
         } else {
-            NSLog(@"Token exists");
+            //NSLog(@"Token exists");
             return true;
         }
     } else {
@@ -159,7 +160,7 @@
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    NSLog(@"tab bar index %lu", (unsigned long)tabBarController.selectedIndex);
+    //NSLog(@"tab bar index %lu", (unsigned long)tabBarController.selectedIndex);
     
 //    if (tabBarController.selectedIndex == 1) {
 //        NSLog(@"1");

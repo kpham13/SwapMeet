@@ -40,7 +40,6 @@
     [SMNetworking loginWithEmail:self.email andPassword:self.password completion:^(BOOL successful, NSString *errorString) {
         if (successful == YES) {
             NSLog(@"Login success.");
-            // NetworkController method to retrieve user information & populate NSUserDefaults
             [self dismissViewControllerAnimated:true completion:nil];
             
             // Switch to delegation in the future
@@ -48,7 +47,11 @@
             UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
             [tabBarController setSelectedIndex:3];
         } else {
-            NSLog(@"Login failed.");
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login failed" message:errorString preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *OKButton = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            
+            [alert addAction:OKButton];
+            [self presentViewController:alert animated:true completion:nil];
         }
     }];
 }
