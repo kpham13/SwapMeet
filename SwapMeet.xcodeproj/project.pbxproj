@@ -19,6 +19,7 @@
 		0AA8B7951A1A75EE00A23C39 /* SwapMeetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7941A1A75EE00A23C39 /* SwapMeetTests.m */; };
 		0AAE327D1A1AB78C0022476E /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE327C1A1AB78C0022476E /* Match.m */; };
 		0AAE32801A1AB78C0022476E /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE327F1A1AB78C0022476E /* Game.m */; };
+		0ACEA2D11A1DC46A00FC9E15 /* SMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2D01A1DC46A00FC9E15 /* SMConstants.m */; };
 		0AFEF7E11A1D01B900F5B83A /* SMSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFEF7DF1A1D01B900F5B83A /* SMSignUpViewController.m */; };
 		0AFEF7E21A1D01B900F5B83A /* SMSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AFEF7E01A1D01B900F5B83A /* SMSignUpViewController.xib */; };
 		281B3C151A1BEB7F003C9D1C /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281B3C141A1BEB7F003C9D1C /* CoreDataController.m */; };
@@ -34,7 +35,6 @@
 		9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68781A1ABBA90088146F /* SMNetworking.m */; };
 		9A3AA5601A1D91AB00F23624 /* CLUploader+SwapMeet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */; };
 		9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7962F11A1D8D590038A076 /* libCloudinary.a */; };
-		9A7962F61A1D8E330038A076 /* SMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7962F51A1D8E330038A076 /* SMConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +69,8 @@
 		0AAE327C1A1AB78C0022476E /* Match.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Match.m; sourceTree = "<group>"; };
 		0AAE327E1A1AB78C0022476E /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		0AAE327F1A1AB78C0022476E /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		0ACEA2CF1A1DC46A00FC9E15 /* SMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMConstants.h; sourceTree = "<group>"; };
+		0ACEA2D01A1DC46A00FC9E15 /* SMConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMConstants.m; sourceTree = "<group>"; };
 		0AFEF7DE1A1D01B900F5B83A /* SMSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSignUpViewController.h; sourceTree = "<group>"; };
 		0AFEF7DF1A1D01B900F5B83A /* SMSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSignUpViewController.m; sourceTree = "<group>"; };
 		0AFEF7E01A1D01B900F5B83A /* SMSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSignUpViewController.xib; sourceTree = "<group>"; };
@@ -100,8 +102,6 @@
 		9A7962EF1A1D8D590038A076 /* CLTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTransformation.h; sourceTree = "<group>"; };
 		9A7962F01A1D8D590038A076 /* CLUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUploader.h; sourceTree = "<group>"; };
 		9A7962F11A1D8D590038A076 /* libCloudinary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCloudinary.a; sourceTree = "<group>"; };
-		9A7962F41A1D8E330038A076 /* SMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMConstants.h; sourceTree = "<group>"; };
-		9A7962F51A1D8E330038A076 /* SMConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +164,8 @@
 			children = (
 				0AA8B7761A1A75ED00A23C39 /* Info.plist */,
 				0AA8B7771A1A75ED00A23C39 /* main.m */,
-				9A7962F41A1D8E330038A076 /* SMConstants.h */,
-				9A7962F51A1D8E330038A076 /* SMConstants.m */,
+				0ACEA2CF1A1DC46A00FC9E15 /* SMConstants.h */,
+				0ACEA2D01A1DC46A00FC9E15 /* SMConstants.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -393,7 +393,6 @@
 			files = (
 				9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */,
 				9A3AA5601A1D91AB00F23624 /* CLUploader+SwapMeet.m in Sources */,
-				9A7962F61A1D8E330038A076 /* SMConstants.m in Sources */,
 				287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */,
 				287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */,
 				287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */,
@@ -410,6 +409,7 @@
 				281B3C151A1BEB7F003C9D1C /* CoreDataController.m in Sources */,
 				0AA8B7781A1A75ED00A23C39 /* main.m in Sources */,
 				281B3C191A1D13A2003C9D1C /* SearchTableViewCell.m in Sources */,
+				0ACEA2D11A1DC46A00FC9E15 /* SMConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
