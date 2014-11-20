@@ -7,7 +7,6 @@
 //
 
 #import "SMMatchesViewController.h"
-#import "SMMatchDetailViewController.h"
 
 @interface SMMatchesViewController ()
 
@@ -22,10 +21,18 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.mailResult = nil;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.mailResult != nil) {
+        [self presentAlertView:self.mailResult];
+    }
 }
 
 #pragma mark - TableView Delegate Methods
@@ -56,7 +63,6 @@
 #pragma mark - MailComposeViewController Delegate Method
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    [self dismissViewControllerAnimated:true completion:nil];
     
     switch (result) {
         case MFMailComposeResultCancelled:
@@ -72,20 +78,19 @@
             self.mailResult = @"Your Email Has Been Sent";
             break;
         default:
-            self.mailResult = @"There Was An Error.";
+            self.mailResult = @"Your Email Was Not Sent";
             break;
     }
     [controller dismissViewControllerAnimated:true completion:nil];
-    [self presentAlertView:self.mailResult];
 }
 
-- (UIAlertController *) presentAlertView:(NSString *) result {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:result message:result preferredStyle:UIAlertControllerStyleAlert];
+- (void) presentAlertView:(NSString *) result {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:result message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [alertController dismissViewControllerAnimated:true completion:nil];
     }];
     [alertController addAction:action];
-    return alertController;
+    [self presentViewController:alertController animated:true completion:nil];
 }
 
 @end
