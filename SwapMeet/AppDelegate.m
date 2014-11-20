@@ -9,10 +9,9 @@
 #import "AppDelegate.h"
 #import "CoreDataController.h"
 #import "SMProfileViewController.h"
+#import "SMNetworking.h"
 
 @interface AppDelegate ()
-
-@property (strong, nonatomic) NSString *token;
 
 @end
 
@@ -133,39 +132,41 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     
+    NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:kSMDefaultsKeyToken];
+    //NSLog(@"%@", token);
+    
     SMProfileViewController *profileViewController = tabBarController.viewControllers[3];
     if ([viewController isEqual:profileViewController]) {
-        if (!self.token) {
-            NSLog(@"No token");
+        if (!token) {
+            //NSLog(@"No token");
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login required" message:@"Please log in to view your profile." preferredStyle: UIAlertControllerStyleAlert];
             UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *loginButton = [UIAlertAction actionWithTitle:@"Login" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                SMLoginViewController *loginViewController = [[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]];
-                [self.window.rootViewController presentViewController:loginViewController animated:true completion:nil];
+                self.navigationController = [[UINavigationController alloc] initWithRootViewController:[[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]]];
+                [self.window.rootViewController presentViewController:self.navigationController animated:true completion:nil];
             }];
             
             [alert addAction:cancelButton];
             [alert addAction:loginButton];
             [self.window.rootViewController presentViewController:alert animated:true completion:nil];
+            return false;
+        } else {
+            //NSLog(@"Token exists");
+            return true;
         }
-        return false;
     } else {
         return true;
     }
-
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    NSLog(@"tab bar index %lu", (unsigned long)tabBarController.selectedIndex);
+    //NSLog(@"tab bar index %lu", (unsigned long)tabBarController.selectedIndex);
     
-    self.token = [[NSUserDefaults standardUserDefaults] stringForKey:@"token"];
-    NSLog(@"%@", self.token);
-    
-    if (tabBarController.selectedIndex == 1) {
-        NSLog(@"1");
-    } else if (tabBarController.selectedIndex == 3) {
-        NSLog(@"3");
-    }
+//    if (tabBarController.selectedIndex == 1) {
+//        NSLog(@"1");
+//    } else if (tabBarController.selectedIndex == 3) {
+//        NSLog(@"3");
+//    }
 }
 
 @end
