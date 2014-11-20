@@ -32,6 +32,9 @@
 		287BF0D21A1ACA2C008C3CCD /* SMAddGameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287BF0D01A1ACA2C008C3CCD /* SMAddGameViewController.xib */; };
 		9A0F68761A1A7B190088146F /* SMNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68751A1A7B190088146F /* SMNetworkController.m */; };
 		9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68781A1ABBA90088146F /* SMNetworking.m */; };
+		9A3AA5601A1D91AB00F23624 /* CLUploader+SwapMeet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */; };
+		9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7962F11A1D8D590038A076 /* libCloudinary.a */; };
+		9A7962F61A1D8E330038A076 /* SMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7962F51A1D8E330038A076 /* SMConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +92,16 @@
 		9A0F68751A1A7B190088146F /* SMNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworkController.m; sourceTree = "<group>"; };
 		9A0F68771A1ABBA90088146F /* SMNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNetworking.h; sourceTree = "<group>"; };
 		9A0F68781A1ABBA90088146F /* SMNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworking.m; sourceTree = "<group>"; };
+		9A3AA55E1A1D91AB00F23624 /* CLUploader+SwapMeet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLUploader+SwapMeet.h"; sourceTree = "<group>"; };
+		9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLUploader+SwapMeet.m"; sourceTree = "<group>"; };
+		9A7962EC1A1D8D590038A076 /* CLCloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCloudinary.h; sourceTree = "<group>"; };
+		9A7962ED1A1D8D590038A076 /* CLEagerTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEagerTransformation.h; sourceTree = "<group>"; };
+		9A7962EE1A1D8D590038A076 /* Cloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cloudinary.h; sourceTree = "<group>"; };
+		9A7962EF1A1D8D590038A076 /* CLTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTransformation.h; sourceTree = "<group>"; };
+		9A7962F01A1D8D590038A076 /* CLUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUploader.h; sourceTree = "<group>"; };
+		9A7962F11A1D8D590038A076 /* libCloudinary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCloudinary.a; sourceTree = "<group>"; };
+		9A7962F41A1D8E330038A076 /* SMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMConstants.h; sourceTree = "<group>"; };
+		9A7962F51A1D8E330038A076 /* SMConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +144,7 @@
 		0AA8B7741A1A75ED00A23C39 /* SwapMeet */ = {
 			isa = PBXGroup;
 			children = (
+				9A7962E91A1D8D590038A076 /* cloudinary_ios_v1.0.12 */,
 				9A0F68731A1A7A330088146F /* Models */,
 				9A0F68711A1A7A280088146F /* Views */,
 				9A0F68701A1A7A210088146F /* View Controllers */,
@@ -139,6 +154,7 @@
 				0AA8B7851A1A75EE00A23C39 /* Images.xcassets */,
 				0AA8B77C1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld */,
 				0AA8B7751A1A75ED00A23C39 /* Supporting Files */,
+				9A3AA55D1A1D908000F23624 /* Categories */,
 			);
 			path = SwapMeet;
 			sourceTree = "<group>";
@@ -148,6 +164,8 @@
 			children = (
 				0AA8B7761A1A75ED00A23C39 /* Info.plist */,
 				0AA8B7771A1A75ED00A23C39 /* main.m */,
+				9A7962F41A1D8E330038A076 /* SMConstants.h */,
+				9A7962F51A1D8E330038A076 /* SMConstants.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -229,6 +247,44 @@
 				0AAE327C1A1AB78C0022476E /* Match.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		9A3AA55D1A1D908000F23624 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				9A3AA55E1A1D91AB00F23624 /* CLUploader+SwapMeet.h */,
+				9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		9A7962E91A1D8D590038A076 /* cloudinary_ios_v1.0.12 */ = {
+			isa = PBXGroup;
+			children = (
+				9A7962EA1A1D8D590038A076 /* include */,
+				9A7962F11A1D8D590038A076 /* libCloudinary.a */,
+			);
+			path = cloudinary_ios_v1.0.12;
+			sourceTree = SOURCE_ROOT;
+		};
+		9A7962EA1A1D8D590038A076 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				9A7962EB1A1D8D590038A076 /* Cloudinary */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		9A7962EB1A1D8D590038A076 /* Cloudinary */ = {
+			isa = PBXGroup;
+			children = (
+				9A7962EC1A1D8D590038A076 /* CLCloudinary.h */,
+				9A7962ED1A1D8D590038A076 /* CLEagerTransformation.h */,
+				9A7962EE1A1D8D590038A076 /* Cloudinary.h */,
+				9A7962EF1A1D8D590038A076 /* CLTransformation.h */,
+				9A7962F01A1D8D590038A076 /* CLUploader.h */,
+			);
+			path = Cloudinary;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +392,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */,
+				9A3AA5601A1D91AB00F23624 /* CLUploader+SwapMeet.m in Sources */,
+				9A7962F61A1D8E330038A076 /* SMConstants.m in Sources */,
 				287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */,
 				287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */,
 				287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */,
@@ -477,6 +535,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SwapMeet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/cloudinary_ios_v1.0.12",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -487,6 +550,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SwapMeet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/cloudinary_ios_v1.0.12",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

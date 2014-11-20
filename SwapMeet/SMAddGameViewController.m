@@ -9,6 +9,9 @@
 #import "SMAddGameViewController.h"
 #import "Game.h"
 #import "SMNetworking.h"
+#import "CLUploader+SwapMeet.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 #pragma mark - Properties
 
@@ -22,6 +25,9 @@
 
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) NSURLSessionDataTask *dataTask;
+@property NSUInteger imageUploadsLeft;
+@property NSMutableArray *remoteURLsArray;
+
 @end
 
 @implementation SMAddGameViewController
@@ -34,10 +40,12 @@
     self.consolePickerView.dataSource = self;
     self.consoles = [[NSArray alloc] initWithObjects:@"Xbox One", @"PS4", @"Xbox 360", @"PS3", nil];
     self.conditions = [[NSArray alloc] initWithObjects:@"Mint", @"Newish", @"Used", @"Still Works...", nil];
-    self.photos = [[NSMutableArray alloc] init];
+    self.photos = [NSMutableArray array];
     self.imageView1.userInteractionEnabled = YES;
     self.imageView2.userInteractionEnabled = YES;
     self.imageView3.userInteractionEnabled = YES;
+    
+    _remoteURLsArray = [NSMutableArray array];
     
     _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
@@ -98,20 +106,53 @@
         if (!self.condition) {
             self.condition = [self.conditions firstObject];
         }
-        __block NSDictionary *gameDict = @{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition};
+        
         [_activityIndicator startAnimating];
         self.navigationController.navigationItem.rightBarButtonItem.enabled = NO;
-        _dataTask = [SMNetworking addNewGame:gameDict completion:^(BOOL success, NSString *errorString) {
-            [_activityIndicator stopAnimating];
-            self.navigationController.navigationItem.rightBarButtonItem.enabled = YES;
-            if (errorString) {
-                [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                return;
+        
+        // Save images to disc
+        NSMutableArray *fileURLs = [NSMutableArray array];
+        NSURL *tmp = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+        for (UIImage *image in self.photos) {
+            NSString *tempFileName = [[NSUUID UUID] UUIDString];
+            NSURL *tempFileURL = [tmp URLByAppendingPathComponent:tempFileName];
+            if ([UIImageJPEGRepresentation(image, 0.8) writeToURL:tempFileURL atomically:NO]) {
+                [fileURLs addObject:tempFileURL];
             }
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
-            [self dismissViewControllerAnimated:true completion:nil];
-        }];
+        }
+        
+        // Upload images
+        self.imageUploadsLeft = [fileURLs count];
+        for (NSURL *url in fileURLs) {
+            NSString *pathString = [url path];
+            CLUploader *uploader = [CLUploader uploaderWithDelegate:nil];
+            [uploader upload:pathString options:@{} withCompletion:^(NSDictionary *successResult, NSString *errorResult, NSInteger code, id context) {
+                NSString *remoteURL = successResult[@"secure_url"];
+                if (remoteURL) {
+                    [_remoteURLsArray addObject:remoteURL];
+                }
+                
+                self.imageUploadsLeft--;
+                if (_imageUploadsLeft == 0) {
+                    // Upload the actual game object
+                    __block NSDictionary *gameDict = @{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition, @"image_urls": _remoteURLsArray};
+                    _dataTask = [SMNetworking addNewGame:gameDict completion:^(BOOL success, NSString *errorString) {
+                        [_activityIndicator stopAnimating];
+                        self.navigationController.navigationItem.rightBarButtonItem.enabled = YES;
+                        if (errorString) {
+                            [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                            return;
+                        }
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
+                        [self dismissViewControllerAnimated:true completion:nil];
+                    }];
+                }
+            } andProgress:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite, id context) {
+                //NSInteger percentsWritten = ((float)totalBytesWritten / (float)totalBytesExpectedToWrite) * 100;
+            }];
+        }
+        
     } else {
         [self noTitleAlertController];
     }
@@ -154,28 +195,26 @@
 
 - (void)setImages {
     NSInteger index = 0;
-    if ([self.photos count] != 0) {
-        self.imageView1.image = nil;
-        self.imageView2.image = nil;
-        self.imageView3.image = nil;
-        index++;
-        for (UIImage *image in self.photos) {
-            if (index == 1) {
-                self.imageView1.image = image;
-                UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image1Tapped:)];
-                [self.imageView1 addGestureRecognizer:touch];
-                index++;
-            } else if (index == 2) {
-                self.imageView2.image = image;
-                UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image2Tapped:)];
-                [self.imageView2 addGestureRecognizer:touch];
-                index++;
-            } else if (index == 3) {
-                self.imageView3.image = image;
-                UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image3Tapped:)];
-                [self.imageView3 addGestureRecognizer:touch];
-                self.addImagesButton.enabled = NO;
-            }
+    self.imageView1.image = nil;
+    self.imageView2.image = nil;
+    self.imageView3.image = nil;
+    index++;
+    for (UIImage *image in self.photos) {
+        if (index == 1) {
+            self.imageView1.image = image;
+            UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image1Tapped:)];
+            [self.imageView1 addGestureRecognizer:touch];
+            index++;
+        } else if (index == 2) {
+            self.imageView2.image = image;
+            UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image2Tapped:)];
+            [self.imageView2 addGestureRecognizer:touch];
+            index++;
+        } else if (index == 3) {
+            self.imageView3.image = image;
+            UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image3Tapped:)];
+            [self.imageView3 addGestureRecognizer:touch];
+            self.addImagesButton.enabled = NO;
         }
     }
 }
@@ -215,15 +254,13 @@
         [self generateThumbnail:imageView.image];
     }];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        NSMutableArray *tempPhotos = [[NSMutableArray alloc] initWithArray:self.photos];
-        for (UIImage *image in tempPhotos) {
-            if (image == imageView.image) {
-                [self.photos removeObject:image];
-                [self setImages];
-                self.addImagesButton.enabled = YES;
-                break;
-            }
+        NSUInteger index = [self.photos indexOfObject:imageView.image];
+        if (index != NSNotFound) {
+            [self.photos removeObjectAtIndex:index];
+            [self setImages];
+            self.addImagesButton.enabled = YES;
         }
+        
         [alertController dismissViewControllerAnimated:true completion:nil];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
