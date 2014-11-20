@@ -36,7 +36,7 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     self.zipCode = [formatter numberFromString:self.zipCodeTextField.text];
 
-    [SMNetworking signUpWithEmail:self.email andPassword:self.password zipNumber:self.zipCode completion:^(BOOL successful, NSString *errorString) {
+    [SMNetworking signUpWithEmail:self.email andPassword:self.password andScreenName:self.screenName zipNumber:self.zipCode completion:^(BOOL successful, NSString *errorString) {
         if (successful == YES) {
             NSLog(@"Account created");
             
