@@ -24,14 +24,11 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.refreshControl = [[UIRefreshControl alloc] init];
-    NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"Pull To Refresh"];
-    [self.refreshControl setAttributedTitle: title];
-    [self.refreshControl addTarget:self action:@selector(refreshPage:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refreshControl];
     self.mailResult = nil;
     [self.tableView registerNib:[UINib nibWithNibName:@"MatchTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MATCH_CELL"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 200;
+    [self setUpRefreshControl];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,9 +101,17 @@
 
 #pragma mark - Refresh Method
 
--(void) refreshPage:(UIRefreshControl *)refreshControl {
+- (void) refreshPage:(UIRefreshControl *)refreshControl {
     NSLog(@"Page is Refreshing");
     [refreshControl endRefreshing];
+}
+
+- (void) setUpRefreshControl {
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"Pull To Refresh"];
+    [self.refreshControl setAttributedTitle: title];
+    [self.refreshControl addTarget:self action:@selector(refreshPage:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl.superview sendSubviewToBack:self.refreshControl];
 }
 
 @end

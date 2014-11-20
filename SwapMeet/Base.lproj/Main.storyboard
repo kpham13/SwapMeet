@@ -24,18 +24,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aDv-a1-aUi">
-                                <rect key="frame" x="0.0" y="49" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="49" width="600" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="aDv-a1-aUi" secondAttribute="trailing" constant="-16" id="Bwp-xa-zUQ"/>
-                            <constraint firstItem="aDv-a1-aUi" firstAttribute="bottom" secondItem="O6X-cu-n6Z" secondAttribute="bottomMargin" id="WJj-y5-edb"/>
+                            <constraint firstItem="aDv-a1-aUi" firstAttribute="top" secondItem="DWS-Yx-wcl" secondAttribute="bottom" constant="8" id="C8M-rw-pCP"/>
+                            <constraint firstItem="H4r-c8-JsF" firstAttribute="top" secondItem="aDv-a1-aUi" secondAttribute="bottom" id="Im2-6X-Xu7"/>
                             <constraint firstItem="DWS-Yx-wcl" firstAttribute="top" secondItem="8xh-Rz-3Wq" secondAttribute="bottom" id="esC-xB-aEa"/>
-                            <constraint firstItem="aDv-a1-aUi" firstAttribute="top" secondItem="DWS-Yx-wcl" secondAttribute="bottom" constant="8" id="fNc-iF-CDn"/>
-                            <constraint firstItem="aDv-a1-aUi" firstAttribute="leading" secondItem="O6X-cu-n6Z" secondAttribute="leadingMargin" constant="-16" id="hnB-ad-pTH"/>
                             <constraint firstItem="DWS-Yx-wcl" firstAttribute="leading" secondItem="O6X-cu-n6Z" secondAttribute="leadingMargin" id="nGP-7g-Ad8"/>
+                            <constraint firstItem="aDv-a1-aUi" firstAttribute="leading" secondItem="O6X-cu-n6Z" secondAttribute="leadingMargin" constant="-16" id="xGn-Q1-o7O"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aDv-a1-aUi" secondAttribute="trailing" constant="-16" id="xcg-y2-RTE"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Matches" image="FavoriteTabIcon" id="kCI-BA-oYF"/>
@@ -152,16 +152,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zqz-Bf-Bj6">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="leading" secondItem="f2p-IJ-66r" secondAttribute="leadingMargin" constant="-16" id="31l-Qy-CY8"/>
-                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="bottom" secondItem="f2p-IJ-66r" secondAttribute="bottomMargin" id="59y-tU-6Ty"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Zqz-Bf-Bj6" secondAttribute="trailing" constant="-16" id="6RM-yf-gj5"/>
-                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="top" secondItem="f2p-IJ-66r" secondAttribute="topMargin" id="fij-gl-YG7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zqz-Bf-Bj6" secondAttribute="trailing" constant="-16" id="Bhp-bl-ZX3"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="top" secondItem="f2p-IJ-66r" secondAttribute="topMargin" id="Cg4-SH-dBX"/>
+                            <constraint firstItem="xrY-Y8-j2z" firstAttribute="top" secondItem="Zqz-Bf-Bj6" secondAttribute="bottom" id="OBm-mj-0ao"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="leading" secondItem="f2p-IJ-66r" secondAttribute="leadingMargin" constant="-16" id="fC6-LU-m3M"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nX5-cB-No4">
