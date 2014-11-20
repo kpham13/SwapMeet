@@ -23,10 +23,18 @@
 
 - (IBAction)addButtonClicked:(id)sender {
     SMAddGameViewController *addGameVC = [[SMAddGameViewController alloc] initWithNibName:@"SMAddGameViewController" bundle:[NSBundle mainBundle]];
-    [self presentViewController:addGameVC animated:YES completion:nil];
-    
-    NSLog(@"Add Button Clicked");
+    [self presentViewController:addGameVC animated:true completion:nil];
 }
+
+- (IBAction)changeSegment:(id)sender {
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        self.tableView.hidden = true;
+    } else if (self.segmentedControl.selectedSegmentIndex == 1) {
+        self.tableView.hidden = false;
+    }
+    [self.tableView reloadData];
+}
+
 
 - (void)favoriteAdded:(NSNotification *)notification {
     NSLog(@"Favorite Added");

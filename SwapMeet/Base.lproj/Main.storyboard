@@ -139,7 +139,7 @@
             </objects>
             <point key="canvasLocation" x="1023" y="2450"/>
         </scene>
-        <!--My Games-->
+        <!--Games View Controller-->
         <scene sceneID="XYp-Tr-tdH">
             <objects>
                 <viewController id="kDX-me-hVu" customClass="SMGamesViewController" sceneMemberID="viewController">
@@ -151,52 +151,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Games" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojx-C3-Mzw">
-                                <rect key="frame" x="16" y="20" width="530" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Jh-8A-qDO">
-                                <rect key="frame" x="554" y="20" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="57g-bJ-ria"/>
-                                    <constraint firstAttribute="width" constant="30" id="KGF-ZT-lIy"/>
-                                </constraints>
-                                <state key="normal" title="Add">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="addButtonClicked:" destination="kDX-me-hVu" eventType="touchUpInside" id="V5i-QE-WwV"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Zqz-Bf-Bj6">
-                                <rect key="frame" x="0.0" y="58" width="600" height="542"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ojx-C3-Mzw" firstAttribute="top" secondItem="C9J-9S-1N3" secondAttribute="bottom" id="0rI-8p-vvE"/>
-                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="top" secondItem="2Jh-8A-qDO" secondAttribute="bottom" constant="8" id="1Ad-Pd-rY5"/>
-                            <constraint firstItem="2Jh-8A-qDO" firstAttribute="top" secondItem="C9J-9S-1N3" secondAttribute="bottom" id="CuI-6A-Xyk"/>
-                            <constraint firstItem="2Jh-8A-qDO" firstAttribute="leading" secondItem="ojx-C3-Mzw" secondAttribute="trailing" constant="8" id="DBx-ap-UBt"/>
-                            <constraint firstItem="2Jh-8A-qDO" firstAttribute="trailing" secondItem="f2p-IJ-66r" secondAttribute="trailingMargin" id="EDz-ng-GfS"/>
-                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="leading" secondItem="f2p-IJ-66r" secondAttribute="leadingMargin" constant="-16" id="SZb-u6-MqX"/>
-                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="bottom" secondItem="f2p-IJ-66r" secondAttribute="bottomMargin" id="TM1-7m-zgc"/>
-                            <constraint firstItem="ojx-C3-Mzw" firstAttribute="leading" secondItem="f2p-IJ-66r" secondAttribute="leadingMargin" id="Tfc-PT-Hc6"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Zqz-Bf-Bj6" secondAttribute="trailing" constant="-16" id="TiE-Fb-TDN"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="leading" secondItem="f2p-IJ-66r" secondAttribute="leadingMargin" constant="-16" id="31l-Qy-CY8"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="bottom" secondItem="f2p-IJ-66r" secondAttribute="bottomMargin" id="59y-tU-6Ty"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Zqz-Bf-Bj6" secondAttribute="trailing" constant="-16" id="6RM-yf-gj5"/>
+                            <constraint firstItem="Zqz-Bf-Bj6" firstAttribute="top" secondItem="f2p-IJ-66r" secondAttribute="topMargin" id="fij-gl-YG7"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Games" image="MyGamesTabIcon" id="Es1-sK-I2A"/>
+                    <navigationItem key="navigationItem" id="nX5-cB-No4">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="sxt-qD-YNa">
+                            <rect key="frame" x="221" y="7" width="159" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="My Games"/>
+                                <segment title="Favorites"/>
+                            </segments>
+                            <connections>
+                                <action selector="changeSegment:" destination="kDX-me-hVu" eventType="valueChanged" id="DsV-JF-esH"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="fV2-Tr-Uxm">
+                            <connections>
+                                <action selector="addButtonClicked:" destination="kDX-me-hVu" id="D41-sT-WkX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="2Jh-8A-qDO" id="RQh-Pz-v1T"/>
+                        <outlet property="segmentedControl" destination="sxt-qD-YNa" id="8wo-hp-kaJ"/>
                         <outlet property="tableView" destination="Zqz-Bf-Bj6" id="tpm-Qj-Fy7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HiA-Bc-RkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1023" y="1703"/>
+            <point key="canvasLocation" x="1835" y="1703"/>
         </scene>
         <!--Search-->
         <scene sceneID="UH3-VE-eS5">
@@ -253,7 +247,7 @@
                     <connections>
                         <segue destination="hRt-Hz-bhQ" kind="relationship" relationship="viewControllers" id="ytz-U4-yWS"/>
                         <segue destination="9Rh-R8-wMw" kind="relationship" relationship="viewControllers" id="QiV-fp-o1x"/>
-                        <segue destination="kDX-me-hVu" kind="relationship" relationship="viewControllers" id="lrS-79-GJC"/>
+                        <segue destination="JVJ-wS-qgS" kind="relationship" relationship="viewControllers" id="lrS-79-GJC"/>
                         <segue destination="5BD-sf-Oet" kind="relationship" relationship="viewControllers" id="1qU-4C-NZ7"/>
                     </connections>
                 </tabBarController>
@@ -279,6 +273,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ehf-ox-98d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="170" y="2183"/>
+        </scene>
+        <!--My Games-->
+        <scene sceneID="2HI-Tt-tgT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JVJ-wS-qgS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Games" image="MyGamesTabIcon" id="Es1-sK-I2A"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZAf-Y4-o98">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kDX-me-hVu" kind="relationship" relationship="rootViewController" id="hjE-7W-dFI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Faf-qf-RaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1023" y="1703"/>
         </scene>
     </scenes>
     <resources>
