@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface SMMatchesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SMMatchesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UINavigationBarDelegate, MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
