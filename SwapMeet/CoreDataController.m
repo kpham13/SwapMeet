@@ -120,12 +120,12 @@
     [self saveContext];
 }
 
-- (NSFetchedResultsController *) fetchUserGames {
+- (NSFetchedResultsController *) fetchUserGames:(NSInteger)segment {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Game"];
     request.sortDescriptors = [[NSArray alloc] initWithObjects:[[NSSortDescriptor sortDescriptorWithKey:@"gameID" ascending:false] init], nil];
     
-    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(isFavorited = %@", segment];
-    //[request setPredicate:predicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorited = %@", @(segment)];
+    [request setPredicate:predicate];
     
     NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     NSError *error = nil;

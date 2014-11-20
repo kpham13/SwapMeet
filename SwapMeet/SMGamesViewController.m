@@ -18,28 +18,31 @@
 }
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
+@property (strong, nonatomic) UIBarButtonItem *addGameButton;
+
 
 @end
 
 @implementation SMGamesViewController
 
-- (IBAction)addButtonClicked:(id)sender {
-    SMAddGameViewController *addGameVC = [[SMAddGameViewController alloc] initWithNibName:@"SMAddGameViewController" bundle:[NSBundle mainBundle]];
-    [self presentViewController:addGameVC animated:true completion:nil];
-}
-
 - (IBAction)changeSegment:(id)sender {
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        //self.tableView.hidden = true;
         NSLog(@"My Games");
+        self.fetchController = [[CoreDataController controller] fetchUserGames:self.segmentedControl.selectedSegmentIndex];
+        self.navigationItem.rightBarButtonItem = self.addGameButton;
     } else if (self.segmentedControl.selectedSegmentIndex == 1) {
-        //self.tableView.hidden = false;
         NSLog(@"Favorites");
+        self.fetchController = [[CoreDataController controller] fetchUserGames:self.segmentedControl.selectedSegmentIndex];
+        self.navigationItem.rightBarButtonItem = nil;
     }
     
     [self.tableView reloadData];
 }
 
+- (void)addButtonClicked:(id)sender {
+    SMAddGameViewController *addGameVC = [[SMAddGameViewController alloc] initWithNibName:@"SMAddGameViewController" bundle:[NSBundle mainBundle]];
+    [self presentViewController:addGameVC animated:true completion:nil];
+}
 
 - (void)favoriteAdded:(NSNotification *)notification {
     NSLog(@"Favorite Added");
@@ -49,6 +52,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.addGameButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonClicked:)];
+    self.navigationItem.rightBarButtonItem = self.addGameButton;
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteAdded:) name:@"ADDED_FAVORITE" object:nil];
@@ -59,7 +66,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
     
-    self.fetchController = [[CoreDataController controller] fetchUserGames];
+    self.fetchController = [[CoreDataController controller] fetchUserGames:self.segmentedControl.selectedSegmentIndex];
     self.fetchController.delegate = self;
     [self.tableView reloadData];
 }
@@ -73,14 +80,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GAME_CELL"];
     
-    //if (self.segmentedControl.selectedSegmentIndex == 0) {
-        Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
-        cell.titleLabel.text = selectedGame.title;
-        cell.platformName.text = selectedGame.platform;
-    //} else if (self.segmentedControl.selectedSegmentIndex == 1) {
-        
-    //}
-    
+    Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
+    cell.titleLabel.text = selectedGame.title;
+    cell.platformName.text = selectedGame.platform;
+
     return cell;
 }
 
