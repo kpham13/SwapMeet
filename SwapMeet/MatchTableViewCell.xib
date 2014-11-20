@@ -14,20 +14,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hu3-Ph-oqG">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hu3-Ph-oqG">
                         <rect key="frame" x="212" y="91" width="100" height="100"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="Cp2-W7-7ol"/>
                             <constraint firstAttribute="width" constant="100" id="w2z-Oq-PNY"/>
-                        </constraints>
-                    </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u7U-NV-AAT">
-                        <rect key="frame" x="8" y="8" width="100" height="100"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="VOM-ek-KoD"/>
-                            <constraint firstAttribute="height" constant="100" id="ZXP-N9-hYk"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swap" translatesAutoresizingMaskIntoConstraints="NO" id="1b0-wD-elS">
@@ -37,8 +29,8 @@
                             <constraint firstAttribute="height" constant="30" id="pHK-15-4DM"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZX-Rf-OBH">
-                        <rect key="frame" x="157" y="170" width="47" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wants Game" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZX-Rf-OBH">
+                        <rect key="frame" x="105" y="170" width="99" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -50,12 +42,20 @@
                             <constraint firstAttribute="height" constant="25" id="hD7-Ur-3h4"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irI-Yu-4Qk">
-                        <rect key="frame" x="116" y="8" width="47" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Has Game" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irI-Yu-4Qk">
+                        <rect key="frame" x="116" y="8" width="81" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u7U-NV-AAT">
+                        <rect key="frame" x="8" y="8" width="100" height="100"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="VOM-ek-KoD"/>
+                            <constraint firstAttribute="height" constant="100" id="ZXP-N9-hYk"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="6AX-X8-HJH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="4fA-3X-qem"/>
@@ -73,11 +73,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="gameOneImageView" destination="u7U-NV-AAT" id="iH3-yV-CrX"/>
-                <outlet property="gameTwoImageView" destination="hu3-Ph-oqG" id="eJs-7H-c6M"/>
+                <outlet property="hasGameImageView" destination="u7U-NV-AAT" id="V8V-zG-Q9r"/>
                 <outlet property="sendEmailImage" destination="6AX-X8-HJH" id="WJP-xH-RM0"/>
                 <outlet property="titleLabelOne" destination="irI-Yu-4Qk" id="gd9-N5-nHn"/>
                 <outlet property="titleLabelTwo" destination="ZZX-Rf-OBH" id="Vp7-Zs-Vpk"/>
+                <outlet property="wantsGameImageView" destination="hu3-Ph-oqG" id="21O-e5-IdQ"/>
             </connections>
             <point key="canvasLocation" x="433" y="357"/>
         </tableViewCell>

@@ -38,13 +38,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    if (self.mailResult != nil) {
-        [self presentAlertView:self.mailResult];
-    }
-}
-
 #pragma mark - TableView Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,15 +76,18 @@
             break;
         case MFMailComposeResultFailed:
             self.mailResult = @"Your Email Failed To Send";
+            [self presentAlertView:self.mailResult];
             break;
         case MFMailComposeResultSaved:
             self.mailResult = @"Your Email Has Been Saved";
             break;
         case MFMailComposeResultSent:
             self.mailResult = @"Your Email Has Been Sent";
+            [self presentAlertView:self.mailResult];
             break;
         default:
             self.mailResult = @"Your Email Was Not Sent";
+            [self presentAlertView:self.mailResult];
             break;
     }
     [controller dismissViewControllerAnimated:true completion:nil];

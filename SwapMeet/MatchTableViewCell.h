@@ -10,8 +10,8 @@
 
 @interface MatchTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *gameOneImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *gameTwoImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *hasGameImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *wantsGameImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabelOne;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabelTwo;
 @property (weak, nonatomic) IBOutlet UIImageView *sendEmailImage;
