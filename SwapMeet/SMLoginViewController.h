@@ -15,6 +15,5 @@
 
 - (IBAction)loginButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
-- (IBAction)cancelButton:(id)sender;
 
 @end

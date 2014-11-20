@@ -130,12 +130,12 @@
 		0AA8B7741A1A75ED00A23C39 /* SwapMeet */ = {
 			isa = PBXGroup;
 			children = (
-				0AA8B7791A1A75ED00A23C39 /* AppDelegate.h */,
-				0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */,
 				9A0F68731A1A7A330088146F /* Models */,
+				9A0F68711A1A7A280088146F /* Views */,
 				9A0F68701A1A7A210088146F /* View Controllers */,
 				9A0F68721A1A7A2D0088146F /* Controllers */,
-				9A0F68711A1A7A280088146F /* Views */,
+				0AA8B7791A1A75ED00A23C39 /* AppDelegate.h */,
+				0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */,
 				0AA8B7851A1A75EE00A23C39 /* Images.xcassets */,
 				0AA8B77C1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld */,
 				0AA8B7751A1A75ED00A23C39 /* Supporting Files */,
@@ -197,10 +197,10 @@
 				0AA8B7871A1A75EE00A23C39 /* LaunchScreen.xib */,
 				287BF0D01A1ACA2C008C3CCD /* SMAddGameViewController.xib */,
 				0A8BD5B71A1AD3E700D5A8BB /* SMLoginViewController.xib */,
+				0AFEF7E01A1D01B900F5B83A /* SMSignUpViewController.xib */,
+				281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */,
 				281B3C161A1D13A2003C9D1C /* SearchTableViewCell.h */,
 				281B3C171A1D13A2003C9D1C /* SearchTableViewCell.m */,
-				281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */,
-				0AFEF7E01A1D01B900F5B83A /* SMSignUpViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
