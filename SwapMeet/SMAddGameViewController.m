@@ -11,7 +11,7 @@
 #import "SMNetworking.h"
 #import "CLUploader+SwapMeet.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-
+#import "UIImage+SwapMeet.h"
 
 #pragma mark - Properties
 
@@ -116,7 +116,7 @@
         for (UIImage *image in self.photos) {
             NSString *tempFileName = [[NSUUID UUID] UUIDString];
             NSURL *tempFileURL = [tmp URLByAppendingPathComponent:tempFileName];
-            if ([UIImageJPEGRepresentation(image, 0.8) writeToURL:tempFileURL atomically:NO]) {
+            if ([UIImageJPEGRepresentation([image thumbnailImage], 0.8) writeToURL:tempFileURL atomically:NO]) {
                 [fileURLs addObject:tempFileURL];
             }
         }

@@ -33,6 +33,7 @@
 		9A0F68761A1A7B190088146F /* SMNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68751A1A7B190088146F /* SMNetworkController.m */; };
 		9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68781A1ABBA90088146F /* SMNetworking.m */; };
 		9A3AA5601A1D91AB00F23624 /* CLUploader+SwapMeet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */; };
+		9A3AA5661A1DC1C400F23624 /* UIImage+SwapMeet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3AA5651A1DC1C400F23624 /* UIImage+SwapMeet.m */; };
 		9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7962F11A1D8D590038A076 /* libCloudinary.a */; };
 		9A7962F61A1D8E330038A076 /* SMConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A7962F51A1D8E330038A076 /* SMConstants.m */; };
 /* End PBXBuildFile section */
@@ -94,6 +95,8 @@
 		9A0F68781A1ABBA90088146F /* SMNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMNetworking.m; sourceTree = "<group>"; };
 		9A3AA55E1A1D91AB00F23624 /* CLUploader+SwapMeet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLUploader+SwapMeet.h"; sourceTree = "<group>"; };
 		9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLUploader+SwapMeet.m"; sourceTree = "<group>"; };
+		9A3AA5641A1DC1C400F23624 /* UIImage+SwapMeet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SwapMeet.h"; sourceTree = "<group>"; };
+		9A3AA5651A1DC1C400F23624 /* UIImage+SwapMeet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SwapMeet.m"; sourceTree = "<group>"; };
 		9A7962EC1A1D8D590038A076 /* CLCloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCloudinary.h; sourceTree = "<group>"; };
 		9A7962ED1A1D8D590038A076 /* CLEagerTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEagerTransformation.h; sourceTree = "<group>"; };
 		9A7962EE1A1D8D590038A076 /* Cloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cloudinary.h; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 			children = (
 				9A3AA55E1A1D91AB00F23624 /* CLUploader+SwapMeet.h */,
 				9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */,
+				9A3AA5641A1DC1C400F23624 /* UIImage+SwapMeet.h */,
+				9A3AA5651A1DC1C400F23624 /* UIImage+SwapMeet.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 				0AAE327D1A1AB78C0022476E /* Match.m in Sources */,
 				0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */,
 				0A8BD5B81A1AD3E700D5A8BB /* SMLoginViewController.m in Sources */,
+				9A3AA5661A1DC1C400F23624 /* UIImage+SwapMeet.m in Sources */,
 				287BF0CD1A1AC5A7008C3CCD /* SMGamesViewController.m in Sources */,
 				281B3C151A1BEB7F003C9D1C /* CoreDataController.m in Sources */,
 				0AA8B7781A1A75ED00A23C39 /* main.m in Sources */,
