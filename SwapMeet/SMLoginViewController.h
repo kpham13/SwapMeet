@@ -15,5 +15,6 @@
 
 - (IBAction)loginButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
+- (void)dismissViewController:(id)sender;
 
 @end

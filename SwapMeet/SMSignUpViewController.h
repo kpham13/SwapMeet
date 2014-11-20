@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *screenNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *zipCodeTextField;
 
+- (IBAction)signUpButton:(id)sender;
+
 @end

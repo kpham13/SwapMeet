@@ -2,7 +2,7 @@
 //  SMConstants.h
 //  SwapMeet
 //
-//  Created by Alex G on 19.11.14.
+//  Created by Kevin Pham on 11/19/14.
 //  Copyright (c) 2014 SwapMeet. All rights reserved.
 //
 
@@ -11,5 +11,3 @@
 extern NSString * const kSMCLCloudname;
 extern NSString * const kSMCLAPIKey;
 extern NSString * const kSMCLAPISecret;
-
-
