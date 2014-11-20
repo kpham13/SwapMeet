@@ -11,6 +11,7 @@
 #import "SMProfileViewController.h"
 #import "SMNetworking.h"
 #import "SMGamesViewController.h"
+#import "SMLoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -146,6 +147,7 @@
             UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *loginButton = [UIAlertAction actionWithTitle:@"Login" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 self.targetTab = 2;
+                
                 self.navigationController = [[UINavigationController alloc] initWithRootViewController:[[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]]];
                 [self.window.rootViewController presentViewController:self.navigationController animated:true completion:nil];
             }];

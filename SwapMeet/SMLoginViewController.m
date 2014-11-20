@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *password;
+@property (nonatomic) NSInteger *destinationTab;
 
 @end
 
