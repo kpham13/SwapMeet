@@ -15,5 +15,6 @@
 @dynamic gameID;
 @dynamic platform;
 @dynamic title;
+@dynamic isFavorited;
 
 @end

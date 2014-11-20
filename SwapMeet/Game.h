@@ -16,5 +16,6 @@
 @property (nonatomic, retain) NSString * gameID;
 @property (nonatomic, retain) NSString * platform;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSNumber * isFavorited;
 
 @end
