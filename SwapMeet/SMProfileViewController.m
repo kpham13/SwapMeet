@@ -21,6 +21,7 @@
     
     // NetworkController method to retrieve user information & populate NSUserDefaults
     
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.lookingForTextField.text = @"Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games";
