@@ -32,6 +32,8 @@ extern NSString * const kSMDefaultsKeyToken;
 + (NSURLSessionDataTask *)addNewGame:(NSDictionary *)gameDictionary
                           completion:(void(^)(BOOL success, NSString *errorString))completion;
 
++ (NSURLSessionDataTask *)profileWithCompletion:(void(^)(NSDictionary *userDictionary, NSString *errorString))completion;
+
 + (void)invalidateToken;
 
 @end
