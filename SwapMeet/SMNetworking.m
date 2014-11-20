@@ -126,6 +126,20 @@ NSString * const kSMDefaultsKeyToken = @"token";
             }];
 }
 
++ (NSURLSessionDataTask *)profileWithCompletion:(void(^)(NSDictionary *userDictionary, NSString *errorString))completion {
+    __block void(^completionBlock)(NSDictionary *userDictionary, NSString *errorString) = completion;
+    return [self performJSONRequestAtPath:@"user/myprofile" withMethod:@"GET" andParameters:nil sendBodyAsJSON:NO completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        NSDictionary *userDictionary = nil;
+        if (!errorString) {
+            userDictionary = JSONDic[@"profile"];
+            if (!userDictionary) {
+                errorString = @"No 'profile' key in response";
+            }
+        }
+        completionBlock(userDictionary, errorString);
+    }];
+}
+
 + (NSURLSessionDataTask *)gamesContaining:(NSString *)query
                               forPlatform:(NSString *)platform
                                  atOffset:(NSInteger)offset
