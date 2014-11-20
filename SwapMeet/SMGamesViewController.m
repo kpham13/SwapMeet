@@ -11,11 +11,13 @@
 #import "CoreDataController.h"
 #import "SearchTableViewCell.h"
 #import "SMNetworking.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
-@interface SMGamesViewController ()
+@interface SMGamesViewController () {
+    MBProgressHUD *hud;
+}
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
-@property UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -49,12 +51,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteAdded:) name:@"ADDED_FAVORITE" object:nil];
     [self.tableView registerNib:[UINib nibWithNibName:@"SearchTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"GAME_CELL"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
-    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_tableView.frame), CGRectGetMinY(_tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetMinY(_tableView.frame))];
-    _activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    _activityIndicator.color = [UIColor colorWithWhite:0.2 alpha:1];
-    _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [self.view insertSubview:_activityIndicator aboveSubview:_tableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -93,9 +89,9 @@
             if (!game)
                 return;
             
-            [_activityIndicator startAnimating];
+            hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [SMNetworking deleteUserGameWithID:game.gameID completion:^(BOOL success, NSString *errorString) {
-                [_activityIndicator stopAnimating];
+                [hud hide:YES];
                 if (success) {
                     [[CoreDataController controller] deleteGame:game];
                     [[CoreDataController controller] saveContext];
