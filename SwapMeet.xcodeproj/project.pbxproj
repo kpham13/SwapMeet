@@ -26,6 +26,7 @@
 		281B3C1A1A1D13A2003C9D1C /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */; };
 		287970DD1A1D4CE700EBDF49 /* SMMatchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287970DB1A1D4CE700EBDF49 /* SMMatchDetailViewController.m */; };
 		287970DE1A1D4CE700EBDF49 /* SMMatchDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287970DC1A1D4CE700EBDF49 /* SMMatchDetailViewController.xib */; };
+		287970E21A1E5C1300EBDF49 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 287970E11A1E5C1300EBDF49 /* MessageUI.framework */; };
 		287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */; };
 		287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */; };
 		287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */; };
@@ -79,6 +80,7 @@
 		287970DA1A1D4CE700EBDF49 /* SMMatchDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMMatchDetailViewController.h; sourceTree = "<group>"; };
 		287970DB1A1D4CE700EBDF49 /* SMMatchDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMMatchDetailViewController.m; sourceTree = "<group>"; };
 		287970DC1A1D4CE700EBDF49 /* SMMatchDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMMatchDetailViewController.xib; sourceTree = "<group>"; };
+		287970E11A1E5C1300EBDF49 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		287BF0BF1A1A7BA9008C3CCD /* SMProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProfileViewController.h; sourceTree = "<group>"; };
 		287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProfileViewController.m; sourceTree = "<group>"; };
 		287BF0C51A1A7BDB008C3CCD /* SMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSearchViewController.h; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				287970E21A1E5C1300EBDF49 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +120,7 @@
 		0AA8B7691A1A75ED00A23C39 = {
 			isa = PBXGroup;
 			children = (
+				287970E11A1E5C1300EBDF49 /* MessageUI.framework */,
 				0AA8B7741A1A75ED00A23C39 /* SwapMeet */,
 				0AA8B7911A1A75EE00A23C39 /* SwapMeetTests */,
 				0AA8B7731A1A75ED00A23C39 /* Products */,

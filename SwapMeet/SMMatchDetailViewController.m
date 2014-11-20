@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //self.mailViewController.delegate = self;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -29,15 +30,17 @@
 - (IBAction)contactButtonClicked:(id)sender {
     if ([MFMailComposeViewController canSendMail]) {
         self.mailViewController = [[MFMailComposeViewController alloc] init];
-        self.mailViewController.delegate = self;
         [self.mailViewController setSubject:@"Let's Trade!"];
         [self.mailViewController setMessageBody:@"TEST" isHTML:NO];
         [self.mailViewController setToRecipients:@[@"reid_weber@hotmail.com"]];
+        self.mailViewController.mailComposeDelegate = self;
         [self presentViewController:self.mailViewController animated:true completion:nil];
     }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:true completion:nil];
+    
     switch (result) {
         case MFMailComposeResultCancelled:
             NSLog(@"Mail Cancelled");
@@ -54,15 +57,7 @@
         default:
             break;
     }
+    [controller dismissViewControllerAnimated:true completion:nil];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
