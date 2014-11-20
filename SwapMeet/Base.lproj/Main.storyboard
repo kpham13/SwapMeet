@@ -85,16 +85,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BKL-8s-GZ5">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games </string>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FNX-m8-JZ8">
-                                <rect key="frame" x="0.0" y="322" width="600" height="278"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Looking For:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pw-fI-Dxc">
                                 <rect key="frame" x="174" y="159" width="410" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -108,15 +98,11 @@
                             <constraint firstItem="gOz-Eu-WCb" firstAttribute="trailing" secondItem="ykx-1P-cb1" secondAttribute="trailingMargin" id="C8t-uZ-QS9"/>
                             <constraint firstItem="gOz-Eu-WCb" firstAttribute="leading" secondItem="Bws-pR-8aT" secondAttribute="trailing" constant="8" id="GOh-P1-Ehf"/>
                             <constraint firstItem="Bws-pR-8aT" firstAttribute="top" secondItem="YWz-NM-qLU" secondAttribute="bottom" constant="8" id="Kyx-hS-CSw"/>
-                            <constraint firstItem="FNX-m8-JZ8" firstAttribute="top" secondItem="Bws-pR-8aT" secondAttribute="bottom" constant="100" id="TIW-rD-JiS"/>
                             <constraint firstItem="3p6-5Q-EgS" firstAttribute="top" secondItem="cBG-ga-EBh" secondAttribute="bottom" constant="8" id="eJQ-EQ-Uqq"/>
-                            <constraint firstItem="FNX-m8-JZ8" firstAttribute="leading" secondItem="ykx-1P-cb1" secondAttribute="leadingMargin" constant="-16" id="ezy-Fn-fbJ"/>
                             <constraint firstItem="3p6-5Q-EgS" firstAttribute="leading" secondItem="Bws-pR-8aT" secondAttribute="trailing" constant="8" id="gXR-LC-dF5"/>
-                            <constraint firstItem="FNX-m8-JZ8" firstAttribute="bottom" secondItem="ykx-1P-cb1" secondAttribute="bottomMargin" id="lUe-rP-orQ"/>
                             <constraint firstItem="Bws-pR-8aT" firstAttribute="leading" secondItem="ykx-1P-cb1" secondAttribute="leadingMargin" id="nJJ-bX-aiO"/>
                             <constraint firstItem="cBG-ga-EBh" firstAttribute="top" secondItem="gOz-Eu-WCb" secondAttribute="bottom" constant="8" id="pC4-Kx-Eu9"/>
                             <constraint firstItem="cBG-ga-EBh" firstAttribute="leading" secondItem="Bws-pR-8aT" secondAttribute="trailing" constant="8" id="vss-yk-zH3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="FNX-m8-JZ8" secondAttribute="trailing" constant="-16" id="wOK-Yr-gLv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AJB-tO-0Os">
@@ -129,9 +115,7 @@
                     <connections>
                         <outlet property="emailLabel" destination="cBG-ga-EBh" id="n4J-Ek-Lxb"/>
                         <outlet property="imageView" destination="Bws-pR-8aT" id="FeD-hT-DsE"/>
-                        <outlet property="lookingForTextField" destination="BKL-8s-GZ5" id="SH8-EG-WdM"/>
                         <outlet property="screenNameLabel" destination="gOz-Eu-WCb" id="YOk-Nm-RfR"/>
-                        <outlet property="tableView" destination="FNX-m8-JZ8" id="aeE-hl-Row"/>
                         <outlet property="zipCodeLabel" destination="3p6-5Q-EgS" id="Yeb-ub-789"/>
                     </connections>
                 </viewController>
@@ -177,11 +161,6 @@
                                 <action selector="changeSegment:" destination="kDX-me-hVu" eventType="valueChanged" id="DsV-JF-esH"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="fV2-Tr-Uxm">
-                            <connections>
-                                <action selector="addButtonClicked:" destination="kDX-me-hVu" id="D41-sT-WkX"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="sxt-qD-YNa" id="8wo-hp-kaJ"/>
