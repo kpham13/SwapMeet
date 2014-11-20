@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ad-5k-3Xy">
-                        <rect key="frame" x="90" y="8" width="300" height="29"/>
+                        <rect key="frame" x="90" y="8" width="292" height="29"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -41,17 +41,17 @@
                         <rect key="frame" x="35" y="35" width="20" height="20"/>
                     </activityIndicatorView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0oP-pm-LY6">
-                        <rect key="frame" x="390" y="0.0" width="38" height="149"/>
+                        <rect key="frame" x="382" y="0.0" width="46" height="149"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" highlightedImage="star" translatesAutoresizingMaskIntoConstraints="NO" id="pAE-S9-gjx">
-                                <rect key="frame" x="8" y="64" width="22" height="22"/>
+                                <rect key="frame" x="12" y="64" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="0xd-N3-bSm"/>
                                     <constraint firstAttribute="height" constant="22" id="xml-lF-Me9"/>
                                 </constraints>
                             </imageView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="m2Z-xH-iXd">
-                                <rect key="frame" x="9" y="65" width="20" height="20"/>
+                                <rect key="frame" x="13" y="65" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,7 +59,7 @@
                             <constraint firstAttribute="centerX" secondItem="m2Z-xH-iXd" secondAttribute="centerX" id="3ij-ZB-aaS"/>
                             <constraint firstAttribute="centerX" secondItem="pAE-S9-gjx" secondAttribute="centerX" id="DTX-5m-pvg"/>
                             <constraint firstAttribute="centerY" secondItem="m2Z-xH-iXd" secondAttribute="centerY" id="LKY-Dq-NsM"/>
-                            <constraint firstAttribute="width" constant="38" id="Q4K-xd-3ut"/>
+                            <constraint firstAttribute="width" constant="46" id="Q4K-xd-3ut"/>
                             <constraint firstAttribute="centerY" secondItem="pAE-S9-gjx" secondAttribute="centerY" id="nLb-VE-7JK"/>
                         </constraints>
                     </view>
@@ -89,6 +89,8 @@
                 <outlet property="activityIndicator" destination="V9C-Vn-36v" id="nem-PH-91o"/>
                 <outlet property="platformBackgroundView" destination="6Vk-8Z-YBa" id="Whh-Iw-nJm"/>
                 <outlet property="platformName" destination="p31-Vr-0Tw" id="cpt-Du-mBP"/>
+                <outlet property="starActivityIndicator" destination="m2Z-xH-iXd" id="FlN-QB-oTO"/>
+                <outlet property="starImageView" destination="pAE-S9-gjx" id="kCK-bv-ePg"/>
                 <outlet property="starringView" destination="0oP-pm-LY6" id="fQh-tF-0W5"/>
                 <outlet property="thumbnailImageView" destination="Hx6-W6-v1I" id="3I7-3C-nud"/>
                 <outlet property="titleLabel" destination="0ad-5k-3Xy" id="h8h-my-imR"/>

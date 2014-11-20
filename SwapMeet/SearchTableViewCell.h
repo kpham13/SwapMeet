@@ -20,5 +20,9 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UILabel *platformName;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) SearchTableViewCellMode mode;
+@property (nonatomic) BOOL starred;
+
+- (void)startStarUpdate;
+- (void)finishStarUpdate:(BOOL)starred;
 
 @end
