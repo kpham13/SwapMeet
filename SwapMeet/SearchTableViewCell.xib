@@ -13,9 +13,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyGamesTabIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Hx6-W6-v1I">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hx6-W6-v1I">
                         <rect key="frame" x="8" y="8" width="74" height="74"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.84057158231735229" green="0.84054642915725708" blue="0.8405606746673584" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="74" id="Qqq-DL-g9g"/>
                             <constraint firstAttribute="height" constant="74" id="reJ-PD-oPo"/>
@@ -37,6 +37,9 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="V9C-Vn-36v">
+                        <rect key="frame" x="35" y="35" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="6Vk-8Z-YBa" firstAttribute="centerX" secondItem="p31-Vr-0Tw" secondAttribute="centerX" id="0ye-fd-MqJ"/>
@@ -45,16 +48,19 @@
                     <constraint firstItem="0ad-5k-3Xy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="GcP-Qm-Okf"/>
                     <constraint firstItem="6Vk-8Z-YBa" firstAttribute="width" secondItem="p31-Vr-0Tw" secondAttribute="width" constant="6" id="Jov-aL-Ezp"/>
                     <constraint firstAttribute="trailing" secondItem="0ad-5k-3Xy" secondAttribute="trailing" constant="8" id="Mw3-pa-ScD"/>
+                    <constraint firstItem="V9C-Vn-36v" firstAttribute="centerY" secondItem="Hx6-W6-v1I" secondAttribute="centerY" id="NfE-x3-h77"/>
                     <constraint firstItem="Hx6-W6-v1I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="XCg-Ue-Olr"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Hx6-W6-v1I" secondAttribute="bottom" constant="8" id="lhn-RH-5Pc"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Vk-8Z-YBa" secondAttribute="bottom" constant="8" id="pIF-AC-5Au"/>
                     <constraint firstItem="Hx6-W6-v1I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="qBs-7f-Yf2"/>
                     <constraint firstItem="0ad-5k-3Xy" firstAttribute="leading" secondItem="Hx6-W6-v1I" secondAttribute="trailing" constant="8" id="sSI-i6-bft"/>
+                    <constraint firstItem="V9C-Vn-36v" firstAttribute="centerX" secondItem="Hx6-W6-v1I" secondAttribute="centerX" id="v1N-8R-R6X"/>
                     <constraint firstItem="p31-Vr-0Tw" firstAttribute="top" secondItem="0ad-5k-3Xy" secondAttribute="bottom" constant="8" id="vJL-ss-vk2"/>
                     <constraint firstItem="6Vk-8Z-YBa" firstAttribute="height" secondItem="p31-Vr-0Tw" secondAttribute="height" constant="4" id="va9-Js-klh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="activityIndicator" destination="V9C-Vn-36v" id="nem-PH-91o"/>
                 <outlet property="platformBackgroundView" destination="6Vk-8Z-YBa" id="Whh-Iw-nJm"/>
                 <outlet property="platformName" destination="p31-Vr-0Tw" id="cpt-Du-mBP"/>
                 <outlet property="thumbnailImageView" destination="Hx6-W6-v1I" id="3I7-3C-nud"/>
@@ -63,7 +69,4 @@
             <point key="canvasLocation" x="433" y="288"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="MyGamesTabIcon" width="25" height="25"/>
-    </resources>
 </document>

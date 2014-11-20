@@ -27,12 +27,14 @@
 - (void)awakeFromNib {
     // Initialization code
     _platformBackgroundView.layer.cornerRadius = 2;
+    _thumbnailImageView.layer.cornerRadius = 4;
     [self addObserver:self forKeyPath:@"platformName.text" options:NSKeyValueObservingOptionNew context:nil];
     _platformName.text = nil;
 }
 
 - (void)prepareForReuse {
     _platformName.text = nil;
+    _thumbnailImageView.image = nil;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

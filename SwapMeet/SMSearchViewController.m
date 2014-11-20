@@ -76,9 +76,29 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GAME_CELL"];
+    [cell.activityIndicator stopAnimating];
     NSDictionary *gameDic = _gamesArray[indexPath.row];
     cell.titleLabel.text = gameDic[@"title"];
     cell.platformName.text = gameDic[@"platform"];
+    NSString *thumbURL = [gameDic[@"image_urls"] firstObject];
+    if (!thumbURL) {
+        cell.thumbnailImageView.image = nil;
+    } else {
+        [cell.activityIndicator startAnimating];
+        
+        __block NSIndexPath *indexPathBlock = indexPath;
+        [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:thumbURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                SearchTableViewCell *cell = (SearchTableViewCell *)[_tableView cellForRowAtIndexPath:indexPathBlock];
+                if (cell) {
+                    [cell.activityIndicator stopAnimating];
+                    [UIView transitionWithView:cell.thumbnailImageView duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                        cell.thumbnailImageView.image = [UIImage imageWithData:data];
+                    } completion:nil];
+                }
+            });
+        }] resume];
+    }
     return cell;
 }
 
