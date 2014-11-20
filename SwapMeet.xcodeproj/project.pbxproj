@@ -115,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */,
+				287970E21A1E5C1300EBDF49 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
