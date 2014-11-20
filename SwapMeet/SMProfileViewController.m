@@ -10,7 +10,15 @@
 #import "SMNetworking.h"
 #import "AppDelegate.h"
 
+NSString * const kSMDefaultsKeyEmail = @"email";
+NSString * const kSMDefaultsKeyScreenName = @"screenname";
+NSString * const kSMDefaultsKeyZipCode = @"zipcode";
+
 @interface SMProfileViewController ()
+
+@property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *screenName;
+@property (strong, nonatomic) NSNumber *zipCode;
 
 @end
 
@@ -19,15 +27,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // NetworkController method to retrieve user information & populate NSUserDefaults
-    
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.lookingForTextField.text = @"Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:true];
+    
+    NSString *zip = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyZipCode];
+    //NSLog(@"%@", zip);
+    
+    if (!zip) {
+        [SMNetworking profileWithCompletion:^(NSDictionary *userDictionary, NSString *errorString) {
+            //NSLog(@"SMNetworking");
+            if (errorString != nil) {
+                NSLog(@"Error: %@", errorString);
+            } else {
+                self.email = [userDictionary objectForKey:@"email"];
+                self.screenName = [userDictionary objectForKey:@"screenname"];
+                self.zipCode = [userDictionary objectForKey:@"zip"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.email forKey:kSMDefaultsKeyEmail];
+                [[NSUserDefaults standardUserDefaults] setObject:self.screenName forKey:kSMDefaultsKeyScreenName];
+                [[NSUserDefaults standardUserDefaults] setObject:self.zipCode forKey:kSMDefaultsKeyZipCode];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }];
+    } else {
+        //NSLog(@"User Defaults");
+        self.email = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyEmail];
+        self.screenName = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyScreenName];
+        self.zipCode = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyZipCode];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,7 +80,8 @@
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"Logout" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [SMNetworking invalidateToken];
-        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyScreenName];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyZipCode];
         //NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:kSMDefaultsKeyToken];
         //NSLog(@"%@", token);
         
