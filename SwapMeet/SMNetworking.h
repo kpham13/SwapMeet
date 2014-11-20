@@ -14,6 +14,7 @@ extern NSString * const kSMDefaultsKeyToken;
 
 + (NSURLSessionDataTask *)signUpWithEmail:(NSString *)email
                               andPassword:(NSString *)password
+                            andScreenName:(NSString *)screenName
                                 zipNumber:(NSNumber *)zip
                                completion:(void(^)(BOOL successful, NSString *errorString))completion;
 

@@ -73,6 +73,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
 
 + (NSURLSessionDataTask *)signUpWithEmail:(NSString *)email
                               andPassword:(NSString *)password
+                            andScreenName:(NSString *)screenName
                                 zipNumber:(NSNumber *)zip
                                completion:(void(^)(BOOL successful, NSString *errorString))completion
 {
@@ -90,7 +91,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
         return nil;
     }
     
-    NSDictionary *params = @{@"email": email, @"password": password, @"zip": zip};
+    NSDictionary *params = @{@"email": email, @"password": password, @"zip": zip, @"screenname": screenName};
     __block void(^completionBlock)(BOOL successful, NSString *errorString) = completion;
     
     return [self performRequestWithURLPathString:@"user" method:@"POST" parameters:params acceptJSONResponse:YES sendBodyAsJSON:NO completion:^(NSData *data, NSString *errorString)
