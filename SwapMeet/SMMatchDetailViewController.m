@@ -27,12 +27,14 @@
 }
 
 - (IBAction)contactButtonClicked:(id)sender {
-    self.mailViewController = [[MFMailComposeViewController alloc] init];
-    self.mailViewController.delegate = self;
-    [self.mailViewController setSubject:@"Let's Trade!"];
-    [self.mailViewController setMessageBody:@"TEST" isHTML:NO];
-    [self.mailViewController setToRecipients:@[@"reid_weber@hotmail.com"]];
-    [self presentViewController:self.mailViewController animated:true completion:nil];
+    if ([MFMailComposeViewController canSendMail]) {
+        self.mailViewController = [[MFMailComposeViewController alloc] init];
+        self.mailViewController.delegate = self;
+        [self.mailViewController setSubject:@"Let's Trade!"];
+        [self.mailViewController setMessageBody:@"TEST" isHTML:NO];
+        [self.mailViewController setToRecipients:@[@"reid_weber@hotmail.com"]];
+        [self presentViewController:self.mailViewController animated:true completion:nil];
+    }
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
