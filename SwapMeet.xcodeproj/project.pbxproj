@@ -36,6 +36,7 @@
 		9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F68781A1ABBA90088146F /* SMNetworking.m */; };
 		9A3AA5601A1D91AB00F23624 /* CLUploader+SwapMeet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */; };
 		9A3AA5661A1DC1C400F23624 /* UIImage+SwapMeet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3AA5651A1DC1C400F23624 /* UIImage+SwapMeet.m */; };
+		9A6A01DD1A1E912D0062B8A4 /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6A01DC1A1E911B0062B8A4 /* libMBProgressHUD.a */; };
 		9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7962F11A1D8D590038A076 /* libCloudinary.a */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0AA8B7711A1A75ED00A23C39;
 			remoteInfo = SwapMeet;
+		};
+		9A6A01DB1A1E911B0062B8A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A6A01D71A1E911B0062B8A4 /* MBProgressHUD.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D286A7491518C70F00E13FB8;
+			remoteInfo = MBProgressHUD;
+		};
+		9A6A01DE1A1E91510062B8A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A6A01D71A1E911B0062B8A4 /* MBProgressHUD.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D286A7481518C70F00E13FB8;
+			remoteInfo = MBProgressHUD;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -101,6 +116,7 @@
 		9A3AA55F1A1D91AB00F23624 /* CLUploader+SwapMeet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLUploader+SwapMeet.m"; sourceTree = "<group>"; };
 		9A3AA5641A1DC1C400F23624 /* UIImage+SwapMeet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SwapMeet.h"; sourceTree = "<group>"; };
 		9A3AA5651A1DC1C400F23624 /* UIImage+SwapMeet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SwapMeet.m"; sourceTree = "<group>"; };
+		9A6A01D71A1E911B0062B8A4 /* MBProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MBProgressHUD.xcodeproj; path = MBProgressHUD/MBProgressHUD.xcodeproj; sourceTree = "<group>"; };
 		9A7962EC1A1D8D590038A076 /* CLCloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCloudinary.h; sourceTree = "<group>"; };
 		9A7962ED1A1D8D590038A076 /* CLEagerTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLEagerTransformation.h; sourceTree = "<group>"; };
 		9A7962EE1A1D8D590038A076 /* Cloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cloudinary.h; sourceTree = "<group>"; };
@@ -114,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A6A01DD1A1E912D0062B8A4 /* libMBProgressHUD.a in Frameworks */,
 				9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */,
 				287970E21A1E5C1300EBDF49 /* MessageUI.framework in Frameworks */,
 			);
@@ -132,6 +149,7 @@
 		0AA8B7691A1A75ED00A23C39 = {
 			isa = PBXGroup;
 			children = (
+				9A6A01D71A1E911B0062B8A4 /* MBProgressHUD.xcodeproj */,
 				287970E11A1E5C1300EBDF49 /* MessageUI.framework */,
 				0AA8B7741A1A75ED00A23C39 /* SwapMeet */,
 				0AA8B7911A1A75EE00A23C39 /* SwapMeetTests */,
@@ -267,6 +285,14 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		9A6A01D81A1E911B0062B8A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A6A01DC1A1E911B0062B8A4 /* libMBProgressHUD.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9A7962E91A1D8D590038A076 /* cloudinary_ios_v1.0.12 */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +336,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9A6A01DF1A1E91510062B8A4 /* PBXTargetDependency */,
 			);
 			name = SwapMeet;
 			productName = SwapMeet;
@@ -363,6 +390,12 @@
 			mainGroup = 0AA8B7691A1A75ED00A23C39;
 			productRefGroup = 0AA8B7731A1A75ED00A23C39 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9A6A01D81A1E911B0062B8A4 /* Products */;
+					ProjectRef = 9A6A01D71A1E911B0062B8A4 /* MBProgressHUD.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0AA8B7711A1A75ED00A23C39 /* SwapMeet */,
@@ -370,6 +403,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9A6A01DC1A1E911B0062B8A4 /* libMBProgressHUD.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMBProgressHUD.a;
+			remoteRef = 9A6A01DB1A1E911B0062B8A4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0AA8B7701A1A75ED00A23C39 /* Resources */ = {
@@ -438,6 +481,11 @@
 			isa = PBXTargetDependency;
 			target = 0AA8B7711A1A75ED00A23C39 /* SwapMeet */;
 			targetProxy = 0AA8B78F1A1A75EE00A23C39 /* PBXContainerItemProxy */;
+		};
+		9A6A01DF1A1E91510062B8A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MBProgressHUD;
+			targetProxy = 9A6A01DE1A1E91510062B8A4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

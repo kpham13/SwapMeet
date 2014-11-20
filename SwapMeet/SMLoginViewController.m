@@ -11,8 +11,11 @@
 #import "SMSignUpViewController.h"
 #import "SMNetworking.h"
 #import "AppDelegate.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
-@interface SMLoginViewController ()
+@interface SMLoginViewController () {
+    MBProgressHUD *hud;
+}
 
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *password;
@@ -39,11 +42,7 @@
     self.email = self.emailTextField.text;
     self.password = self.passwordTextField.text;
     
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicator.alpha = 1.0;
-    activityIndicator.center = self.view.center;
-    [self.view addSubview:activityIndicator];
-    [activityIndicator startAnimating];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [SMNetworking loginWithEmail:self.email andPassword:self.password completion:^(BOOL successful, NSString *errorString) {
         if (successful == YES) {
@@ -54,7 +53,7 @@
             UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
             [tabBarController setSelectedIndex:3];
             
-            [activityIndicator stopAnimating];
+            [hud hide:YES];
             [self dismissViewControllerAnimated:true completion:nil];
         } else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login failed" message:errorString preferredStyle:UIAlertControllerStyleAlert];
@@ -62,7 +61,7 @@
             
             [alert addAction:OKButton];
             [self presentViewController:alert animated:true completion:nil];
-            [activityIndicator stopAnimating];
+            [hud hide:YES];
         }
     }];
 }

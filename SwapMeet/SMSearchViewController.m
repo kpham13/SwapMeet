@@ -9,8 +9,11 @@
 #import "SMSearchViewController.h"
 #import "SMNetworking.h"
 #import "SearchTableViewCell.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
-@interface SMSearchViewController ()
+@interface SMSearchViewController () {
+    MBProgressHUD *hud;
+}
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -18,7 +21,6 @@
 @property (strong, nonatomic) NSMutableArray *gamesArray;
 @property (nonatomic) NSURLSessionDataTask *searchTask;
 @property BOOL canLoadMore;
-@property UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -31,7 +33,7 @@
     _searchTask = [SMNetworking gamesContaining:_searchBar.text forPlatform:nil atOffset:offset completion:^(NSArray *objects, NSInteger itemsLeft, NSString *errorString) {
         _canLoadMore = itemsLeft > 0;
         NSLog(@"Count: %ld. Items left: %ld", (long)[objects count], (long)itemsLeft);
-        [_activityIndicator stopAnimating];
+        [hud hide:YES];
         if (errorString) {
             NSLog(@"%@", errorString);
             return;
@@ -55,12 +57,6 @@
     
     self.gamesArray = [NSMutableArray array];
     _canLoadMore = YES;
-    
-    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_tableView.frame), CGRectGetMinY(_tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetMinY(_tableView.frame))];
-    _activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    _activityIndicator.color = [UIColor colorWithWhite:0.2 alpha:1];
-    _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [self.view insertSubview:_activityIndicator aboveSubview:_tableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -123,7 +119,7 @@
     [searchBar resignFirstResponder];
     [_searchTask cancel];
     _gamesArray = [NSMutableArray array];
-    [_activityIndicator startAnimating];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self searchAtOffset:0];
 }
 

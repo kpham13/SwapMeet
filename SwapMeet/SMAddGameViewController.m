@@ -12,10 +12,13 @@
 #import "CLUploader+SwapMeet.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UIImage+SwapMeet.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #pragma mark - Properties
 
-@interface SMAddGameViewController () <UITextFieldDelegate>
+@interface SMAddGameViewController () <UITextFieldDelegate> {
+    MBProgressHUD *hud;
+}
 
 @property (strong, nonatomic) NSArray *consoles;
 @property (strong, nonatomic) NSArray *conditions;
@@ -23,7 +26,6 @@
 @property (strong, nonatomic) NSString *condition;
 @property (strong, nonatomic) NSMutableArray *photos;
 
-@property (nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) NSURLSessionDataTask *dataTask;
 @property NSUInteger imageUploadsLeft;
 @property NSMutableArray *remoteURLsArray;
@@ -35,9 +37,12 @@
 #pragma mark - Private Methods
 
 - (void)uploadNewGame {
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Adding game";
     __block NSMutableDictionary *gameDict = [NSMutableDictionary dictionaryWithDictionary:@{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition, @"image_urls": _remoteURLsArray}];
     _dataTask = [SMNetworking addNewGame:gameDict completion:^(NSString *gameID, NSString *errorString) {
-        [_activityIndicator stopAnimating];
+        [hud hide:YES];
         self.navigationController.navigationItem.rightBarButtonItem.enabled = YES;
         if (errorString) {
             [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
@@ -64,12 +69,6 @@
     _remoteURLsArray = [NSMutableArray array];
     
     [self addTouchGestures];
-    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
-    _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    _activityIndicator.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
-    _activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    _activityIndicator.color = [UIColor colorWithWhite:0.2 alpha:1];
-    [self.view addSubview:_activityIndicator];
     
     _titleTextView.delegate = self;
 }
@@ -128,7 +127,6 @@
             [self generateThumbnail:self.imageView1.image];
         }
         
-        [_activityIndicator startAnimating];
         self.navigationController.navigationItem.rightBarButtonItem.enabled = NO;
         
         // Save images to disc
@@ -148,6 +146,11 @@
             for (NSURL *url in fileURLs) {
                 NSString *pathString = [url path];
                 CLUploader *uploader = [CLUploader uploaderWithDelegate:nil];
+                hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+                hud.labelText = @"Uploading image";
+                hud.progress = 0.01;
+                
                 [uploader upload:pathString options:@{} withCompletion:^(NSDictionary *successResult, NSString *errorResult, NSInteger code, id context) {
                     NSString *remoteURL = successResult[@"secure_url"];
                     if (remoteURL) {
@@ -157,10 +160,13 @@
                     self.imageUploadsLeft--;
                     if (_imageUploadsLeft == 0) {
                         // Upload the actual game object
+                        [hud hide:YES];
                         [self uploadNewGame];
                     }
                 } andProgress:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite, id context) {
-                    //NSInteger percentsWritten = ((float)totalBytesWritten / (float)totalBytesExpectedToWrite) * 100;
+                    float progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
+                    NSLog(@"PROGRESS: %@", @(progress));
+                    hud.progress = progress;
                 }];
             }
         } else {
