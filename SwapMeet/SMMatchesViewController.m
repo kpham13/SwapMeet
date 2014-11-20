@@ -7,6 +7,7 @@
 //
 
 #import "SMMatchesViewController.h"
+#import "MatchTableViewCell.h"
 
 @interface SMMatchesViewController ()
 
@@ -28,6 +29,9 @@
     [self.refreshControl addTarget:self action:@selector(refreshPage:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
     self.mailResult = nil;
+    [self.tableView registerNib:[UINib nibWithNibName:@"MatchTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MATCH_CELL"];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 200;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,13 +48,16 @@
 #pragma mark - TableView Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SEARCH_CELL"];
-    cell.backgroundColor = [UIColor blueColor];
+    MatchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MATCH_CELL"];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 200;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
