@@ -8,6 +8,7 @@
 
 #import "SMAddGameViewController.h"
 #import "Game.h"
+#import "SMNetworking.h"
 
 #pragma mark - Properties
 
@@ -19,6 +20,8 @@
 @property (strong, nonatomic) NSString *condition;
 @property (strong, nonatomic) NSMutableArray *photos;
 
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic) NSURLSessionDataTask *dataTask;
 @end
 
 @implementation SMAddGameViewController
@@ -35,6 +38,13 @@
     self.imageView1.userInteractionEnabled = YES;
     self.imageView2.userInteractionEnabled = YES;
     self.imageView3.userInteractionEnabled = YES;
+    
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+    _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    _activityIndicator.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
+    _activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    _activityIndicator.color = [UIColor colorWithWhite:0.2 alpha:1];
+    [self.view addSubview:_activityIndicator];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,15 +96,25 @@
         if (!self.condition) {
             self.condition = [self.conditions firstObject];
         }
-        NSDictionary *gameDict = @{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
-        [self dismissViewControllerAnimated:true completion:nil];
+        __block NSDictionary *gameDict = @{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition};
+        [_activityIndicator startAnimating];
+        _dataTask = [SMNetworking addNewGame:gameDict completion:^(BOOL success, NSString *errorString) {
+            [_activityIndicator stopAnimating];
+            if (errorString) {
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                return;
+            }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
+            [self dismissViewControllerAnimated:true completion:nil];
+        }];
     } else {
         [self noTitleAlertController];
     }
 }
 
 - (IBAction)cancelButtonClicked:(id)sender {
+    [_dataTask cancel];
     [self dismissViewControllerAnimated:true completion:nil];
 }
 

@@ -19,13 +19,26 @@
 
 @implementation SMGamesViewController
 
+- (IBAction)addButtonClicked:(id)sender {
+    SMAddGameViewController *addGameVC = [[SMAddGameViewController alloc] initWithNibName:@"SMAddGameViewController" bundle:[NSBundle mainBundle]];
+    [self presentViewController:addGameVC animated:YES completion:nil];
+    
+    NSLog(@"Add Button Clicked");
+}
+
+- (void)favoriteAdded:(NSNotification *)notification {
+    NSLog(@"Favorite Added");
+}
+
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteAdded:) name:@"ADDED_FAVORITE" object:nil];
     [self.tableView registerNib:[UINib nibWithNibName:@"SearchTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"GAME_CELL"];
-    self.tableView.rowHeight = 150;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -39,27 +52,19 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - UITableView Delegates Methods
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GAME_CELL"];
     Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
     cell.titleLabel.text = selectedGame.title;
+    cell.platformName.text = selectedGame.platform;
     cell.imageView.backgroundColor = [UIColor blackColor];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.fetchController.fetchedObjects count];
-}
-
-- (IBAction)addButtonClicked:(id)sender {
-    SMAddGameViewController *addGameVC = [[SMAddGameViewController alloc] initWithNibName:@"SMAddGameViewController" bundle:[NSBundle mainBundle]];
-    [self presentViewController:addGameVC animated:YES completion:nil];
-    
-    NSLog(@"Add Button Clicked");
-}
-
-- (void) favoriteAdded:(NSNotification *)notification {
-    NSLog(@"Favorite Added");
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
