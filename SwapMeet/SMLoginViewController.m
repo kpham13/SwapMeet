@@ -51,7 +51,13 @@
             // Switch to delegation in the future
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
-            [tabBarController setSelectedIndex:3];
+            
+            NSInteger destinationTab = appDelegate.targetTab;
+            if (destinationTab == 2) {
+                [tabBarController setSelectedIndex:destinationTab];
+            } else if (destinationTab == 3) {
+                [tabBarController setSelectedIndex:destinationTab];
+            }
             
             [hud hide:YES];
             [self dismissViewControllerAnimated:true completion:nil];

@@ -30,10 +30,13 @@
 
 - (IBAction)changeSegment:(id)sender {
     if (self.segmentedControl.selectedSegmentIndex == 0) {
-        self.tableView.hidden = true;
+        //self.tableView.hidden = true;
+        NSLog(@"My Games");
     } else if (self.segmentedControl.selectedSegmentIndex == 1) {
-        self.tableView.hidden = false;
+        //self.tableView.hidden = false;
+        NSLog(@"Favorites");
     }
+    
     [self.tableView reloadData];
 }
 
@@ -55,6 +58,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear: animated];
+    
     self.fetchController = [[CoreDataController controller] fetchUserGames];
     self.fetchController.delegate = self;
     [self.tableView reloadData];
@@ -68,9 +72,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GAME_CELL"];
-    Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
-    cell.titleLabel.text = selectedGame.title;
-    cell.platformName.text = selectedGame.platform;
+    
+    //if (self.segmentedControl.selectedSegmentIndex == 0) {
+        Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
+        cell.titleLabel.text = selectedGame.title;
+        cell.platformName.text = selectedGame.platform;
+    //} else if (self.segmentedControl.selectedSegmentIndex == 1) {
+        
+    //}
+    
     return cell;
 }
 
