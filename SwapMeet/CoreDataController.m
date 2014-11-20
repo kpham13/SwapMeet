@@ -117,6 +117,7 @@
     game.condition = info[@"condition"];
     game.platform = info[@"platform"];
     game.gameID = info[@"id"];
+    game.imagePath = info[@"imagePath"];
     [self saveContext];
 }
 

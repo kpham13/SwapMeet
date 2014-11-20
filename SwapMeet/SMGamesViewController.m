@@ -77,6 +77,9 @@
         Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
         cell.titleLabel.text = selectedGame.title;
         cell.platformName.text = selectedGame.platform;
+        NSString *imageFullPath = [[[NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] isDirectory:YES] URLByAppendingPathComponent:selectedGame.imagePath] path];
+        UIImage *image = [UIImage imageWithContentsOfFile:imageFullPath];
+        cell.thumbnailImageView.image = image;
     //} else if (self.segmentedControl.selectedSegmentIndex == 1) {
         
     //}

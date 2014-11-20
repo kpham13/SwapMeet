@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSString * platform;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSNumber * isFavorited;
+@property (nonatomic, retain) NSString * imagePath;
 
 @end

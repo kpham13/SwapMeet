@@ -3,6 +3,7 @@
     <entity name="Game" representedClassName="Game" syncable="YES">
         <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gameID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imagePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isFavorited" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="platform" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -14,7 +15,7 @@
         <attribute name="originGameID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Game" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="Game" positionX="-54" positionY="-9" width="128" height="135"/>
         <element name="Match" positionX="-36" positionY="9" width="128" height="103"/>
     </elements>
 </model>
