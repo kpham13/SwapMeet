@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GAME_CELL" rowHeight="150" id="KGk-i7-Jjw" customClass="SearchTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="428" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ad-5k-3Xy">
-                        <rect key="frame" x="90" y="8" width="222" height="29"/>
+                        <rect key="frame" x="90" y="8" width="300" height="29"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -40,18 +40,44 @@
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="V9C-Vn-36v">
                         <rect key="frame" x="35" y="35" width="20" height="20"/>
                     </activityIndicatorView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0oP-pm-LY6">
+                        <rect key="frame" x="390" y="0.0" width="38" height="149"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" highlightedImage="star" translatesAutoresizingMaskIntoConstraints="NO" id="pAE-S9-gjx">
+                                <rect key="frame" x="8" y="64" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="0xd-N3-bSm"/>
+                                    <constraint firstAttribute="height" constant="22" id="xml-lF-Me9"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="m2Z-xH-iXd">
+                                <rect key="frame" x="9" y="65" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="m2Z-xH-iXd" secondAttribute="centerX" id="3ij-ZB-aaS"/>
+                            <constraint firstAttribute="centerX" secondItem="pAE-S9-gjx" secondAttribute="centerX" id="DTX-5m-pvg"/>
+                            <constraint firstAttribute="centerY" secondItem="m2Z-xH-iXd" secondAttribute="centerY" id="LKY-Dq-NsM"/>
+                            <constraint firstAttribute="width" constant="38" id="Q4K-xd-3ut"/>
+                            <constraint firstAttribute="centerY" secondItem="pAE-S9-gjx" secondAttribute="centerY" id="nLb-VE-7JK"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="6Vk-8Z-YBa" firstAttribute="centerX" secondItem="p31-Vr-0Tw" secondAttribute="centerX" id="0ye-fd-MqJ"/>
+                    <constraint firstAttribute="trailing" secondItem="0oP-pm-LY6" secondAttribute="trailing" id="5Nh-5b-3cn"/>
                     <constraint firstItem="6Vk-8Z-YBa" firstAttribute="centerY" secondItem="p31-Vr-0Tw" secondAttribute="centerY" id="8Uo-lO-1LC"/>
                     <constraint firstItem="p31-Vr-0Tw" firstAttribute="leading" secondItem="Hx6-W6-v1I" secondAttribute="trailing" constant="11" id="8fM-cy-vLj"/>
                     <constraint firstItem="0ad-5k-3Xy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="GcP-Qm-Okf"/>
                     <constraint firstItem="6Vk-8Z-YBa" firstAttribute="width" secondItem="p31-Vr-0Tw" secondAttribute="width" constant="6" id="Jov-aL-Ezp"/>
-                    <constraint firstAttribute="trailing" secondItem="0ad-5k-3Xy" secondAttribute="trailing" constant="8" id="Mw3-pa-ScD"/>
                     <constraint firstItem="V9C-Vn-36v" firstAttribute="centerY" secondItem="Hx6-W6-v1I" secondAttribute="centerY" id="NfE-x3-h77"/>
                     <constraint firstItem="Hx6-W6-v1I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="XCg-Ue-Olr"/>
+                    <constraint firstItem="0oP-pm-LY6" firstAttribute="leading" secondItem="0ad-5k-3Xy" secondAttribute="trailing" id="c5U-U7-pUG"/>
+                    <constraint firstAttribute="bottom" secondItem="0oP-pm-LY6" secondAttribute="bottom" id="lgb-Qs-ZZ4"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Hx6-W6-v1I" secondAttribute="bottom" constant="8" id="lhn-RH-5Pc"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Vk-8Z-YBa" secondAttribute="bottom" constant="8" id="pIF-AC-5Au"/>
+                    <constraint firstItem="0oP-pm-LY6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="q51-Rl-Ppe"/>
                     <constraint firstItem="Hx6-W6-v1I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="qBs-7f-Yf2"/>
                     <constraint firstItem="0ad-5k-3Xy" firstAttribute="leading" secondItem="Hx6-W6-v1I" secondAttribute="trailing" constant="8" id="sSI-i6-bft"/>
                     <constraint firstItem="V9C-Vn-36v" firstAttribute="centerX" secondItem="Hx6-W6-v1I" secondAttribute="centerX" id="v1N-8R-R6X"/>
@@ -63,10 +89,14 @@
                 <outlet property="activityIndicator" destination="V9C-Vn-36v" id="nem-PH-91o"/>
                 <outlet property="platformBackgroundView" destination="6Vk-8Z-YBa" id="Whh-Iw-nJm"/>
                 <outlet property="platformName" destination="p31-Vr-0Tw" id="cpt-Du-mBP"/>
+                <outlet property="starringView" destination="0oP-pm-LY6" id="fQh-tF-0W5"/>
                 <outlet property="thumbnailImageView" destination="Hx6-W6-v1I" id="3I7-3C-nud"/>
                 <outlet property="titleLabel" destination="0ad-5k-3Xy" id="h8h-my-imR"/>
             </connections>
-            <point key="canvasLocation" x="433" y="288"/>
+            <point key="canvasLocation" x="487" y="285"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="star" width="22" height="22"/>
+    </resources>
 </document>

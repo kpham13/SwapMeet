@@ -76,6 +76,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GAME_CELL"];
+    cell.mode = SearchTableViewCellModeSearch;
     [cell.activityIndicator stopAnimating];
     NSDictionary *gameDic = _gamesArray[indexPath.row];
     cell.titleLabel.text = gameDic[@"title"];

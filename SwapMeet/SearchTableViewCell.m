@@ -9,17 +9,23 @@
 #import "SearchTableViewCell.h"
 
 @interface SearchTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIView *starringView;
 @property (weak, nonatomic) IBOutlet UIView *platformBackgroundView;
 @end
 
 @implementation SearchTableViewCell
+
+#pragma mark -
 
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"platformName.text"]) {
         _platformBackgroundView.hidden = !_platformName.text || [_platformName.text isEqualToString:@""];
-    } else {
+    } else if ([keyPath isEqualToString:@"mode"]) {
+        _starringView.hidden = _mode == SearchTableViewCellModeGames;
+    }
+    else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
@@ -29,7 +35,9 @@
     _platformBackgroundView.layer.cornerRadius = 2;
     _thumbnailImageView.layer.cornerRadius = 4;
     [self addObserver:self forKeyPath:@"platformName.text" options:NSKeyValueObservingOptionNew context:nil];
+    [self addObserver:self forKeyPath:@"mode" options:NSKeyValueObservingOptionNew context:nil];
     _platformName.text = nil;
+    self.mode = SearchTableViewCellModeGames;
 }
 
 - (void)prepareForReuse {
