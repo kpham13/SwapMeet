@@ -49,6 +49,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
         completion(NO, @"gameID cannot be empty");
         return nil;
     }
+    
     __block void(^completionBlock)(BOOL success, NSString *errorString) = completion;
     return [self performJSONRequestAtPath:@"games/wantsgames" withMethod:@"POST" andParameters:@{@"id": gameID} sendBodyAsJSON:YES completion:^(NSDictionary *JSONDic, NSString *errorString) {
         completionBlock(errorString == nil, errorString);
@@ -68,6 +69,19 @@ NSString * const kSMDefaultsKeyToken = @"token";
             errorString = @"No game id at item._id path";
         }
         completionBlock(gameID, errorString);
+    }];
+}
+
++ (NSURLSessionDataTask *)deleteUserGameWithID:(NSString *)gameID
+                                    completion:(void(^)(BOOL success, NSString *errorString))completion {
+    if (!gameID || [gameID isEqualToString:@""]) {
+        completion(NO, @"gameID cannot be empty");
+        return nil;
+    }
+    
+    __block void(^completionBlock)(BOOL success, NSString *errorString) = completion;
+    return [self performJSONRequestAtPath:@"games/hasgames" withMethod:@"DELETE" andParameters:@{@"id": gameID} sendBodyAsJSON:YES completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        completionBlock(errorString == nil, errorString);
     }];
 }
 
