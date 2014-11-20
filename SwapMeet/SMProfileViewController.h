@@ -12,11 +12,15 @@
 extern NSString * const kSMDefaultsKeyEmail;
 extern NSString * const kSMDefaultsKeyScreenName;
 extern NSString * const kSMDefaultsKeyZipCode;
+extern NSString * const kSMDefaultsKeyAvatarURL;
 
 @interface SMProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *userImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+@property (weak, nonatomic) IBOutlet UILabel *zipCodeLabel;
+
 @property (weak, nonatomic) IBOutlet UITextView *lookingForTextField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
