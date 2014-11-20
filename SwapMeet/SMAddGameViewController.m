@@ -32,6 +32,24 @@
 
 @implementation SMAddGameViewController
 
+#pragma mark - Private Methods
+
+- (void)uploadNewGame {
+    __block NSMutableDictionary *gameDict = [NSMutableDictionary dictionaryWithDictionary:@{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition, @"image_urls": _remoteURLsArray}];
+    _dataTask = [SMNetworking addNewGame:gameDict completion:^(NSString *gameID, NSString *errorString) {
+        [_activityIndicator stopAnimating];
+        self.navigationController.navigationItem.rightBarButtonItem.enabled = YES;
+        if (errorString) {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            return;
+        }
+        
+        gameDict[@"id"] = gameID;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
+        [self dismissViewControllerAnimated:true completion:nil];
+    }];
+}
+
 #pragma mark - ViewController LifeCycle Methods
 
 - (void)viewDidLoad {
@@ -123,35 +141,27 @@
         
         // Upload images
         self.imageUploadsLeft = [fileURLs count];
-        for (NSURL *url in fileURLs) {
-            NSString *pathString = [url path];
-            CLUploader *uploader = [CLUploader uploaderWithDelegate:nil];
-            [uploader upload:pathString options:@{} withCompletion:^(NSDictionary *successResult, NSString *errorResult, NSInteger code, id context) {
-                NSString *remoteURL = successResult[@"secure_url"];
-                if (remoteURL) {
-                    [_remoteURLsArray addObject:remoteURL];
-                }
-                
-                self.imageUploadsLeft--;
-                if (_imageUploadsLeft == 0) {
-                    // Upload the actual game object
-                    __block NSMutableDictionary *gameDict = [NSMutableDictionary dictionaryWithDictionary:@{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition, @"image_urls": _remoteURLsArray}];
-                    _dataTask = [SMNetworking addNewGame:gameDict completion:^(NSString *gameID, NSString *errorString) {
-                        [_activityIndicator stopAnimating];
-                        self.navigationController.navigationItem.rightBarButtonItem.enabled = YES;
-                        if (errorString) {
-                            [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                            return;
-                        }
-                        
-                        gameDict[@"id"] = gameID;
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
-                        [self dismissViewControllerAnimated:true completion:nil];
-                    }];
-                }
-            } andProgress:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite, id context) {
-                //NSInteger percentsWritten = ((float)totalBytesWritten / (float)totalBytesExpectedToWrite) * 100;
-            }];
+        if (self.imageUploadsLeft > 0) {
+            for (NSURL *url in fileURLs) {
+                NSString *pathString = [url path];
+                CLUploader *uploader = [CLUploader uploaderWithDelegate:nil];
+                [uploader upload:pathString options:@{} withCompletion:^(NSDictionary *successResult, NSString *errorResult, NSInteger code, id context) {
+                    NSString *remoteURL = successResult[@"secure_url"];
+                    if (remoteURL) {
+                        [_remoteURLsArray addObject:remoteURL];
+                    }
+                    
+                    self.imageUploadsLeft--;
+                    if (_imageUploadsLeft == 0) {
+                        // Upload the actual game object
+                        [self uploadNewGame];
+                    }
+                } andProgress:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite, id context) {
+                    //NSInteger percentsWritten = ((float)totalBytesWritten / (float)totalBytesExpectedToWrite) * 100;
+                }];
+            }
+        } else {
+            [self uploadNewGame];
         }
         
     } else {

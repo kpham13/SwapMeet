@@ -122,7 +122,7 @@
 
 - (NSFetchedResultsController *) fetchUserGames {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Game"];
-    request.sortDescriptors = [[NSArray alloc] initWithObjects:[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:false] init], nil];
+    request.sortDescriptors = [[NSArray alloc] initWithObjects:[[NSSortDescriptor sortDescriptorWithKey:@"gameID" ascending:false] init], nil];
     NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     NSError *error = nil;
     [controller performFetch: &error];
