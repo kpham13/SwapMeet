@@ -11,6 +11,7 @@
 @interface SMMatchDetailViewController ()
 
 @property (strong, nonatomic) MFMailComposeViewController *mailViewController;
+@property (strong, nonatomic) NSString *mailResult;
 
 @end
 
@@ -25,6 +26,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (IBAction)contactButtonClicked:(id)sender {
@@ -43,21 +48,32 @@
     
     switch (result) {
         case MFMailComposeResultCancelled:
-            NSLog(@"Mail Cancelled");
+            self.mailResult = @"You Cancelled Your Email";
             break;
         case MFMailComposeResultFailed:
-            NSLog(@"Mail Failed");
+            self.mailResult = @"Your Email Failed To Send";
             break;
         case MFMailComposeResultSaved:
-            NSLog(@"Mail Saved");
+            self.mailResult = @"Your Email Has Been Saved";
             break;
         case MFMailComposeResultSent:
-            NSLog(@"Mail Sent");
+            self.mailResult = @"Your Email Has Been Sent";
             break;
         default:
+            self.mailResult = @"There Was An Error.";
             break;
     }
     [controller dismissViewControllerAnimated:true completion:nil];
+    [self presentAlertView:self.mailResult];
+}
+
+- (UIAlertController *) presentAlertView:(NSString *) result {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:result message:result preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertController dismissViewControllerAnimated:true completion:nil];
+    }];
+    [alertController addAction:action];
+    return alertController;
 }
 
 @end
