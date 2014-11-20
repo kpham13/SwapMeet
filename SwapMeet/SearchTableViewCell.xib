@@ -13,24 +13,54 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MyGamesTabIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Hx6-W6-v1I">
-                        <rect key="frame" x="8" y="8" width="75" height="75"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyGamesTabIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Hx6-W6-v1I">
+                        <rect key="frame" x="8" y="8" width="74" height="74"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="74" id="Qqq-DL-g9g"/>
+                            <constraint firstAttribute="height" constant="74" id="reJ-PD-oPo"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ad-5k-3Xy">
-                        <rect key="frame" x="91" y="8" width="221" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ad-5k-3Xy">
+                        <rect key="frame" x="90" y="8" width="222" height="29"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vk-8Z-YBa">
+                        <rect key="frame" x="90" y="43" width="71" height="25"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Platform" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p31-Vr-0Tw">
+                        <rect key="frame" x="93" y="45" width="65" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-                <color key="backgroundColor" red="0.40000000596046448" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="6Vk-8Z-YBa" firstAttribute="centerX" secondItem="p31-Vr-0Tw" secondAttribute="centerX" id="0ye-fd-MqJ"/>
+                    <constraint firstItem="6Vk-8Z-YBa" firstAttribute="centerY" secondItem="p31-Vr-0Tw" secondAttribute="centerY" id="8Uo-lO-1LC"/>
+                    <constraint firstItem="p31-Vr-0Tw" firstAttribute="leading" secondItem="Hx6-W6-v1I" secondAttribute="trailing" constant="11" id="8fM-cy-vLj"/>
+                    <constraint firstItem="0ad-5k-3Xy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="GcP-Qm-Okf"/>
+                    <constraint firstItem="6Vk-8Z-YBa" firstAttribute="width" secondItem="p31-Vr-0Tw" secondAttribute="width" constant="6" id="Jov-aL-Ezp"/>
+                    <constraint firstAttribute="trailing" secondItem="0ad-5k-3Xy" secondAttribute="trailing" constant="8" id="Mw3-pa-ScD"/>
+                    <constraint firstItem="Hx6-W6-v1I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="XCg-Ue-Olr"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Hx6-W6-v1I" secondAttribute="bottom" constant="8" id="lhn-RH-5Pc"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Vk-8Z-YBa" secondAttribute="bottom" constant="8" id="pIF-AC-5Au"/>
+                    <constraint firstItem="Hx6-W6-v1I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="qBs-7f-Yf2"/>
+                    <constraint firstItem="0ad-5k-3Xy" firstAttribute="leading" secondItem="Hx6-W6-v1I" secondAttribute="trailing" constant="8" id="sSI-i6-bft"/>
+                    <constraint firstItem="p31-Vr-0Tw" firstAttribute="top" secondItem="0ad-5k-3Xy" secondAttribute="bottom" constant="8" id="vJL-ss-vk2"/>
+                    <constraint firstItem="6Vk-8Z-YBa" firstAttribute="height" secondItem="p31-Vr-0Tw" secondAttribute="height" constant="4" id="va9-Js-klh"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="platformBackgroundView" destination="6Vk-8Z-YBa" id="Whh-Iw-nJm"/>
+                <outlet property="platformName" destination="p31-Vr-0Tw" id="cpt-Du-mBP"/>
                 <outlet property="thumbnailImageView" destination="Hx6-W6-v1I" id="3I7-3C-nud"/>
                 <outlet property="titleLabel" destination="0ad-5k-3Xy" id="h8h-my-imR"/>
             </connections>
-            <point key="canvasLocation" x="433" y="291"/>
+            <point key="canvasLocation" x="433" y="288"/>
         </tableViewCell>
     </objects>
     <resources>

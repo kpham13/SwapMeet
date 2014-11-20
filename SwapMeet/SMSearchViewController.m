@@ -12,11 +12,37 @@
 
 @interface SMSearchViewController ()
 
-@property (strong, nonatomic) NSMutableArray *games;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray *gamesArray;
+@property (nonatomic) NSURLSessionDataTask *searchTask;
+@property BOOL canLoadMore;
+@property UIActivityIndicatorView *activityIndicator;
 
 @end
 
 @implementation SMSearchViewController
+
+#pragma mark - Private Methods
+
+- (void)searchAtOffset:(NSInteger)offset {
+    _canLoadMore = NO;
+    _searchTask = [SMNetworking gamesContaining:_searchBar.text forPlatform:nil atOffset:offset completion:^(NSArray *objects, NSInteger itemsLeft, NSString *errorString) {
+        _canLoadMore = itemsLeft > 0;
+        NSLog(@"Count: %ld. Items left: %ld", (long)[objects count], (long)itemsLeft);
+        [_activityIndicator stopAnimating];
+        if (errorString) {
+            NSLog(@"%@", errorString);
+            return;
+        }
+        
+        [_gamesArray addObjectsFromArray:objects];
+        [_tableView reloadData];
+    }];
+}
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,41 +50,60 @@
     self.tableView.dataSource = self;
     self.searchBar.delegate =self;
     [self.tableView registerNib:[UINib nibWithNibName:@"SearchTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"GAME_CELL"];
-    self.tableView.rowHeight = 150;
-    [self.tableView reloadData];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 70;
+    
+    self.gamesArray = [NSMutableArray array];
+    _canLoadMore = YES;
+    
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(CGRectGetMinX(_tableView.frame), CGRectGetMinY(_tableView.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - CGRectGetMinY(_tableView.frame))];
+    _activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    _activityIndicator.color = [UIColor colorWithWhite:0.2 alpha:1];
+    _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [self.view insertSubview:_activityIndicator aboveSubview:_tableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ADDED_FAVORITE" object:self userInfo:nil];
+    [super viewDidAppear:animated];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"ADDED_FAVORITE" object:self userInfo:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 150;
-}
+#pragma mark - UITableView Delegates Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GAME_CELL"];
-    cell.titleLabel.text = @"Game Title";
-    cell.imageView.backgroundColor = [UIColor blackColor];
+    NSDictionary *gameDic = _gamesArray[indexPath.row];
+    cell.titleLabel.text = gameDic[@"title"];
+    cell.platformName.text = gameDic[@"platform"];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return [_gamesArray count];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!_canLoadMore) {
+        return;
+    }
+    
+    if (indexPath.row == [_gamesArray count] - 2) {
+        [self searchAtOffset:[_gamesArray count]];
+    }
+}
+
+#pragma mark - UISearchBarDelegate Methods
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"SEARCH CLICKED");
-    [SMNetworking gamesContaining:self.searchBar.text forPlatform:nil atOffset:10 completion:^(NSArray *objects, NSInteger itemsLeft, NSString *errorString) {
-        self.games = [[NSMutableArray alloc] initWithArray:objects];
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self.tableView reloadData];
-        }];
-    }];
+    [searchBar resignFirstResponder];
+    [_searchTask cancel];
+    _gamesArray = [NSMutableArray array];
+    [_activityIndicator startAnimating];
+    [self searchAtOffset:0];
 }
 
 @end
