@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) MFMailComposeViewController *mailViewController;
 @property (strong, nonatomic) NSString *mailResult;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -21,6 +22,11 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    NSAttributedString *title = [[NSAttributedString alloc] initWithString:@"Pull To Refresh"];
+    [self.refreshControl setAttributedTitle: title];
+    [self.refreshControl addTarget:self action:@selector(refreshPage:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
     self.mailResult = nil;
 }
 
@@ -91,6 +97,13 @@
     }];
     [alertController addAction:action];
     [self presentViewController:alertController animated:true completion:nil];
+}
+
+#pragma mark - Refresh Method
+
+-(void) refreshPage:(UIRefreshControl *)refreshControl {
+    NSLog(@"Page is Refreshing");
+    [refreshControl endRefreshing];
 }
 
 @end
