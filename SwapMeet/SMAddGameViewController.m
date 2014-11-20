@@ -60,11 +60,10 @@
     self.conditions = [[NSArray alloc] initWithObjects:@"Mint", @"Newish", @"Used", @"Still Works...", nil];
     self.photos = [NSMutableArray array];
     self.imageView1.userInteractionEnabled = YES;
-    self.imageView2.userInteractionEnabled = YES;
-    self.imageView3.userInteractionEnabled = YES;
     
     _remoteURLsArray = [NSMutableArray array];
     
+    [self addTouchGestures];
     _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     _activityIndicator.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
@@ -125,6 +124,10 @@
             self.condition = [self.conditions firstObject];
         }
         
+        if (self.imageView1.image) {
+            [self generateThumbnail:self.imageView1.image];
+        }
+        
         [_activityIndicator startAnimating];
         self.navigationController.navigationItem.rightBarButtonItem.enabled = NO;
         
@@ -175,7 +178,7 @@
 }
 
 - (IBAction)addPhotosButtonClicked:(id)sender {
-    if ([self.photos count] >= 3) {
+    if (self.imageView1.image) {
         [self maxImagesReached];
     } else {
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
@@ -188,14 +191,16 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
     [self.photos addObject:image];
-    [self setImages];
-    [picker dismissViewControllerAnimated:true completion:nil];
+    self.imageView1.image = image;
+    [picker dismissViewControllerAnimated:true completion:^{
+        //[self addTouchGestures];
+    }];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [self.photos insertObject:[info objectForKey:UIImagePickerControllerOriginalImage] atIndex:[self.photos count]];
     [picker dismissViewControllerAnimated:true completion:nil];
-    [self setImages];
+    self.imageView1.image = [info objectForKey:UIImagePickerControllerOriginalImage];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -204,34 +209,8 @@
 
 #pragma mark - ImageView and Tap Gesture Methods
 
-- (void)setImages {
-    NSInteger index = 0;
-    self.imageView1.image = nil;
-    self.imageView2.image = nil;
-    self.imageView3.image = nil;
-    index++;
-    for (UIImage *image in self.photos) {
-        if (index == 1) {
-            self.imageView1.image = image;
-            UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image1Tapped:)];
-            [self.imageView1 addGestureRecognizer:touch];
-            index++;
-        } else if (index == 2) {
-            self.imageView2.image = image;
-            UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image2Tapped:)];
-            [self.imageView2 addGestureRecognizer:touch];
-            index++;
-        } else if (index == 3) {
-            self.imageView3.image = image;
-            UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image3Tapped:)];
-            [self.imageView3 addGestureRecognizer:touch];
-            self.addImagesButton.enabled = NO;
-        }
-    }
-}
-
 - (void)addTouchGestures {
-    UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] init];
+    UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(image1Tapped:)];
     [self.imageView1 addGestureRecognizer:touch];
 }
 
@@ -242,47 +221,28 @@
     }
 }
 
-- (void) image2Tapped:(UITapGestureRecognizer *) recognizer {
-    if (self.imageView2.image) {
-        NSLog(@"Image Tapped");
-        [self addSelectedImageAlert:self.imageView2];
-    }
-}
-
-- (void) image3Tapped:(UITapGestureRecognizer *) recognizer {
-    if (self.imageView3.image) {
-        NSLog(@"Image Tapped");
-        [self addSelectedImageAlert:self.imageView3];
-    }
-}
-
 #pragma mark - Alert Controller Methods
 
 - (void)addSelectedImageAlert: (UIImageView *) imageView {
-    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Choose An Option" message:@"Would you like to select this photo for your thumbnail? Or would you like to delete it?" preferredStyle:UIAlertControllerStyleAlert] init];
-    UIAlertAction *thumbnailAction = [UIAlertAction actionWithTitle:@"Select As Thumbnail" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [alertController dismissViewControllerAnimated:true completion:nil];
-        [self generateThumbnail:imageView.image];
-    }];
+    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Delete This Photo?" message: nil preferredStyle:UIAlertControllerStyleAlert] init];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         NSUInteger index = [self.photos indexOfObject:imageView.image];
         if (index != NSNotFound) {
             [self.photos removeObjectAtIndex:index];
-            [self setImages];
-            self.addImagesButton.enabled = YES;
+            self.imageView1.image = nil;
         }
         
         [alertController dismissViewControllerAnimated:true completion:nil];
     }];
+    
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-    [alertController addAction:thumbnailAction];
     [alertController addAction:deleteAction];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:true completion:nil];
 }
 
 - (void)maxImagesReached {
-    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Too Many Photos" message:@"Sorry, You Can Only Add 3 Photos" preferredStyle:UIAlertControllerStyleAlert] init];
+    UIAlertController *alertController = [[UIAlertController alertControllerWithTitle:@"Too Many Photos" message:@"Sorry, You Can Only Add 1 Photo" preferredStyle:UIAlertControllerStyleAlert] init];
     UIAlertAction *alertAction = [[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [alertController dismissViewControllerAnimated:true completion:nil];
     }] init];
@@ -300,6 +260,7 @@
 }
 
 #pragma mark - UITextFieldDelegate Methods
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [textField resignFirstResponder];
 }

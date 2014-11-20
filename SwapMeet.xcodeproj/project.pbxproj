@@ -25,6 +25,7 @@
 		281B3C151A1BEB7F003C9D1C /* CoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281B3C141A1BEB7F003C9D1C /* CoreDataController.m */; };
 		281B3C191A1D13A2003C9D1C /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 281B3C171A1D13A2003C9D1C /* SearchTableViewCell.m */; };
 		281B3C1A1A1D13A2003C9D1C /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */; };
+		287970E21A1E5C1300EBDF49 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 287970E11A1E5C1300EBDF49 /* MessageUI.framework */; };
 		287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */; };
 		287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C61A1A7BDB008C3CCD /* SMSearchViewController.m */; };
 		287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287BF0C91A1A7BF1008C3CCD /* SMMatchesViewController.m */; };
@@ -80,6 +81,7 @@
 		281B3C161A1D13A2003C9D1C /* SearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewCell.h; sourceTree = "<group>"; };
 		281B3C171A1D13A2003C9D1C /* SearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewCell.m; sourceTree = "<group>"; };
 		281B3C181A1D13A2003C9D1C /* SearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
+		287970E11A1E5C1300EBDF49 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		287BF0BF1A1A7BA9008C3CCD /* SMProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMProfileViewController.h; sourceTree = "<group>"; };
 		287BF0C01A1A7BA9008C3CCD /* SMProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMProfileViewController.m; sourceTree = "<group>"; };
 		287BF0C51A1A7BDB008C3CCD /* SMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSearchViewController.h; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */,
+				287970E21A1E5C1300EBDF49 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +132,7 @@
 		0AA8B7691A1A75ED00A23C39 = {
 			isa = PBXGroup;
 			children = (
+				287970E11A1E5C1300EBDF49 /* MessageUI.framework */,
 				0AA8B7741A1A75ED00A23C39 /* SwapMeet */,
 				0AA8B7911A1A75EE00A23C39 /* SwapMeetTests */,
 				0AA8B7731A1A75ED00A23C39 /* Products */,
