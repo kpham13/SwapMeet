@@ -136,34 +136,35 @@
     NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:kSMDefaultsKeyToken];
     //NSLog(@"%@", token);
     
-//    SMGamesViewController *gameViewController = tabBarController.viewControllers[2];
+    SMGamesViewController *gameViewController = tabBarController.viewControllers[2];
     SMProfileViewController *profileViewController = tabBarController.viewControllers[3];
     
-//    if ([viewController isEqual:gameViewController]) {
-//        if (!token) {
-//            //NSLog(@"No token");
-//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login required" message:@"Please log in to view your games." preferredStyle: UIAlertControllerStyleAlert];
-//            UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-//            UIAlertAction *loginButton = [UIAlertAction actionWithTitle:@"Login" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//                self.navigationController = [[UINavigationController alloc] initWithRootViewController:[[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]]];
-//                [self.window.rootViewController presentViewController:self.navigationController animated:true completion:nil];
-//            }];
-//            
-//            [alert addAction:cancelButton];
-//            [alert addAction:loginButton];
-//            [self.window.rootViewController presentViewController:alert animated:true completion:nil];
-//            return false;
-//        } else {
-//            //NSLog(@"Token exists");
-//            return true;
-//        }
-//    } else
-        if ([viewController isEqual:profileViewController]) {
+    if ([viewController isEqual:gameViewController]) {
+        if (!token) {
+            //NSLog(@"No token");
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login required" message:@"Please log in to view your games." preferredStyle: UIAlertControllerStyleAlert];
+            UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+            UIAlertAction *loginButton = [UIAlertAction actionWithTitle:@"Login" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                self.targetTab = 2;
+                self.navigationController = [[UINavigationController alloc] initWithRootViewController:[[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]]];
+                [self.window.rootViewController presentViewController:self.navigationController animated:true completion:nil];
+            }];
+            
+            [alert addAction:cancelButton];
+            [alert addAction:loginButton];
+            [self.window.rootViewController presentViewController:alert animated:true completion:nil];
+            return false;
+        } else {
+            //NSLog(@"Token exists");
+            return true;
+        }
+    } else if ([viewController isEqual:profileViewController]) {
         if (!token) {
             //NSLog(@"No token");
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login required" message:@"Please log in to view your profile." preferredStyle: UIAlertControllerStyleAlert];
             UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *loginButton = [UIAlertAction actionWithTitle:@"Login" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                self.targetTab = 3;
                 self.navigationController = [[UINavigationController alloc] initWithRootViewController:[[SMLoginViewController alloc] initWithNibName:@"SMLoginViewController" bundle:[NSBundle mainBundle]]];
                 [self.window.rootViewController presentViewController:self.navigationController animated:true completion:nil];
             }];
