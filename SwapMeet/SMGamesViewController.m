@@ -79,18 +79,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SearchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GAME_CELL"];
-    
-    //if (self.segmentedControl.selectedSegmentIndex == 0) {
-        Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
-        cell.titleLabel.text = selectedGame.title;
-        cell.platformName.text = selectedGame.platform;
-        NSString *imageFullPath = [[[NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] isDirectory:YES] URLByAppendingPathComponent:selectedGame.imagePath] path];
-        UIImage *image = [UIImage imageWithContentsOfFile:imageFullPath];
-        cell.thumbnailImageView.image = image;
-    //} else if (self.segmentedControl.selectedSegmentIndex == 1) {
-        
-    //}
-    
+    Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
+    cell.titleLabel.text = selectedGame.title;
+    cell.platformName.text = selectedGame.platform;
+    NSString *imageFullPath = [[[NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] isDirectory:YES] URLByAppendingPathComponent:selectedGame.imagePath] path];
+    UIImage *image = [UIImage imageWithContentsOfFile:imageFullPath];
+    cell.thumbnailImageView.image = image;
+
     return cell;
 }
 
