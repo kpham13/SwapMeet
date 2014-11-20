@@ -135,8 +135,8 @@
                 self.imageUploadsLeft--;
                 if (_imageUploadsLeft == 0) {
                     // Upload the actual game object
-                    __block NSDictionary *gameDict = @{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition, @"image_urls": _remoteURLsArray};
-                    _dataTask = [SMNetworking addNewGame:gameDict completion:^(BOOL success, NSString *errorString) {
+                    __block NSMutableDictionary *gameDict = [NSMutableDictionary dictionaryWithDictionary:@{@"title": self.titleTextView.text, @"platform": self.console, @"condition": self.condition, @"image_urls": _remoteURLsArray}];
+                    _dataTask = [SMNetworking addNewGame:gameDict completion:^(NSString *gameID, NSString *errorString) {
                         [_activityIndicator stopAnimating];
                         self.navigationController.navigationItem.rightBarButtonItem.enabled = YES;
                         if (errorString) {
@@ -144,6 +144,7 @@
                             return;
                         }
                         
+                        gameDict[@"id"] = gameID;
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
                         [self dismissViewControllerAnimated:true completion:nil];
                     }];

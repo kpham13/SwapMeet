@@ -56,14 +56,18 @@ NSString * const kSMDefaultsKeyToken = @"token";
 }
 
 + (NSURLSessionDataTask *)addNewGame:(NSDictionary *)gameDictionary
-                          completion:(void(^)(BOOL success, NSString *errorString))completion {
+                          completion:(void(^)(NSString *gameID, NSString *errorString))completion {
     if (!gameDictionary) {
-        completion(NO, @"Game dictionary can't be nil");
+        completion(nil, @"Game dictionary can't be nil");
     }
     
-    __block void(^completionBlock)(BOOL success, NSString *errorString) = completion;
+    __block void(^completionBlock)(NSString *gameID, NSString *errorString) = completion;
     return [self performJSONRequestAtPath:@"games/hasgames" withMethod:@"POST" andParameters:gameDictionary sendBodyAsJSON:YES completion:^(NSDictionary *JSONDic, NSString *errorString) {
-        completionBlock(errorString == nil, errorString);
+        NSString *gameID = [JSONDic valueForKeyPath:@"item._id"];
+        if (!gameID && !errorString) {
+            errorString = @"No game id at item._id path";
+        }
+        completionBlock(gameID, errorString);
     }];
 }
 

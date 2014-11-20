@@ -107,12 +107,16 @@
     }
 }
 
+#pragma mark - Own methods
+
 - (void) newGameAdded:(NSNotification *)notificaiton {
     NSLog(@"newGameAdded: %@", notificaiton.userInfo);
     Game *game = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];
-    game.title = [notificaiton.userInfo objectForKey:@"title"];
-    game.condition = [notificaiton.userInfo objectForKey:@"condition"];
-    game.platform = [notificaiton.userInfo objectForKey:@"platform"];
+    NSDictionary *info = notificaiton.userInfo;
+    game.title = info[@"title"];
+    game.condition = info[@"condition"];
+    game.platform = info[@"platform"];
+    game.gameID = info[@"id"];
     [self saveContext];
 }
 
