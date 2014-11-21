@@ -29,9 +29,9 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.tableView.delegate = self;
-//    self.tableView.dataSource = self;
-//    self.lookingForTextField.text = @"Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games, Games";
+    UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped:)];
+    [self.imageView addGestureRecognizer:touch];
+    self.imageView.userInteractionEnabled = true;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -77,15 +77,6 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
     [super didReceiveMemoryWarning];
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SEARCH_CELL"];
-//    cell.backgroundColor = [UIColor blueColor];
-//    return cell;
-//}
-
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 5;
-//}
 
 - (IBAction)logoutButton:(id)sender {
     UIAlertController *logoutAlert = [UIAlertController alertControllerWithTitle:@"Logout" message:@"Are you sure you want to logout?" preferredStyle:UIAlertControllerStyleAlert];
@@ -94,10 +85,7 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
         [SMNetworking invalidateToken];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyScreenName];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyZipCode];
-        //NSString *token = [[NSUserDefaults standardUserDefaults] stringForKey:kSMDefaultsKeyToken];
-        //NSLog(@"%@", token);
         
-        // Switch to delegation in the future
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
         [tabBarController setSelectedIndex:0];
@@ -106,6 +94,21 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
     [logoutAlert addAction:cancelButton];
     [logoutAlert addAction:logoutAction];
     [self presentViewController:logoutAlert animated:true completion:nil];
+}
+
+- (void) imageTapped:(UITapGestureRecognizer *) gesture {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:true completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [picker dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:true completion:nil];
 }
 
 @end
