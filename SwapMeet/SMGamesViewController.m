@@ -20,7 +20,6 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
 @property (strong, nonatomic) UIBarButtonItem *addGameButton;
 
-
 @end
 
 @implementation SMGamesViewController
@@ -36,6 +35,7 @@
         self.navigationItem.rightBarButtonItem = nil;
     }
     
+    self.fetchController.delegate = self;    
     [self.tableView reloadData];
 }
 
@@ -129,7 +129,7 @@
             } else {
                 [SMNetworking removeGameFromFavoritesWithID:game.gameID completion:^(BOOL success, NSString *errorString) {
                     [hud hide:YES];
-                    if (success) {
+                    if (success || [errorString isEqualToString:@"Game not found in user's list"]) {
                         [[CoreDataController controller] deleteGame:game];
                         [[CoreDataController controller] saveContext];
                     } else {

@@ -208,10 +208,19 @@
     }];
 }
 
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self.photos insertObject:[info objectForKey:UIImagePickerControllerOriginalImage] atIndex:[self.photos count]];
-    [picker dismissViewControllerAnimated:true completion:nil];
-    self.imageView1.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *newImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    if (newImage.imageOrientation == UIImageOrientationUp) {
+        [self.photos insertObject:newImage atIndex:[self.photos count]];
+        [picker dismissViewControllerAnimated:true completion:nil];
+        self.imageView1.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    } else {
+        UIImage *fixedImage = [newImage fixRotation];
+        [self.photos insertObject:fixedImage atIndex:[self.photos count]];
+        [picker dismissViewControllerAnimated:true completion:nil];
+        self.imageView1.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

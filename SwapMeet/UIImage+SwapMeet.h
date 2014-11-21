@@ -11,5 +11,6 @@
 @interface UIImage (SwapMeet)
 
 - (UIImage *)thumbnailImage;
+- (UIImage *)fixRotation;
 
 @end
