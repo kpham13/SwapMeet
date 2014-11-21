@@ -302,6 +302,9 @@ NSString * const kSMDefaultsKeyToken = @"token";
             case 10:
                 retVal = @"Invalid game id";
                 break;
+            case 11:
+                retVal = @"Item must have title and platform";
+                break;
                 
             default:
                 retVal = @"Unknown server error";
