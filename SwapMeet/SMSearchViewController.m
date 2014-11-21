@@ -12,6 +12,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "Game.h"
 #import "CoreDataController.h"
+#import "GDCacheController.h"
 
 @interface SMSearchViewController () {
     MBProgressHUD *hud;
@@ -102,20 +103,30 @@
     if (!thumbURL) {
         cell.thumbnailImageView.image = nil;
     } else {
-        [cell.activityIndicator startAnimating];
-        
-        __block NSIndexPath *indexPathBlock = indexPath;
-        [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:thumbURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                SearchTableViewCell *cell = (SearchTableViewCell *)[_tableView cellForRowAtIndexPath:indexPathBlock];
-                if (cell) {
-                    [cell.activityIndicator stopAnimating];
-                    [UIView transitionWithView:cell.thumbnailImageView duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                        cell.thumbnailImageView.image = [UIImage imageWithData:data];
-                    } completion:nil];
-                }
-            });
-        }] resume];
+        UIImage *cachedImage = [UIImage imageWithData:[GDCacheController objectForKey:thumbURL]];
+        if (cachedImage) {
+            NSLog(@"Image from cache");
+            cell.thumbnailImageView.image = cachedImage;
+        } else {
+            [cell.activityIndicator startAnimating];
+            
+            __block NSIndexPath *indexPathBlock = indexPath;
+            [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:thumbURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (!error) {
+                        [GDCacheController setObject:data forKey:thumbURL ofLength:[data length]];
+                    }
+                    
+                    SearchTableViewCell *cell = (SearchTableViewCell *)[_tableView cellForRowAtIndexPath:indexPathBlock];
+                    if (cell) {
+                        [cell.activityIndicator stopAnimating];
+                        [UIView transitionWithView:cell.thumbnailImageView duration:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                            cell.thumbnailImageView.image = [UIImage imageWithData:data];
+                        } completion:nil];
+                    }
+                });
+            }] resume];
+        }
     }
     return cell;
 }

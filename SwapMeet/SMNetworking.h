@@ -12,6 +12,8 @@ extern NSString * const kSMDefaultsKeyToken;
 
 @interface SMNetworking : SMNetworkController
 
++ (NSURLSessionDataTask *)matchesWithCompletion:(void(^)(NSArray *matches, NSString *errorString))completion;
+
 + (NSURLSessionDataTask *)signUpWithEmail:(NSString *)email
                               andPassword:(NSString *)password
                             andScreenName:(NSString *)screenName

@@ -42,6 +42,12 @@ NSString * const kSMDefaultsKeyToken = @"token";
 
 #pragma mark - Public Methods
 
++ (NSURLSessionDataTask *)matchesWithCompletion:(void(^)(NSArray *matches, NSString *errorString))completion {
+    return [self performJSONRequestAtPath:@"matches" withMethod:@"GET" andParameters:nil sendBodyAsJSON:NO completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        NSLog(@"Dic: %@. Error: %@", JSONDic, errorString);
+    }];
+}
+
 + (NSURLSessionDataTask *)addGameToFavoritesWithID:(NSString *)gameID
                                         completion:(void(^)(BOOL success, NSString *errorString))completion
 {
