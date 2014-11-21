@@ -19,10 +19,13 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *platformName;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *conditionLabel;
+@property (weak, nonatomic) IBOutlet UIView *conditionContainerView;
 @property (nonatomic) SearchTableViewCellMode mode;
 @property (nonatomic) BOOL starred;
 
 - (void)startStarUpdate;
 - (void)finishStarUpdate:(BOOL)starred;
+- (UIColor *) getConditionColor:(NSString *) condition;
 
 @end

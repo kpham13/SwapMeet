@@ -69,8 +69,7 @@
     self.searchBar.delegate =self;
     [self.tableView registerNib:[UINib nibWithNibName:@"SearchTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"GAME_CELL"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 70;
-    
+    self.tableView.estimatedRowHeight = 100;
     self.gamesArray = [NSMutableArray array];
     _canLoadMore = YES;
     
@@ -168,6 +167,10 @@
             [[CoreDataController controller] deleteGame:game];
         }
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 110;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

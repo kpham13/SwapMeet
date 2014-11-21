@@ -82,6 +82,8 @@
     Game *selectedGame = [self.fetchController.fetchedObjects objectAtIndex:indexPath.row];
     cell.titleLabel.text = selectedGame.title;
     cell.platformName.text = selectedGame.platform;
+    cell.conditionLabel.text = selectedGame.condition;
+    cell.conditionContainerView.backgroundColor = [cell getConditionColor:selectedGame.condition];
     NSString *imagePath = selectedGame.imagePath;
     if (imagePath) {
         NSString *imageFullPath = [[[NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] isDirectory:YES] URLByAppendingPathComponent:imagePath] path];
@@ -100,6 +102,10 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 110;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
