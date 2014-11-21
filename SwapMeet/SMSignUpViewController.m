@@ -7,12 +7,15 @@
 //
 
 #import "SMSignUpViewController.h"
+#import "SMProfileViewController.h"
 #import "SMNetworking.h"
 #import "AppDelegate.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "MHTextField.h"
 
 @interface SMSignUpViewController () {
     MBProgressHUD *hud;
+    MHTextField *mhTextField;
 }
 
 @property (strong, nonatomic) NSString *email;
@@ -27,13 +30,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
     self.errorLabel.text = nil;
+    
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+        [self setEdgesForExtendedLayout:UIRectEdgeTop];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [_emailTextField setRequired:YES];
+    [_emailTextField setEmailField:YES];
+    [_passwordTextField setRequired:YES];
+    [_confirmPasswordTextField setRequired:YES];
+    [_zipCodeTextField setRequired:YES];
+    
+    [self.navigationItem setTitle:@"Registration"];
+    //NSLog(@"%@", self.navigationItem.backBarButtonItem.title);
+    //self.navigationItem.backBarButtonItem.title = nil;
     
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
     self.confirmPasswordTextField.delegate = self;
     self.zipCodeTextField.delegate = self;
 }
+
+//- (void)textFieldWillShow:(NSNotification *)notification {
+//    CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+//    NSLog(@"%f",keyboardFrame.origin.y);
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -52,6 +76,13 @@
         if (successful == YES) {
             NSLog(@"Account created");
             NSLog(@"%@", profileDic);
+            NSString *profileEmail = [profileDic objectForKey:@"email"];
+            NSString *profileScreenName = [profileDic objectForKey:@"screename"];
+            NSString *profileZipCode = [profileDic objectForKey:@"zip"];
+            [[NSUserDefaults standardUserDefaults] setObject:profileEmail forKey:kSMDefaultsKeyEmail];
+            [[NSUserDefaults standardUserDefaults] setObject:profileScreenName forKey:kSMDefaultsKeyScreenName];
+            [[NSUserDefaults standardUserDefaults] setObject:profileZipCode forKey:kSMDefaultsKeyZipCode];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Switch to delegation in the future
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

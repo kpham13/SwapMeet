@@ -17,9 +17,9 @@ extern NSString * const kSMDefaultsKeyAvatarURL;
 @interface SMProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
-@property (weak, nonatomic) IBOutlet UILabel *zipCodeLabel;
+@property (weak, nonatomic) IBOutlet UITextField *screenNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *zipCodeTextField;
 
 - (IBAction)logoutButton:(id)sender;
 

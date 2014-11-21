@@ -67,7 +67,7 @@
     [super viewDidLoad];
     self.consolePickerView.delegate = self;
     self.consolePickerView.dataSource = self;
-    self.consoles = [[NSArray alloc] initWithObjects:@"Xbox One", @"PS4", @"Xbox 360", @"PS3", nil];
+    self.consoles = [[NSArray alloc] initWithObjects:@"Xbox One", @"PS4", @"Xbox 360", @"PS3", @"Wii", nil];
     self.conditions = [[NSArray alloc] initWithObjects:@"Mint", @"Newish", @"Used", @"Still Works...", nil];
     self.photos = [NSMutableArray array];
     self.imageView1.userInteractionEnabled = YES;

@@ -29,7 +29,9 @@
     
     self.emailTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyEmail];
     
-    [self.navigationItem setTitle:@"Profile VC"];
+    [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
+    
+    [self.navigationItem setTitle:@"Account Login"];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(dismissViewController:)];
     [self.navigationItem setRightBarButtonItem:cancelButton animated:false];
 }
@@ -48,6 +50,15 @@
         if (successful == YES) {
             NSLog(@"Login success.");
             NSLog(@"%@", profileDic);
+            NSString *profileEmail = [profileDic objectForKey:@"email"];
+            NSString *profileScreenName = [profileDic objectForKey:@"screename"];
+            NSString *profileZipCode = [profileDic objectForKey:@"zip"];
+            NSString *profileAvatarURL = [profileDic objectForKey:@"avatar_url"];
+            [[NSUserDefaults standardUserDefaults] setObject:profileEmail forKey:kSMDefaultsKeyEmail];
+            [[NSUserDefaults standardUserDefaults] setObject:profileScreenName forKey:kSMDefaultsKeyScreenName];
+            [[NSUserDefaults standardUserDefaults] setObject:profileZipCode forKey:kSMDefaultsKeyZipCode];
+            [[NSUserDefaults standardUserDefaults] setObject:profileAvatarURL forKey:kSMDefaultsKeyAvatarURL];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Switch to delegation in the future
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -80,6 +91,10 @@
 
 - (IBAction)registerButton:(id)sender {
     SMSignUpViewController *signUpViewController = [[SMSignUpViewController alloc] initWithNibName:@"SMSignUpViewController" bundle:[NSBundle mainBundle]];
+    
+    //NSLog(@"%@", self.navigationItem.backBarButtonItem.title);
+    //self.navigationItem.backBarButtonItem.title = nil;
+    
     [self.navigationController pushViewController:signUpViewController animated:true];
 }
 

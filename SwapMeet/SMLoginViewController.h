@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SMTextField.h"
 
 @interface SMLoginViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet SMTextField *emailTextField;
+@property (weak, nonatomic) IBOutlet SMTextField *passwordTextField;
 
 - (IBAction)loginButton:(id)sender;
 - (IBAction)registerButton:(id)sender;
