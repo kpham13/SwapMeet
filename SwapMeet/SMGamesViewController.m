@@ -20,7 +20,6 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchController;
 @property (strong, nonatomic) UIBarButtonItem *addGameButton;
 
-
 @end
 
 @implementation SMGamesViewController
@@ -36,6 +35,7 @@
         self.navigationItem.rightBarButtonItem = nil;
     }
     
+    self.fetchController.delegate = self;    
     [self.tableView reloadData];
 }
 
