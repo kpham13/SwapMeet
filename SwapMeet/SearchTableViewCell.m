@@ -43,6 +43,8 @@
         _starringView.hidden = _mode == SearchTableViewCellModeGames;
     } else if ([keyPath isEqualToString:@"starred"]) {
         _starImageView.image = [UIImage imageNamed:_starred ? @"star_selected" : @"star"];
+    } else if ([keyPath isEqualToString:@"conditionLabel.text"]) {
+        _conditionContainerView.hidden = !_conditionLabel.text || [_conditionLabel.text isEqualToString:@""];
     }
     else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
@@ -51,12 +53,15 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    _conditionContainerView.layer.cornerRadius = 2;
     _platformBackgroundView.layer.cornerRadius = 2;
     _thumbnailImageView.layer.cornerRadius = 4;
     [self addObserver:self forKeyPath:@"platformName.text" options:NSKeyValueObservingOptionNew context:nil];
     [self addObserver:self forKeyPath:@"mode" options:NSKeyValueObservingOptionNew context:nil];
     [self addObserver:self forKeyPath:@"starred" options:NSKeyValueObservingOptionNew context:nil];
+    [self addObserver:self forKeyPath:@"conditionLabel.text" options:NSKeyValueObservingOptionNew context:nil];
     _platformName.text = nil;
+    _conditionLabel.text = nil;
     self.mode = SearchTableViewCellModeGames;
 }
 
@@ -75,6 +80,21 @@
     [self removeObserver:self forKeyPath:@"platformName.text"];
     [self removeObserver:self forKeyPath:@"mode"];
     [self removeObserver:self forKeyPath:@"starred"];
+    [self removeObserver:self forKeyPath:@"conditionLabel.text"];
+}
+
+- (UIColor *) getConditionColor:(NSString *) condition {
+    if ([condition isEqualToString:@"Mint"]) {
+        return [UIColor blueColor];
+    } else if ([condition isEqualToString:@"Newish"]) {
+        return [UIColor greenColor];
+    } else if ([condition isEqualToString:@"Used"]) {
+        return [UIColor orangeColor];
+    } else if ([condition isEqualToString:@"Still Works..."]) {
+        return [UIColor redColor];
+    } else {
+        return [UIColor greenColor];
+    }
 }
 
 @end

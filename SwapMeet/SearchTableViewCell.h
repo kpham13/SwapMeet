@@ -26,5 +26,6 @@ typedef enum : NSUInteger {
 
 - (void)startStarUpdate;
 - (void)finishStarUpdate:(BOOL)starred;
+- (UIColor *) getConditionColor:(NSString *) condition;
 
 @end

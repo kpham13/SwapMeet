@@ -103,6 +103,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="activityIndicator" destination="V9C-Vn-36v" id="nem-PH-91o"/>
+                <outlet property="conditionContainerView" destination="WvZ-qF-UtE" id="Mu2-5M-MEF"/>
+                <outlet property="conditionLabel" destination="9AM-8p-ABR" id="Pl3-mi-0aB"/>
                 <outlet property="platformBackgroundView" destination="6Vk-8Z-YBa" id="Whh-Iw-nJm"/>
                 <outlet property="platformName" destination="p31-Vr-0Tw" id="cpt-Du-mBP"/>
                 <outlet property="starActivityIndicator" destination="m2Z-xH-iXd" id="FlN-QB-oTO"/>
@@ -113,16 +115,6 @@
             </connections>
             <point key="canvasLocation" x="487" y="277"/>
         </tableViewCell>
-        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="oWf-MB-gds">
-            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-        </activityIndicatorView>
-        <view contentMode="scaleToFill" id="gAS-qB-oR4">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="592" y="458"/>
-        </view>
     </objects>
     <resources>
         <image name="star" width="22" height="22"/>

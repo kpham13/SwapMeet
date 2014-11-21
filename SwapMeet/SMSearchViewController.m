@@ -53,7 +53,7 @@
     self.searchBar.delegate =self;
     [self.tableView registerNib:[UINib nibWithNibName:@"SearchTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"GAME_CELL"];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 70;
+    self.tableView.estimatedRowHeight = 100;
     
     self.gamesArray = [NSMutableArray array];
     _canLoadMore = YES;
@@ -111,6 +111,10 @@
     if (indexPath.row == [_gamesArray count] - 2) {
         [self searchAtOffset:[_gamesArray count]];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 110;
 }
 
 #pragma mark - UISearchBarDelegate Methods
