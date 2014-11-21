@@ -175,6 +175,19 @@ NSString * const kSMDefaultsKeyToken = @"token";
             }];
 }
 
++ (NSURLSessionDataTask *)setAvatarURLString:(NSString *)URLString
+                                  completion:(void(^)(BOOL successful, NSString *errorString))completion {
+    if (!URLString) {
+        completion(NO, @"URLString can not be nil");
+        return nil;
+    }
+    __block void(^completionBlock)(BOOL successful, NSString *errorString) = completion;
+    
+    return [self performJSONRequestAtPath:@"user" withMethod:@"PUT" andParameters:@{@"avatar_url": URLString} sendBodyAsJSON:YES completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        completionBlock(errorString == nil, errorString);
+    }];
+}
+
 + (NSURLSessionDataTask *)profileWithCompletion:(void(^)(NSDictionary *userDictionary, NSString *errorString))completion {
     __block void(^completionBlock)(NSDictionary *userDictionary, NSString *errorString) = completion;
     return [self performJSONRequestAtPath:@"user/myprofile" withMethod:@"GET" andParameters:nil sendBodyAsJSON:NO completion:^(NSDictionary *JSONDic, NSString *errorString) {
@@ -272,7 +285,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
             NSError *error;
             JSONDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             if (error) {
-                errorString = [NSString stringWithFormat:@"Error converting JSON object: %@", error.localizedDescription];
+                errorString = [NSString stringWithFormat:@"Object is not JSON. %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
             } else {
                 errorString = [self checkJSONResponse:JSONDic];
                 if (errorString) {
