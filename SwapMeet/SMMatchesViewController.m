@@ -51,6 +51,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
     if ([MFMailComposeViewController canSendMail]) {
         self.mailViewController = [[MFMailComposeViewController alloc] init];
         [self.mailViewController setSubject:@"Let's Trade!"];
