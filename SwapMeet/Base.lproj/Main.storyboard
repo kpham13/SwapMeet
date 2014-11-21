@@ -39,7 +39,7 @@
             </objects>
             <point key="canvasLocation" x="1835" y="994"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--My Profile-->
         <scene sceneID="Kzl-UZ-a6w">
             <objects>
                 <viewController id="Yb5-xL-fHA" customClass="SMProfileViewController" sceneMemberID="viewController">
@@ -97,7 +97,7 @@
                             <constraint firstItem="cBG-ga-EBh" firstAttribute="leading" secondItem="Bws-pR-8aT" secondAttribute="trailing" constant="8" id="vss-yk-zH3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="AJB-tO-0Os">
+                    <navigationItem key="navigationItem" title="My Profile" id="AJB-tO-0Os">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="pRu-bZ-aWs">
                             <connections>
                                 <action selector="logoutButton:" destination="Yb5-xL-fHA" id="NQQ-sr-iqa"/>
@@ -163,7 +163,7 @@
             </objects>
             <point key="canvasLocation" x="1835" y="1703"/>
         </scene>
-        <!--Search View Controller-->
+        <!--Search For Games-->
         <scene sceneID="UH3-VE-eS5">
             <objects>
                 <viewController id="hRt-Hz-bhQ" customClass="SMSearchViewController" sceneMemberID="viewController">
@@ -195,7 +195,7 @@
                             <constraint firstItem="tCd-C4-PaH" firstAttribute="top" secondItem="fuF-dq-4QH" secondAttribute="bottom" id="v74-RU-ZML"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="J5P-rF-QnS"/>
+                    <navigationItem key="navigationItem" title="Search For Games" id="J5P-rF-QnS"/>
                     <connections>
                         <outlet property="searchBar" destination="tCd-C4-PaH" id="fea-WS-7cZ"/>
                         <outlet property="tableView" destination="GA1-W7-NHP" id="70k-Bq-0ns"/>
