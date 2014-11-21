@@ -50,6 +50,15 @@
         if (successful == YES) {
             NSLog(@"Login success.");
             NSLog(@"%@", profileDic);
+            NSString *profileEmail = [profileDic objectForKey:@"email"];
+            NSString *profileScreenName = [profileDic objectForKey:@"screename"];
+            NSString *profileZipCode = [profileDic objectForKey:@"zip"];
+            NSString *profileAvatarURL = [profileDic objectForKey:@"avatar_url"];
+            [[NSUserDefaults standardUserDefaults] setObject:profileEmail forKey:kSMDefaultsKeyEmail];
+            [[NSUserDefaults standardUserDefaults] setObject:profileScreenName forKey:kSMDefaultsKeyScreenName];
+            [[NSUserDefaults standardUserDefaults] setObject:profileZipCode forKey:kSMDefaultsKeyZipCode];
+            [[NSUserDefaults standardUserDefaults] setObject:profileAvatarURL forKey:kSMDefaultsKeyAvatarURL];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Switch to delegation in the future
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

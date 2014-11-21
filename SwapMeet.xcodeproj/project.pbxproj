@@ -12,6 +12,7 @@
 		0A7D592D1A1C453F00036AC8 /* SMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D592C1A1C453F00036AC8 /* SMTabBarController.m */; };
 		0A8BD5B81A1AD3E700D5A8BB /* SMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BD5B61A1AD3E700D5A8BB /* SMLoginViewController.m */; };
 		0A8BD5B91A1AD3E700D5A8BB /* SMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8BD5B71A1AD3E700D5A8BB /* SMLoginViewController.xib */; };
+		0A91BD9F1A1FCDE800C8AC79 /* default-user-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A91BD9E1A1FCDE800C8AC79 /* default-user-image.png */; };
 		0AA8B7781A1A75ED00A23C39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B7771A1A75ED00A23C39 /* main.m */; };
 		0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B77A1A1A75ED00A23C39 /* AppDelegate.m */; };
 		0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8B77C1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld */; };
@@ -79,6 +80,7 @@
 		0A8BD5B51A1AD3E700D5A8BB /* SMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLoginViewController.h; sourceTree = "<group>"; };
 		0A8BD5B61A1AD3E700D5A8BB /* SMLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMLoginViewController.m; sourceTree = "<group>"; };
 		0A8BD5B71A1AD3E700D5A8BB /* SMLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMLoginViewController.xib; sourceTree = "<group>"; };
+		0A91BD9E1A1FCDE800C8AC79 /* default-user-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-user-image.png"; sourceTree = "<group>"; };
 		0AA8B7721A1A75ED00A23C39 /* SwapMeet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwapMeet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA8B7761A1A75ED00A23C39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AA8B7771A1A75ED00A23C39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		0AA8B7751A1A75ED00A23C39 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A91BD9E1A1FCDE800C8AC79 /* default-user-image.png */,
 				0AA8B7761A1A75ED00A23C39 /* Info.plist */,
 				0AA8B7771A1A75ED00A23C39 /* main.m */,
 				0A1F9D4A1A1F994F0085A61A /* MHTextField.h */,
@@ -449,6 +452,7 @@
 				287BF0D21A1ACA2C008C3CCD /* SMAddGameViewController.xib in Resources */,
 				0AA8B7861A1A75EE00A23C39 /* Images.xcassets in Resources */,
 				281B3C1A1A1D13A2003C9D1C /* SearchTableViewCell.xib in Resources */,
+				0A91BD9F1A1FCDE800C8AC79 /* default-user-image.png in Resources */,
 				282E8C691A1E8CD300A57BC0 /* MatchTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

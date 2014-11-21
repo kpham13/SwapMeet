@@ -14,7 +14,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 
 NSString * const kSMDefaultsKeyEmail = @"email";
-NSString * const kSMDefaultsKeyScreenName = @"screenname";
+NSString * const kSMDefaultsKeyScreenName = @"screename";
 NSString * const kSMDefaultsKeyZipCode = @"zipcode";
 NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
 
@@ -24,7 +24,7 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
 
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *screenName;
-@property (strong, nonatomic) NSNumber *zipCode;
+@property (strong, nonatomic) NSString *zipCode;
 @property (strong, nonatomic) NSString *avatarURL;
 @property (strong, nonatomic) UIImage *avatarImage;
 
@@ -43,47 +43,26 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:true];
     
-    NSString *zip = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyZipCode];
+    NSString *zipCheck = self.zipCode;
     //NSLog(@"%@", zip);
     
-    if (!zip) {
-        [SMNetworking profileWithCompletion:^(NSDictionary *userDictionary, NSString *errorString) {
-            NSLog(@"SMNetworking");
-            if (errorString != nil) {
-                NSLog(@"Error: %@", errorString);
-            } else {
-                self.email = [userDictionary objectForKey:@"email"];
-                self.screenName = [userDictionary objectForKey:@"screenname"];
-                self.zipCode = [userDictionary objectForKey:@"zip"];
-                self.avatarURL = [userDictionary objectForKey:@"avatar_url"];
-                //NSLog(@"1%@, %@", self.screenName, self.avatarURL);
-                [[NSUserDefaults standardUserDefaults] setObject:self.email forKey:kSMDefaultsKeyEmail];
-                [[NSUserDefaults standardUserDefaults] setObject:self.screenName forKey:kSMDefaultsKeyScreenName];
-                [[NSUserDefaults standardUserDefaults] setObject:self.zipCode forKey:kSMDefaultsKeyZipCode];
-                [[NSUserDefaults standardUserDefaults] setObject:self.avatarURL forKey:kSMDefaultsKeyAvatarURL];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                [self checkForAvatarImage];
-                NSLog(@"checkforAvatarImage1");
-                
-                self.screenName = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyScreenName];
-                //NSLog(@"2%@, %@", self.screenName, self.avatarURL);
-            }
-        }];
-    } else {
-        NSLog(@"User Defaults");
+    if (!zipCheck) {
+        NSLog(@"Local variables not stored");
         self.email = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyEmail];
         self.screenName = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyScreenName];
         self.zipCode = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyZipCode];
         self.avatarURL = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyAvatarURL];
-        
-        [self checkForAvatarImage];
-        NSLog(@"checkforAvatarimage");
-        //NSLog(@"3%@, %@", self.screenName, self.avatarURL);
+        self.emailTextField.text = self.email;
+        self.screenNameTextField.text = self.screenName;
+        self.zipCodeTextField.text = self.zipCode;
+    } else {
+        NSLog(@"Zip Check works");
+        self.emailTextField.text = self.email;
+        self.screenNameTextField.text = self.screenName;
+        self.zipCodeTextField.text = self.zipCode;
     }
-    
-    self.screenNameLabel.text = self.screenName;
-    //NSLog(@"4%@, %@", self.screenName, self.avatarURL);
+
+    [self checkForAvatarImage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,6 +78,10 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyScreenName];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyZipCode];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyAvatarURL];
+        self.email = nil;
+        self.screenName = nil;
+        self.zipCode = nil;
+        self.avatarURL = nil;
         self.avatarImage = nil;
         self.imageView.image = nil;
         
@@ -145,6 +128,13 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
     [uploader upload:fileURL options:@{} withCompletion:^(NSDictionary *successResult, NSString *errorResult, NSInteger code, id context) {
         NSString *remoteURL = successResult[@"secure_url"];
         [[NSUserDefaults standardUserDefaults] setObject:remoteURL forKey:kSMDefaultsKeyAvatarURL];
+        [SMNetworking setAvatarURLString:remoteURL completion:^(BOOL successful, NSString *errorString) {
+            if (successful == YES) {
+                NSLog(@"Avatar URL stored on server.");
+            } else {
+                NSLog(@"Avatar URL not stored.");
+            }
+        }];
         
     } andProgress:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite, id context) {
         float progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
