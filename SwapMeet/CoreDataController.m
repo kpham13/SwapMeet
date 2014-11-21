@@ -118,6 +118,10 @@
     game.platform = info[@"platform"];
     game.gameID = info[@"id"];
     game.imagePath = info[@"imagePath"];
+    NSNumber *favorite = info[@"favorite"];
+    if (favorite) {
+        game.isFavorited = favorite;
+    }
     [self saveContext];
 }
 
