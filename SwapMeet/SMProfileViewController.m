@@ -100,6 +100,7 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyZipCode];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyAvatarURL];
         self.avatarImage = nil;
+        self.imageView.image = nil;
         
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
