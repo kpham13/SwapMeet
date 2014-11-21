@@ -77,6 +77,7 @@
     NSDictionary *gameDic = _gamesArray[indexPath.row];
     cell.titleLabel.text = gameDic[@"title"];
     cell.platformName.text = gameDic[@"platform"];
+    cell.starred = [gameDic[@"already_wanted"] boolValue];
     NSString *thumbURL = [gameDic[@"image_urls"] firstObject];
     if (!thumbURL) {
         cell.thumbnailImageView.image = nil;
@@ -110,6 +111,40 @@
     
     if (indexPath.row == [_gamesArray count] - 2) {
         [self searchAtOffset:[_gamesArray count]];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *gameDic = _gamesArray[indexPath.row];
+    SearchTableViewCell *cell = (SearchTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell startStarUpdate];
+    __block NSIndexPath *indexPathBlock = indexPath;
+    BOOL add = ![gameDic[@"already_wanted"] boolValue];
+    if (add) {
+        [SMNetworking addGameToFavoritesWithID:gameDic[@"_id"] completion:^(BOOL success, NSString *errorString) {
+            SearchTableViewCell *cell = (SearchTableViewCell *)[tableView cellForRowAtIndexPath:indexPathBlock];
+            if (errorString) {
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            }
+            
+            NSMutableDictionary *gameDic = _gamesArray[indexPathBlock.row];
+            gameDic[@"already_wanted"] = @(errorString == nil);
+            
+            [cell finishStarUpdate:errorString == nil];
+        }];
+    } else {
+        [SMNetworking removeGameFromFavoritesWithID:gameDic[@"_id"] completion:^(BOOL success, NSString *errorString) {
+            SearchTableViewCell *cell = (SearchTableViewCell *)[tableView cellForRowAtIndexPath:indexPathBlock];
+            if (errorString) {
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            }
+            
+            NSMutableDictionary *gameDic = _gamesArray[indexPathBlock.row];
+            gameDic[@"already_wanted"] = @(errorString != nil);
+            
+            [cell finishStarUpdate:errorString != nil];
+        }];
     }
 }
 

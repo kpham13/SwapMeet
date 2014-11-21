@@ -198,10 +198,16 @@ NSString * const kSMDefaultsKeyToken = @"token";
     __block void(^completionBlock)(NSArray *objects, NSInteger itemsLeft, NSString *errorString) = completion;
     return [self performJSONRequestAtPath:@"wantsgames" withMethod:@"GET" andParameters:params sendBodyAsJSON:NO completion:^(NSDictionary *JSONDic, NSString *errorString) {
         NSInteger itemsLeft = 0;
-        NSArray *objects = nil;
+        NSMutableArray *objects = nil;
         if (!errorString) {
             itemsLeft = [JSONDic[@"items_left"] integerValue];
-            objects = JSONDic[@"items"];
+            NSArray *tmpObjects = JSONDic[@"items"];
+            if (tmpObjects) {
+                objects = [NSMutableArray array];
+                for (NSDictionary *dic in tmpObjects) {
+                    [objects addObject:[NSMutableDictionary dictionaryWithDictionary:dic]];
+                }
+            }
         }
         
         completionBlock(objects, itemsLeft, errorString);        
