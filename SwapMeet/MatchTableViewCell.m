@@ -12,6 +12,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    _hasGameImageView.layer.cornerRadius = 2;
+    _wantsGameImageView.layer.cornerRadius = 2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
