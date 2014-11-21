@@ -117,6 +117,11 @@
     game.condition = info[@"condition"];
     game.platform = info[@"platform"];
     game.gameID = info[@"id"];
+    game.imagePath = info[@"imagePath"];
+    NSNumber *favorite = info[@"favorite"];
+    if (favorite) {
+        game.isFavorited = favorite;
+    }
     [self saveContext];
 }
 
@@ -138,9 +143,16 @@
     }
 }
 
+// Add fetch game request after receive match
+
 - (void) deleteGame:(Game *)game {
-    [self.managedObjectContext deleteObject: game];
+    NSString *gameID = game.gameID;
+    BOOL inFavorites = [game.isFavorited boolValue];
+    [self.managedObjectContext deleteObject:game];
     [self saveContext];
+    if (inFavorites) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FAVORITE_DELETED" object:nil userInfo:@{@"id": gameID}];
+    }
 }
 
 @end

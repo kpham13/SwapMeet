@@ -16,5 +16,6 @@
 @dynamic platform;
 @dynamic title;
 @dynamic isFavorited;
+@dynamic imagePath;
 
 @end

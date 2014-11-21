@@ -10,6 +10,8 @@
 #import "SMNetworking.h"
 #import "SearchTableViewCell.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "Game.h"
+#import "CoreDataController.h"
 
 @interface SMSearchViewController () {
     MBProgressHUD *hud;
@@ -44,6 +46,19 @@
     }];
 }
 
+- (void)deletedFavorite:(NSNotification *)notification {
+    NSString *favoriteID = notification.userInfo[@"id"];
+    if (favoriteID) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"_id = %@", favoriteID];
+        NSArray *filteredArray = [_gamesArray filteredArrayUsingPredicate:predicate];
+        if ([filteredArray count] > 0) {
+            NSMutableDictionary *gameDic = [filteredArray firstObject];
+            gameDic[@"already_wanted"] = @(NO);
+            [_tableView reloadData];
+        }
+    }
+}
+
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
@@ -56,6 +71,8 @@
     self.tableView.estimatedRowHeight = 100;
     self.gamesArray = [NSMutableArray array];
     _canLoadMore = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deletedFavorite:) name:@"FAVORITE_DELETED" object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -67,6 +84,10 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - UITableView Delegates Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,6 +97,7 @@
     NSDictionary *gameDic = _gamesArray[indexPath.row];
     cell.titleLabel.text = gameDic[@"title"];
     cell.platformName.text = gameDic[@"platform"];
+    cell.starred = [gameDic[@"already_wanted"] boolValue];
     NSString *thumbURL = [gameDic[@"image_urls"] firstObject];
     if (!thumbURL) {
         cell.thumbnailImageView.image = nil;

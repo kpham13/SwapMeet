@@ -56,6 +56,19 @@ NSString * const kSMDefaultsKeyToken = @"token";
     }];
 }
 
++ (NSURLSessionDataTask *)removeGameFromFavoritesWithID:(NSString *)gameID
+                                             completion:(void(^)(BOOL success, NSString *errorString))completion {
+    if (!gameID || [gameID isEqualToString:@""]) {
+        completion(NO, @"gameID cannot be empty");
+        return nil;
+    }
+    
+    __block void(^completionBlock)(BOOL success, NSString *errorString) = completion;
+    return [self performJSONRequestAtPath:@"games/wantsgames" withMethod:@"DELETE" andParameters:@{@"id": gameID} sendBodyAsJSON:YES completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        completionBlock(errorString == nil, errorString);
+    }];
+}
+
 + (NSURLSessionDataTask *)addNewGame:(NSDictionary *)gameDictionary
                           completion:(void(^)(NSString *gameID, NSString *errorString))completion {
     if (!gameDictionary) {
@@ -185,10 +198,16 @@ NSString * const kSMDefaultsKeyToken = @"token";
     __block void(^completionBlock)(NSArray *objects, NSInteger itemsLeft, NSString *errorString) = completion;
     return [self performJSONRequestAtPath:@"wantsgames" withMethod:@"GET" andParameters:params sendBodyAsJSON:NO completion:^(NSDictionary *JSONDic, NSString *errorString) {
         NSInteger itemsLeft = 0;
-        NSArray *objects = nil;
+        NSMutableArray *objects = nil;
         if (!errorString) {
             itemsLeft = [JSONDic[@"items_left"] integerValue];
-            objects = JSONDic[@"items"];
+            NSArray *tmpObjects = JSONDic[@"items"];
+            if (tmpObjects) {
+                objects = [NSMutableArray array];
+                for (NSDictionary *dic in tmpObjects) {
+                    [objects addObject:[NSMutableDictionary dictionaryWithDictionary:dic]];
+                }
+            }
         }
         
         completionBlock(objects, itemsLeft, errorString);        
@@ -288,6 +307,9 @@ NSString * const kSMDefaultsKeyToken = @"token";
                 break;
             case 10:
                 retVal = @"Invalid game id";
+                break;
+            case 11:
+                retVal = @"Item must have title and platform";
                 break;
                 
             default:

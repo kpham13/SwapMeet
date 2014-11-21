@@ -18,6 +18,7 @@
 
 @interface SMAddGameViewController () <UITextFieldDelegate> {
     MBProgressHUD *hud;
+    NSMutableArray *fileURLs;
 }
 
 @property (strong, nonatomic) NSArray *consoles;
@@ -50,6 +51,11 @@
         }
         
         gameDict[@"id"] = gameID;
+        NSString *imagePath = [[fileURLs firstObject] lastPathComponent];
+        if (imagePath) {
+            gameDict[@"imagePath"] = imagePath;
+        }
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
         [self dismissViewControllerAnimated:true completion:nil];
     }];
@@ -130,21 +136,20 @@
         self.navigationController.navigationItem.rightBarButtonItem.enabled = NO;
         
         // Save images to disc
-        NSMutableArray *fileURLs = [NSMutableArray array];
-        NSURL *tmp = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+        fileURLs = [NSMutableArray array];
+        NSURL *tmp = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] isDirectory:YES];
         for (UIImage *image in self.photos) {
             NSString *tempFileName = [[NSUUID UUID] UUIDString];
             NSURL *tempFileURL = [tmp URLByAppendingPathComponent:tempFileName];
-            if ([UIImageJPEGRepresentation([image thumbnailImage], 0.8) writeToURL:tempFileURL atomically:NO]) {
-                [fileURLs addObject:tempFileURL];
+            if ([UIImageJPEGRepresentation([image thumbnailImage], 0.8) writeToURL:tempFileURL atomically:YES]) {
+                [fileURLs addObject:[tempFileURL path]];
             }
         }
         
         // Upload images
         self.imageUploadsLeft = [fileURLs count];
         if (self.imageUploadsLeft > 0) {
-            for (NSURL *url in fileURLs) {
-                NSString *pathString = [url path];
+            for (NSString *pathString in fileURLs) {
                 CLUploader *uploader = [CLUploader uploaderWithDelegate:nil];
                 hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
