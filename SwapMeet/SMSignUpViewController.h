@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SMTextField.h"
 
 @interface SMSignUpViewController : UIViewController <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
-@property (weak, nonatomic) IBOutlet UITextField *screenNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *zipCodeTextField;
+@property (weak, nonatomic) IBOutlet SMTextField *emailTextField;
+@property (weak, nonatomic) IBOutlet SMTextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet SMTextField *confirmPasswordTextField;
+@property (weak, nonatomic) IBOutlet SMTextField *screenNameTextField;
+@property (weak, nonatomic) IBOutlet SMTextField *zipCodeTextField;
+
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
 - (IBAction)signUpButton:(id)sender;

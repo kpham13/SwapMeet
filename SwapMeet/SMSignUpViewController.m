@@ -10,9 +10,11 @@
 #import "SMNetworking.h"
 #import "AppDelegate.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "MHTextField.h"
 
 @interface SMSignUpViewController () {
     MBProgressHUD *hud;
+    MHTextField *mhTextField;
 }
 
 @property (strong, nonatomic) NSString *email;
@@ -27,7 +29,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
     self.errorLabel.text = nil;
+    
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+        [self setEdgesForExtendedLayout:UIRectEdgeTop];
+    
+    [_emailTextField setRequired:YES];
+    [_emailTextField setEmailField:YES];
+    [_passwordTextField setRequired:YES];
+    [_confirmPasswordTextField setRequired:YES];
+    [_zipCodeTextField setRequired:YES];
+    
+    self.emailTextField.placeholder = @"Hello";
+    [self.navigationItem setTitle:@"Registration"];
+    //NSLog(@"%@", self.navigationItem.backBarButtonItem.title);
+    //self.navigationItem.backBarButtonItem.title = nil;
     
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;

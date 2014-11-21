@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1F9D4C1A1F994F0085A61A /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F9D4B1A1F994F0085A61A /* MHTextField.m */; };
+		0A1F9D4F1A1F9D7B0085A61A /* SMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F9D4E1A1F9D7B0085A61A /* SMTextField.m */; };
 		0A7D592D1A1C453F00036AC8 /* SMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D592C1A1C453F00036AC8 /* SMTabBarController.m */; };
 		0A8BD5B81A1AD3E700D5A8BB /* SMLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8BD5B61A1AD3E700D5A8BB /* SMLoginViewController.m */; };
 		0A8BD5B91A1AD3E700D5A8BB /* SMLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8BD5B71A1AD3E700D5A8BB /* SMLoginViewController.xib */; };
@@ -68,6 +70,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1F9D4A1A1F994F0085A61A /* MHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTextField.h; sourceTree = "<group>"; };
+		0A1F9D4B1A1F994F0085A61A /* MHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTextField.m; sourceTree = "<group>"; };
+		0A1F9D4D1A1F9D7B0085A61A /* SMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTextField.h; sourceTree = "<group>"; };
+		0A1F9D4E1A1F9D7B0085A61A /* SMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTextField.m; sourceTree = "<group>"; };
 		0A7D592B1A1C453F00036AC8 /* SMTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMTabBarController.h; sourceTree = "<group>"; };
 		0A7D592C1A1C453F00036AC8 /* SMTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMTabBarController.m; sourceTree = "<group>"; };
 		0A8BD5B51A1AD3E700D5A8BB /* SMLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLoginViewController.h; sourceTree = "<group>"; };
@@ -197,8 +203,12 @@
 			children = (
 				0AA8B7761A1A75ED00A23C39 /* Info.plist */,
 				0AA8B7771A1A75ED00A23C39 /* main.m */,
+				0A1F9D4A1A1F994F0085A61A /* MHTextField.h */,
+				0A1F9D4B1A1F994F0085A61A /* MHTextField.m */,
 				0ACEA2CF1A1DC46A00FC9E15 /* SMConstants.h */,
 				0ACEA2D01A1DC46A00FC9E15 /* SMConstants.m */,
+				0A1F9D4D1A1F9D7B0085A61A /* SMTextField.h */,
+				0A1F9D4E1A1F9D7B0085A61A /* SMTextField.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -458,11 +468,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A0F68791A1ABBA90088146F /* SMNetworking.m in Sources */,
+				0A1F9D4F1A1F9D7B0085A61A /* SMTextField.m in Sources */,
 				9A3AA5601A1D91AB00F23624 /* CLUploader+SwapMeet.m in Sources */,
 				287BF0C71A1A7BDB008C3CCD /* SMSearchViewController.m in Sources */,
 				287BF0CA1A1A7BF1008C3CCD /* SMMatchesViewController.m in Sources */,
 				287BF0C11A1A7BA9008C3CCD /* SMProfileViewController.m in Sources */,
 				9A0F68761A1A7B190088146F /* SMNetworkController.m in Sources */,
+				0A1F9D4C1A1F994F0085A61A /* MHTextField.m in Sources */,
 				0AAE32801A1AB78C0022476E /* Game.m in Sources */,
 				0A7D592D1A1C453F00036AC8 /* SMTabBarController.m in Sources */,
 				0AA8B77B1A1A75ED00A23C39 /* AppDelegate.m in Sources */,
