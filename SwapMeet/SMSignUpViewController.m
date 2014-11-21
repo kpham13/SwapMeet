@@ -53,18 +53,16 @@
             NSLog(@"Account created");
             NSLog(@"%@", profileDic);
             
-            [SMNetworking loginWithEmail:self.email andPassword:self.password completion:^(BOOL successful, NSDictionary *profileDic, NSString *errorString) {
-                // Switch to delegation in the future
-                AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
-                
-                NSInteger destinationTab = appDelegate.targetTab;
-                if (destinationTab == 2) {
-                    [tabBarController setSelectedIndex:destinationTab];
-                } else if (destinationTab == 3) {
-                    [tabBarController setSelectedIndex:destinationTab];
-                }
-            }];
+            // Switch to delegation in the future
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
+            
+            NSInteger destinationTab = appDelegate.targetTab;
+            if (destinationTab == 2) {
+                [tabBarController setSelectedIndex:destinationTab];
+            } else if (destinationTab == 3) {
+                [tabBarController setSelectedIndex:destinationTab];
+            }
             
             [hud hide:YES];
             [self dismissViewControllerAnimated:true completion:nil];
