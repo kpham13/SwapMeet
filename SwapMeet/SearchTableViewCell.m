@@ -85,15 +85,15 @@
 
 - (UIColor *) getConditionColor:(NSString *) condition {
     if ([condition isEqualToString:@"Mint"]) {
-        return [UIColor blueColor];
+        return [UIColor colorWithRed:28.0f/255.0f green:201.0f/255.0f blue:42.0f/255.0f alpha:1.0];
     } else if ([condition isEqualToString:@"Newish"]) {
-        return [UIColor greenColor];
+        return [UIColor colorWithRed:237.0f/255.0f green:237.0f/255.0f blue:0.0f/255.0f alpha:1.0];
     } else if ([condition isEqualToString:@"Used"]) {
-        return [UIColor orangeColor];
+        return [UIColor colorWithRed:255.0f/255.0f green:157.0f/255.0f blue:0.0f/255.0f alpha:1.0];
     } else if ([condition isEqualToString:@"Still Works..."]) {
-        return [UIColor redColor];
+        return [UIColor colorWithRed:217.0f/255.0f green:60.0f/255.0f blue:26.0f/255.0f alpha:1.0];
     } else {
-        return [UIColor greenColor];
+        return [UIColor colorWithRed:28.0f/255.0f green:201.0f/255.0f blue:42.0f/255.0f alpha:1.0];
     }
 }
 
