@@ -109,7 +109,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *match = matchesArray[indexPath.row];
+    NSLog(@"%@", match);
     if ([MFMailComposeViewController canSendMail]) {
         self.mailViewController = [[MFMailComposeViewController alloc] init];
         [self.mailViewController setSubject:@"Let's Trade!"];
