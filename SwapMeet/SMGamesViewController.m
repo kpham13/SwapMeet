@@ -129,7 +129,7 @@
             } else {
                 [SMNetworking removeGameFromFavoritesWithID:game.gameID completion:^(BOOL success, NSString *errorString) {
                     [hud hide:YES];
-                    if (success) {
+                    if (success || [errorString isEqualToString:@"Game not found in user's list"]) {
                         [[CoreDataController controller] deleteGame:game];
                         [[CoreDataController controller] saveContext];
                     } else {
