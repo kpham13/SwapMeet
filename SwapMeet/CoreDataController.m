@@ -109,6 +109,17 @@
 
 #pragma mark - Own methods
 
+- (Game *)gameWithID:(NSString *)gameID {
+    if (!gameID)
+        return nil;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Game"];
+    request.predicate = [NSPredicate predicateWithFormat:@"gameID = %@", gameID];
+    NSError *error;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:&error];
+    return [results firstObject];
+}
+
 - (void) newGameAdded:(NSNotification *)notificaiton {
     NSLog(@"newGameAdded: %@", notificaiton.userInfo);
     Game *game = [NSEntityDescription insertNewObjectForEntityForName:@"Game" inManagedObjectContext:self.managedObjectContext];

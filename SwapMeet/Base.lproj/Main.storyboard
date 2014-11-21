@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--My Games-->
+        <!--Matches-->
         <scene sceneID="nqS-Br-kP9">
             <objects>
                 <viewController id="9Rh-R8-wMw" customClass="SMMatchesViewController" sceneMemberID="viewController">
@@ -30,7 +30,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="aDv-a1-aUi" secondAttribute="trailing" constant="-16" id="sKV-Dh-Trd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Games" id="bpY-3Y-pTo"/>
+                    <navigationItem key="navigationItem" title="Matches" id="bpY-3Y-pTo"/>
                     <connections>
                         <outlet property="tableView" destination="aDv-a1-aUi" id="gkX-P4-IQ0"/>
                     </connections>

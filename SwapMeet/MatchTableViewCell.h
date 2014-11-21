@@ -12,8 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *hasGameImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *wantsGameImageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabelOne;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabelTwo;
+@property (weak, nonatomic) IBOutlet UILabel *hasGameTitle;
+@property (weak, nonatomic) IBOutlet UILabel *wantsGameTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *sendEmailImage;
 
 @end

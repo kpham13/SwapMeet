@@ -22,5 +22,6 @@
 - (NSURL *)applicationDocumentsDirectory;
 - (NSFetchedResultsController *) fetchUserGames:(NSInteger)segment;
 - (void) deleteGame:(Game *)game;
+- (Game *)gameWithID:(NSString *)gameID;
 
 @end

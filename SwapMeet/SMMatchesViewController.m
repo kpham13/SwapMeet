@@ -8,8 +8,14 @@
 
 #import "SMMatchesViewController.h"
 #import "MatchTableViewCell.h"
+#import "SMNetworking.h"
+#import "Game.h"
+#import "CoreDataController.h"
 
-@interface SMMatchesViewController ()
+@interface SMMatchesViewController () {
+    NSArray *matchesArray;
+    BOOL loaded;
+}
 
 @property (strong, nonatomic) MFMailComposeViewController *mailViewController;
 @property (strong, nonatomic) NSString *mailResult;
@@ -18,6 +24,23 @@
 @end
 
 @implementation SMMatchesViewController
+
+#pragma mark - Private Methods
+
+- (void)downloadMatches {
+    [SMNetworking matchesWithCompletion:^(NSArray *matches, NSString *errorString) {
+        [_refreshControl endRefreshing];
+        if (errorString) {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            return;
+        }
+        
+        matchesArray = matches;
+        [_tableView reloadData];
+    }];
+}
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,6 +52,17 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 200;
     [self setUpRefreshControl];
+    
+    matchesArray = [NSArray array];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (!loaded) {
+        loaded = YES;
+        [self downloadMatches];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,12 +72,36 @@
 #pragma mark - TableView Delegate Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSURL *tmp = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] isDirectory:YES];
+    
     MatchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"MATCH_CELL"];
+    cell.hasGameImageView.image = nil;
+    cell.wantsGameImageView.image = nil;
+    cell.hasGameTitle.text = nil;
+    cell.wantsGameTitle.text = nil;
+    NSDictionary *match = matchesArray[indexPath.row];
+    Game *myGame = [[CoreDataController controller] gameWithID:[match valueForKeyPath:@"mygame.gameId"]];
+    if (myGame) {
+        cell.hasGameTitle.text = myGame.title;
+        if (myGame.imagePath) {
+            NSString *fullPath = [[tmp URLByAppendingPathComponent:myGame.imagePath] path];
+            cell.hasGameImageView.image = [UIImage imageWithContentsOfFile:fullPath];
+        }
+        
+        Game *yourGame = [[CoreDataController controller] gameWithID:[match valueForKeyPath:@"yourgame._id"]];
+        if (yourGame) {
+            cell.wantsGameTitle.text = yourGame.title;
+            if (yourGame.imagePath) {
+                NSString *fullPath = [[tmp URLByAppendingPathComponent:yourGame.imagePath] path];
+                cell.wantsGameImageView.image = [UIImage imageWithContentsOfFile:fullPath];
+            }
+        }
+    }
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return [matchesArray count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,11 +109,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *match = matchesArray[indexPath.row];
+    NSLog(@"%@", match);
     if ([MFMailComposeViewController canSendMail]) {
         self.mailViewController = [[MFMailComposeViewController alloc] init];
         [self.mailViewController setSubject:@"Let's Trade!"];
-        [self.mailViewController setMessageBody:@"TEST" isHTML:NO];
-        [self.mailViewController setToRecipients:@[@"reid_weber@hotmail.com"]];
+        [self.mailViewController setMessageBody:@"Hi. We have a match in SwapMeet. Let's trade!" isHTML:NO];
+        [self.mailViewController setToRecipients:@[[match valueForKeyPath:@"you.email"]]];
         self.mailViewController.mailComposeDelegate = self;
         [self presentViewController:self.mailViewController animated:true completion:nil];
     } else {
@@ -103,7 +164,7 @@
 
 - (void) refreshPage:(UIRefreshControl *)refreshControl {
     NSLog(@"Page is Refreshing");
-    [refreshControl endRefreshing];
+    [self downloadMatches];
 }
 
 - (void) setUpRefreshControl {
