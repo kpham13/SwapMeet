@@ -138,6 +138,8 @@
     }
 }
 
+// Add fetch game request after receive match
+
 - (void) deleteGame:(Game *)game {
     [self.managedObjectContext deleteObject: game];
     [self saveContext];
