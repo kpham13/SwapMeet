@@ -134,8 +134,73 @@
     }
 }
 
+- (void)processFavourite:(NSDictionary *)gameDic add:(BOOL)add image:(UIImage *)image {
+    if (add) {
+        NSMutableDictionary *cdGameDict = [NSMutableDictionary dictionaryWithDictionary:@{@"id": gameDic[@"_id"], @"title": gameDic[@"title"], @"platform": gameDic[@"platform"], @"condition": @"", @"favorite": @(YES)}];
+        if (image) {
+            NSURL *tmp = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] isDirectory:YES];
+            NSString *tempFileName = [[NSUUID UUID] UUIDString];
+            NSURL *tempFileURL = [tmp URLByAppendingPathComponent:tempFileName];
+            if ([UIImageJPEGRepresentation(image, 1) writeToURL:tempFileURL atomically:YES]) {
+                cdGameDict[@"imagePath"] = [tempFileURL lastPathComponent];
+            }
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:cdGameDict];
+    } else {
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Game"];
+        request.predicate = [NSPredicate predicateWithFormat:@"gameID = %@", gameDic[@"_id"]];
+        NSError *error;
+        Game *game = [[[CoreDataController controller].managedObjectContext executeFetchRequest:request error:&error] firstObject];
+        if (game) {
+            [[CoreDataController controller] deleteGame:game];
+        }
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 110;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *gameDic = _gamesArray[indexPath.row];
+    SearchTableViewCell *cell = (SearchTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell startStarUpdate];
+    __block NSIndexPath *indexPathBlock = indexPath;
+    BOOL add = ![gameDic[@"already_wanted"] boolValue];
+    if (add) {
+        [SMNetworking addGameToFavoritesWithID:gameDic[@"_id"] completion:^(BOOL success, NSString *errorString) {
+            SearchTableViewCell *cell = (SearchTableViewCell *)[tableView cellForRowAtIndexPath:indexPathBlock];
+            if (errorString) {
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            }
+            
+            NSMutableDictionary *gameDic = _gamesArray[indexPathBlock.row];
+            gameDic[@"already_wanted"] = @(errorString == nil);
+            
+            [cell finishStarUpdate:errorString == nil];
+            
+            if (!errorString) {
+                [self processFavourite:gameDic add:YES image:cell.thumbnailImageView.image];
+            }
+        }];
+    } else {
+        [SMNetworking removeGameFromFavoritesWithID:gameDic[@"_id"] completion:^(BOOL success, NSString *errorString) {
+            SearchTableViewCell *cell = (SearchTableViewCell *)[tableView cellForRowAtIndexPath:indexPathBlock];
+            if (errorString) {
+                [[[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            }
+            
+            NSMutableDictionary *gameDic = _gamesArray[indexPathBlock.row];
+            gameDic[@"already_wanted"] = @(errorString != nil);
+            
+            [cell finishStarUpdate:errorString != nil];
+            if (!errorString) {
+                [self processFavourite:gameDic add:NO image:nil];
+            }
+        }];
+    }
 }
 
 #pragma mark - UISearchBarDelegate Methods

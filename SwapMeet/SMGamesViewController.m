@@ -84,6 +84,15 @@
     cell.platformName.text = selectedGame.platform;
     cell.conditionLabel.text = selectedGame.condition;
     cell.conditionContainerView.backgroundColor = [cell getConditionColor:selectedGame.condition];
+    NSString *imagePath = selectedGame.imagePath;
+    if (imagePath) {
+        NSString *imageFullPath = [[[NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] isDirectory:YES] URLByAppendingPathComponent:imagePath] path];
+        UIImage *image = [UIImage imageWithContentsOfFile:imageFullPath];
+        cell.thumbnailImageView.image = image;
+    } else {
+        cell.thumbnailImageView.image = nil;
+    }
+
     return cell;
 }
 
