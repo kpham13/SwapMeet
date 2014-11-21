@@ -88,7 +88,8 @@
             }
             
         } else if (textField == self.passwordTextField) {
-            BOOL lowerCaseLetter,digit = 0;
+            BOOL lowerCaseLetter = 0;
+            BOOL digit = 0;
             if ([textField.text length] >= 8 && [textField.text length] <= 12) {
                 for (int i = 0; i < [textField.text length]; i++) {
                     unichar c = [textField.text characterAtIndex:i];

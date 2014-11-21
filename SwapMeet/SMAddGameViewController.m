@@ -51,7 +51,11 @@
         }
         
         gameDict[@"id"] = gameID;
-        gameDict[@"imagePath"] = [[fileURLs firstObject] lastPathComponent];
+        NSString *imagePath = [[fileURLs firstObject] lastPathComponent];
+        if (imagePath) {
+            gameDict[@"imagePath"] = imagePath;
+        }
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GAME_ADDED" object:self userInfo:gameDict];
         [self dismissViewControllerAnimated:true completion:nil];
     }];
