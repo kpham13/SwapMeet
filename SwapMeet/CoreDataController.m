@@ -143,6 +143,8 @@
     }
 }
 
+// Add fetch game request after receive match
+
 - (void) deleteGame:(Game *)game {
     NSString *gameID = game.gameID;
     BOOL inFavorites = [game.isFavorited boolValue];
