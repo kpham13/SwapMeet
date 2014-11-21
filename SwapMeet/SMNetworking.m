@@ -123,7 +123,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
                               andPassword:(NSString *)password
                             andScreenName:(NSString *)screenName
                                 zipNumber:(NSNumber *)zip
-                               completion:(void(^)(BOOL successful, NSString *errorString))completion
+                               completion:(void(^)(BOOL successful, NSDictionary *profileDic, NSString *errorString))completion
 {
     NSString *errorString = nil;
     if (!email) {
@@ -135,23 +135,24 @@ NSString * const kSMDefaultsKeyToken = @"token";
     }
     
     if (errorString) {
-        completion(NO, errorString);
+        completion(NO, nil, errorString);
         return nil;
     }
     
     NSDictionary *params = @{@"email": email, @"password": password, @"zip": zip, @"screenname": screenName};
-    __block void(^completionBlock)(BOOL successful, NSString *errorString) = completion;
+    __block void(^completionBlock)(BOOL successful, NSDictionary *profileDic, NSString *errorString) = completion;
     
     return [self performRequestWithURLPathString:@"user" method:@"POST" parameters:params acceptJSONResponse:YES sendBodyAsJSON:NO completion:^(NSData *data, NSString *errorString)
     {
-        NSString *token = [self tokenByProcessingResponse:&errorString data:data];
-        completionBlock(token != nil, errorString);
+        NSDictionary *profileDic = nil;
+        NSString *token = [self tokenByProcessingResponse:&errorString data:data profileDic:&profileDic];
+        completionBlock(token != nil, profileDic, errorString);
     }];
 }
 
 + (NSURLSessionDataTask *)loginWithEmail:(NSString *)email
                               andPassword:(NSString *)password
-                               completion:(void(^)(BOOL successful, NSString *errorString))completion
+                               completion:(void(^)(BOOL successful, NSDictionary *profileDic, NSString *errorString))completion
 {
     NSString *errorString = nil;
     if (!email) {
@@ -161,17 +162,18 @@ NSString * const kSMDefaultsKeyToken = @"token";
     }
     
     if (errorString) {
-        completion(NO, errorString);
+        completion(NO, nil, errorString);
         return nil;
     }
     
     NSDictionary *params = @{@"email": email, @"password": password};
-    __block void(^completionBlock)(BOOL successful, NSString *errorString) = completion;
+    __block void(^completionBlock)(BOOL successful, NSDictionary *profileDic, NSString *errorString) = completion;
     
     return [self performRequestWithURLPathString:@"user" method:@"GET" parameters:params acceptJSONResponse:YES sendBodyAsJSON:NO completion:^(NSData *data, NSString *errorString)
             {
-                NSString *token = [self tokenByProcessingResponse:&errorString data:data];
-                completionBlock(token != nil, errorString);
+                NSDictionary *profileDic = nil;
+                NSString *token = [self tokenByProcessingResponse:&errorString data:data profileDic:&profileDic];
+                completionBlock(token != nil, profileDic, errorString);
             }];
 }
 
@@ -246,7 +248,7 @@ NSString * const kSMDefaultsKeyToken = @"token";
 
 #pragma mark - Private Methods
 
-+ (NSString *)tokenByProcessingResponse:(NSString **)errorString_p data:(NSData *)data
++ (NSString *)tokenByProcessingResponse:(NSString **)errorString_p data:(NSData *)data profileDic:(NSDictionary **)profileDic_p
 {
     NSString *token = nil;
     if (!(*errorString_p)) {
@@ -264,6 +266,8 @@ NSString * const kSMDefaultsKeyToken = @"token";
                     [[self controller] setToken:token];
                     [[self controller] setValue:token forHTTPHeaderField:@"jwt"];
                 }
+                
+                *profileDic_p = JSONObject[@"profile"];
             }
         }
     }

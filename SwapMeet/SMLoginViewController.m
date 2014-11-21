@@ -44,9 +44,10 @@
     
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [SMNetworking loginWithEmail:self.email andPassword:self.password completion:^(BOOL successful, NSString *errorString) {
+    [SMNetworking loginWithEmail:self.email andPassword:self.password completion:^(BOOL successful, NSDictionary *profileDic, NSString *errorString) {
         if (successful == YES) {
-            //NSLog(@"Login success.");
+            NSLog(@"Login success.");
+            NSLog(@"%@", profileDic);
             
             // Switch to delegation in the future
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

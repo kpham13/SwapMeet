@@ -43,11 +43,12 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     self.zipCode = [formatter numberFromString:self.zipCodeTextField.text];
 
-    [SMNetworking signUpWithEmail:self.email andPassword:self.password andScreenName:self.screenName zipNumber:self.zipCode completion:^(BOOL successful, NSString *errorString) {
+    [SMNetworking signUpWithEmail:self.email andPassword:self.password andScreenName:self.screenName zipNumber:self.zipCode completion:^(BOOL successful, NSDictionary *profileDic, NSString *errorString) {
         if (successful == YES) {
             NSLog(@"Account created");
+            NSLog(@"%@", profileDic);
             
-            [SMNetworking loginWithEmail:self.email andPassword:self.password completion:^(BOOL successful, NSString *errorString) {
+            [SMNetworking loginWithEmail:self.email andPassword:self.password completion:^(BOOL successful, NSDictionary *profileDic, NSString *errorString) {
                 // Switch to delegation in the future
                 AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                 UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
