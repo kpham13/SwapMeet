@@ -51,7 +51,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bws-pR-8aT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bws-pR-8aT">
                                 <rect key="frame" x="240" y="80" width="120" height="120"/>
                                 <color key="backgroundColor" red="0.15000000599999999" green="0.15000000599999999" blue="0.15000000599999999" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
