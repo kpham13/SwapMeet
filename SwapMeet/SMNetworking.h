@@ -18,11 +18,14 @@ extern NSString * const kSMDefaultsKeyToken;
                               andPassword:(NSString *)password
                             andScreenName:(NSString *)screenName
                                 zipNumber:(NSNumber *)zip
-                               completion:(void(^)(BOOL successful, NSString *errorString))completion;
+                               completion:(void(^)(BOOL successful, NSDictionary *profileDic, NSString *errorString))completion;
 
 + (NSURLSessionDataTask *)loginWithEmail:(NSString *)email
                              andPassword:(NSString *)password
-                              completion:(void(^)(BOOL successful, NSString *errorString))completion;
+                              completion:(void(^)(BOOL successful, NSDictionary *profileDic, NSString *errorString))completion;
+
++ (NSURLSessionDataTask *)setAvatarURLString:(NSString *)URLString
+                                  completion:(void(^)(BOOL successful, NSString *errorString))completion;
 
 + (NSURLSessionDataTask *)gamesContaining:(NSString *)query
                               forPlatform:(NSString *)platform
