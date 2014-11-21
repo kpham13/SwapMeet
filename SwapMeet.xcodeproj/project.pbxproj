@@ -40,6 +40,7 @@
 		9A3AA5661A1DC1C400F23624 /* UIImage+SwapMeet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3AA5651A1DC1C400F23624 /* UIImage+SwapMeet.m */; };
 		9A6A01DD1A1E912D0062B8A4 /* libMBProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A6A01DC1A1E911B0062B8A4 /* libMBProgressHUD.a */; };
 		9A7962F21A1D8D590038A076 /* libCloudinary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7962F11A1D8D590038A076 /* libCloudinary.a */; };
+		9A9D66211A1EE8590027D5E2 /* GDCacheController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9D66201A1EE8590027D5E2 /* GDCacheController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +129,8 @@
 		9A7962EF1A1D8D590038A076 /* CLTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTransformation.h; sourceTree = "<group>"; };
 		9A7962F01A1D8D590038A076 /* CLUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUploader.h; sourceTree = "<group>"; };
 		9A7962F11A1D8D590038A076 /* libCloudinary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCloudinary.a; sourceTree = "<group>"; };
+		9A9D661F1A1EE8590027D5E2 /* GDCacheController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDCacheController.h; sourceTree = "<group>"; };
+		9A9D66201A1EE8590027D5E2 /* GDCacheController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDCacheController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +262,8 @@
 		9A0F68721A1A7A2D0088146F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9A9D661F1A1EE8590027D5E2 /* GDCacheController.h */,
+				9A9D66201A1EE8590027D5E2 /* GDCacheController.m */,
 				0A7D592B1A1C453F00036AC8 /* SMTabBarController.h */,
 				0A7D592C1A1C453F00036AC8 /* SMTabBarController.m */,
 				9A0F68771A1ABBA90088146F /* SMNetworking.h */,
@@ -465,6 +470,7 @@
 				287BF0D11A1ACA2C008C3CCD /* SMAddGameViewController.m in Sources */,
 				0AAE327D1A1AB78C0022476E /* Match.m in Sources */,
 				0AA8B77E1A1A75EE00A23C39 /* SwapMeet.xcdatamodeld in Sources */,
+				9A9D66211A1EE8590027D5E2 /* GDCacheController.m in Sources */,
 				0A8BD5B81A1AD3E700D5A8BB /* SMLoginViewController.m in Sources */,
 				9A3AA5661A1DC1C400F23624 /* UIImage+SwapMeet.m in Sources */,
 				287BF0CD1A1AC5A7008C3CCD /* SMGamesViewController.m in Sources */,
