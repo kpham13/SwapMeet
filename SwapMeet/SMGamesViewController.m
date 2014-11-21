@@ -110,15 +110,27 @@
                 return;
             
             hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [SMNetworking deleteUserGameWithID:game.gameID completion:^(BOOL success, NSString *errorString) {
-                [hud hide:YES];
-                if (success) {
-                    [[CoreDataController controller] deleteGame:game];
-                    [[CoreDataController controller] saveContext];
-                } else {
-                    [[[UIAlertView alloc] initWithTitle:@"Deletion failed" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-                }
-            }];
+            if (_segmentedControl.selectedSegmentIndex == 0) {
+                [SMNetworking deleteUserGameWithID:game.gameID completion:^(BOOL success, NSString *errorString) {
+                    [hud hide:YES];
+                    if (success) {
+                        [[CoreDataController controller] deleteGame:game];
+                        [[CoreDataController controller] saveContext];
+                    } else {
+                        [[[UIAlertView alloc] initWithTitle:@"Deletion failed" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    }
+                }];
+            } else {
+                [SMNetworking removeGameFromFavoritesWithID:game.gameID completion:^(BOOL success, NSString *errorString) {
+                    [hud hide:YES];
+                    if (success) {
+                        [[CoreDataController controller] deleteGame:game];
+                        [[CoreDataController controller] saveContext];
+                    } else {
+                        [[[UIAlertView alloc] initWithTitle:@"Deletion failed" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    }
+                }];
+            }
         }
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.

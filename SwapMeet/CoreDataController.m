@@ -144,8 +144,13 @@
 }
 
 - (void) deleteGame:(Game *)game {
-    [self.managedObjectContext deleteObject: game];
+    NSString *gameID = game.gameID;
+    BOOL inFavorites = [game.isFavorited boolValue];
+    [self.managedObjectContext deleteObject:game];
     [self saveContext];
+    if (inFavorites) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FAVORITE_DELETED" object:nil userInfo:@{@"id": gameID}];
+    }
 }
 
 @end
