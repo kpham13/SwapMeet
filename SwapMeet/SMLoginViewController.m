@@ -73,6 +73,11 @@
     }];
 }
 
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.emailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+}
+
 - (IBAction)registerButton:(id)sender {
     SMSignUpViewController *signUpViewController = [[SMSignUpViewController alloc] initWithNibName:@"SMSignUpViewController" bundle:[NSBundle mainBundle]];
     [self.navigationController pushViewController:signUpViewController animated:true];

@@ -9,8 +9,11 @@
 #import "SMSignUpViewController.h"
 #import "SMNetworking.h"
 #import "AppDelegate.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
-@interface SMSignUpViewController ()
+@interface SMSignUpViewController () {
+    MBProgressHUD *hud;
+}
 
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *password;
@@ -42,6 +45,8 @@
     self.screenName = self.screenNameTextField.text;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     self.zipCode = [formatter numberFromString:self.zipCodeTextField.text];
+    
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
     [SMNetworking signUpWithEmail:self.email andPassword:self.password andScreenName:self.screenName zipNumber:self.zipCode completion:^(BOOL successful, NSDictionary *profileDic, NSString *errorString) {
         if (successful == YES) {
@@ -61,6 +66,7 @@
                 }
             }];
             
+            [hud hide:YES];
             [self dismissViewControllerAnimated:true completion:nil];
         } else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login failed" message:errorString preferredStyle:UIAlertControllerStyleAlert];
@@ -68,8 +74,17 @@
             
             [alert addAction:OKButton];
             [self presentViewController:alert animated:true completion:nil];
+            [hud hide:YES];
         }
     }];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.emailTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+    [self.confirmPasswordTextField resignFirstResponder];
+    [self.screenNameTextField resignFirstResponder];
+    [self.zipCodeTextField resignFirstResponder];
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
@@ -128,6 +143,7 @@
         } else if (textField == self.zipCodeTextField) {
             if ([self validateZipCodeWithString:self.zipCodeTextField.text] == true) {
                 self.errorLabel.text = nil;
+                [self.zipCodeTextField resignFirstResponder];
                 return true;
             } else {
                 self.errorLabel.text = @"Not a valid U.S. Postal Code.";

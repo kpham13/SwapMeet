@@ -9,18 +9,24 @@
 #import "SMProfileViewController.h"
 #import "SMNetworking.h"
 #import "AppDelegate.h"
+#import "CLUploader+SwapMeet.h"
+#import "UIImage+SwapMeet.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 NSString * const kSMDefaultsKeyEmail = @"email";
 NSString * const kSMDefaultsKeyScreenName = @"screenname";
 NSString * const kSMDefaultsKeyZipCode = @"zipcode";
 NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
 
-@interface SMProfileViewController ()
+@interface SMProfileViewController () {
+    MBProgressHUD *hud;
+}
 
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *screenName;
 @property (strong, nonatomic) NSNumber *zipCode;
 @property (strong, nonatomic) NSString *avatarURL;
+@property (strong, nonatomic) UIImage *avatarImage;
 
 @end
 
@@ -50,14 +56,18 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
                 self.screenName = [userDictionary objectForKey:@"screenname"];
                 self.zipCode = [userDictionary objectForKey:@"zip"];
                 self.avatarURL = [userDictionary objectForKey:@"avatar_url"];
-                NSLog(@"1%@, %@", self.screenName, self.avatarURL);
+                //NSLog(@"1%@, %@", self.screenName, self.avatarURL);
                 [[NSUserDefaults standardUserDefaults] setObject:self.email forKey:kSMDefaultsKeyEmail];
                 [[NSUserDefaults standardUserDefaults] setObject:self.screenName forKey:kSMDefaultsKeyScreenName];
                 [[NSUserDefaults standardUserDefaults] setObject:self.zipCode forKey:kSMDefaultsKeyZipCode];
                 [[NSUserDefaults standardUserDefaults] setObject:self.avatarURL forKey:kSMDefaultsKeyAvatarURL];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [self checkForAvatarImage];
+                NSLog(@"checkforAvatarImage1");
+                
                 self.screenName = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyScreenName];
-                NSLog(@"2%@, %@", self.screenName, self.avatarURL);
+                //NSLog(@"2%@, %@", self.screenName, self.avatarURL);
             }
         }];
     } else {
@@ -66,11 +76,14 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
         self.screenName = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyScreenName];
         self.zipCode = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyZipCode];
         self.avatarURL = [[NSUserDefaults standardUserDefaults] objectForKey:kSMDefaultsKeyAvatarURL];
-        NSLog(@"3%@, %@", self.screenName, self.avatarURL);
+        
+        [self checkForAvatarImage];
+        NSLog(@"checkforAvatarimage");
+        //NSLog(@"3%@, %@", self.screenName, self.avatarURL);
     }
     
     self.screenNameLabel.text = self.screenName;
-    NSLog(@"4%@, %@", self.screenName, self.avatarURL);
+    //NSLog(@"4%@, %@", self.screenName, self.avatarURL);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +98,8 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
         [SMNetworking invalidateToken];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyScreenName];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyZipCode];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSMDefaultsKeyAvatarURL];
+        self.avatarImage = nil;
         
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         UITabBarController *tabBarController = (UITabBarController *)appDelegate.window.rootViewController;
@@ -103,12 +118,72 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    self.avatarImage = image;
+    self.imageView.image = self.avatarImage;
+    NSLog(@"imagepicker set");
+    
+    [self generateThumbnail:self.imageView.image];
+    
+    // Save avatar image to disk
+    NSString *fileURL;
+    NSURL *temp = [NSURL fileURLWithPath:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true) firstObject] isDirectory:true];
+    NSString *tempFileName = [[NSUUID UUID] UUIDString];
+    NSURL *tempFileURL = [temp URLByAppendingPathComponent:tempFileName];
+    if ([UIImageJPEGRepresentation([image thumbnailImage], 0.8) writeToURL:tempFileURL atomically:true]) {
+        fileURL = [tempFileURL path];
+    }
+    
+    // Upload images
+    CLUploader *uploader = [CLUploader uploaderWithDelegate:nil];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    hud.labelText = @"Uploading image";
+    hud.progress = 0.01;
+            
+    [uploader upload:fileURL options:@{} withCompletion:^(NSDictionary *successResult, NSString *errorResult, NSInteger code, id context) {
+        NSString *remoteURL = successResult[@"secure_url"];
+        [[NSUserDefaults standardUserDefaults] setObject:remoteURL forKey:kSMDefaultsKeyAvatarURL];
+        
+    } andProgress:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite, id context) {
+        float progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
+        NSLog(@"PROGRESS: %@", @(progress));
+        hud.progress = progress;
+        [hud hide:true];
+    }];
+    
     [picker dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:true completion:nil];
+}
+
+- (UIImage *) generateThumbnail:(UIImage *) image {
+    UIGraphicsBeginImageContext(CGSizeMake(75, 75));
+    [image drawInRect:CGRectMake(0, 0, 75, 75)];
+    UIImage *thumbnail = UIGraphicsGetImageFromCurrentImageContext();
+    return thumbnail;
+}
+
+- (void)checkForAvatarImage {
+    if (!self.avatarImage) {
+        NSLog(@"Avatar image does not exist.");
+        if (!self.avatarURL) {
+            NSLog(@"No avatar URL saved.");
+        } else {
+            NSLog(@"Downloading image from saved URL in user defaults.");
+            NSString *url = self.avatarURL;
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:url]];
+            
+            UIImage *image = [[UIImage alloc] initWithData:imageData];
+            self.avatarImage = image;
+            self.imageView.image = self.avatarImage;
+        }
+    } else {
+        NSLog(@"Avatar image does exist, setting image view.");
+        //self.imageView.image = self.avatarImage;
+    }
 }
 
 @end

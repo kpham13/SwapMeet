@@ -38,7 +38,7 @@
                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Screen Name (Optional)" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sWt-BX-XkC">
                     <rect key="frame" x="8" y="194" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                    <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eFe-nI-TAQ">
                     <rect key="frame" x="8" y="232" width="584" height="30"/>
@@ -46,7 +46,7 @@
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VmJ-d6-FWl">
-                    <rect key="frame" x="273" y="520" width="55" height="30"/>
+                    <rect key="frame" x="273" y="285" width="55" height="30"/>
                     <state key="normal" title="Sign Up">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -67,6 +67,7 @@
                 <constraint firstAttribute="trailing" secondItem="YeM-Qn-3E0" secondAttribute="trailing" constant="12" id="9lh-vE-rsn"/>
                 <constraint firstItem="YeM-Qn-3E0" firstAttribute="top" secondItem="eFe-nI-TAQ" secondAttribute="bottom" constant="8" id="AfF-ze-NOR"/>
                 <constraint firstItem="RZF-Jp-dsN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Bx0-A6-geX"/>
+                <constraint firstAttribute="centerY" secondItem="VmJ-d6-FWl" secondAttribute="centerY" id="C8p-v1-ddV"/>
                 <constraint firstAttribute="trailing" secondItem="Jfg-Kn-wq4" secondAttribute="trailing" constant="8" id="KXy-c2-SEO"/>
                 <constraint firstItem="GfZ-nY-Iih" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="Mp0-wu-Zkd"/>
                 <constraint firstItem="Jfg-Kn-wq4" firstAttribute="top" secondItem="RZF-Jp-dsN" secondAttribute="bottom" constant="8" id="NWw-PI-5nY"/>
@@ -77,7 +78,6 @@
                 <constraint firstItem="sWt-BX-XkC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="YE9-GI-gjx"/>
                 <constraint firstItem="sWt-BX-XkC" firstAttribute="top" secondItem="Jfg-Kn-wq4" secondAttribute="bottom" constant="8" id="Ygv-lg-Wem"/>
                 <constraint firstAttribute="trailing" secondItem="eFe-nI-TAQ" secondAttribute="trailing" constant="8" id="auW-rM-xtP"/>
-                <constraint firstAttribute="bottom" secondItem="VmJ-d6-FWl" secondAttribute="bottom" constant="50" id="c0c-cT-92z"/>
                 <constraint firstItem="RZF-Jp-dsN" firstAttribute="top" secondItem="GfZ-nY-Iih" secondAttribute="bottom" constant="8" id="ca7-Ni-sFp"/>
                 <constraint firstItem="eFe-nI-TAQ" firstAttribute="top" secondItem="sWt-BX-XkC" secondAttribute="bottom" constant="8" id="fta-99-vu3"/>
                 <constraint firstAttribute="centerX" secondItem="VmJ-d6-FWl" secondAttribute="centerX" id="hPt-42-5H0"/>
