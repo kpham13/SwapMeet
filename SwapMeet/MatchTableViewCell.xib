@@ -75,10 +75,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="hasGameImageView" destination="u7U-NV-AAT" id="V8V-zG-Q9r"/>
+                <outlet property="hasGameTitle" destination="irI-Yu-4Qk" id="6x3-Ei-L0p"/>
                 <outlet property="sendEmailImage" destination="6AX-X8-HJH" id="WJP-xH-RM0"/>
-                <outlet property="titleLabelOne" destination="irI-Yu-4Qk" id="gd9-N5-nHn"/>
-                <outlet property="titleLabelTwo" destination="ZZX-Rf-OBH" id="Vp7-Zs-Vpk"/>
                 <outlet property="wantsGameImageView" destination="hu3-Ph-oqG" id="21O-e5-IdQ"/>
+                <outlet property="wantsGameTitle" destination="ZZX-Rf-OBH" id="Gun-4G-cSm"/>
             </connections>
             <point key="canvasLocation" x="433" y="357"/>
         </tableViewCell>
