@@ -43,8 +43,19 @@ NSString * const kSMDefaultsKeyToken = @"token";
 #pragma mark - Public Methods
 
 + (NSURLSessionDataTask *)matchesWithCompletion:(void(^)(NSArray *matches, NSString *errorString))completion {
+    __block void(^completionBlock)(NSArray *matches, NSString *errorString) = completion;
     return [self performJSONRequestAtPath:@"matches" withMethod:@"GET" andParameters:nil sendBodyAsJSON:NO completion:^(NSDictionary *JSONDic, NSString *errorString) {
-        NSLog(@"Dic: %@. Error: %@", JSONDic, errorString);
+        if (errorString) {
+            completionBlock(nil, errorString);
+            return;
+        }
+        
+        NSArray *items = JSONDic[@"items"];
+        if (!items) {
+            errorString = @"No 'items' object in response";
+        }
+        
+        completionBlock(items, errorString);
     }];
 }
 
