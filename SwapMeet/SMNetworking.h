@@ -30,6 +30,9 @@ extern NSString * const kSMDefaultsKeyToken;
 + (NSURLSessionDataTask *)addGameToFavoritesWithID:(NSString *)gameID
                                         completion:(void(^)(BOOL success, NSString *errorString))completion;
 
++ (NSURLSessionDataTask *)removeGameFromFavoritesWithID:(NSString *)gameID
+                                             completion:(void(^)(BOOL success, NSString *errorString))completion;
+
 + (NSURLSessionDataTask *)addNewGame:(NSDictionary *)gameDictionary
                           completion:(void(^)(NSString *gameID, NSString *errorString))completion;
 

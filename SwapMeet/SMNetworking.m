@@ -56,6 +56,19 @@ NSString * const kSMDefaultsKeyToken = @"token";
     }];
 }
 
++ (NSURLSessionDataTask *)removeGameFromFavoritesWithID:(NSString *)gameID
+                                             completion:(void(^)(BOOL success, NSString *errorString))completion {
+    if (!gameID || [gameID isEqualToString:@""]) {
+        completion(NO, @"gameID cannot be empty");
+        return nil;
+    }
+    
+    __block void(^completionBlock)(BOOL success, NSString *errorString) = completion;
+    return [self performJSONRequestAtPath:@"games/wantsgames" withMethod:@"DELETE" andParameters:@{@"id": gameID} sendBodyAsJSON:YES completion:^(NSDictionary *JSONDic, NSString *errorString) {
+        completionBlock(errorString == nil, errorString);
+    }];
+}
+
 + (NSURLSessionDataTask *)addNewGame:(NSDictionary *)gameDictionary
                           completion:(void(^)(NSString *gameID, NSString *errorString))completion {
     if (!gameDictionary) {
