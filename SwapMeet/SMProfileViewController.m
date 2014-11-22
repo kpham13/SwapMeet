@@ -103,7 +103,7 @@ NSString * const kSMDefaultsKeyAvatarURL = @"avatar";
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    self.avatarImage = image;
+    self.avatarImage = [image fixRotation];
     self.imageView.image = self.avatarImage;
     NSLog(@"imagepicker set");
     
