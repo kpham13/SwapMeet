@@ -17,7 +17,11 @@
 @property (weak, nonatomic) IBOutlet SMTextField *screenNameTextField;
 @property (weak, nonatomic) IBOutlet SMTextField *zipCodeTextField;
 
-@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *passwordErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *confirmPasswordErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *screenNameErrorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *zipCodeErrorLabel;
 
 - (IBAction)signUpButton:(id)sender;
 - (BOOL)validateEmailWithString:(NSString *)email;

@@ -29,35 +29,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
-    self.errorLabel.text = nil;
-    
+    [self setupViewController];
+
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
         [self setEdgesForExtendedLayout:UIRectEdgeTop];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [_emailTextField setRequired:YES];
-    [_emailTextField setEmailField:YES];
-    [_passwordTextField setRequired:YES];
-    [_confirmPasswordTextField setRequired:YES];
-    [_zipCodeTextField setRequired:YES];
-    
-    [self.navigationItem setTitle:@"Registration"];
     //NSLog(@"%@", self.navigationItem.backBarButtonItem.title);
     //self.navigationItem.backBarButtonItem.title = nil;
     
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
     self.confirmPasswordTextField.delegate = self;
+    self.screenNameTextField.delegate = self;
     self.zipCodeTextField.delegate = self;
 }
-
-//- (void)textFieldWillShow:(NSNotification *)notification {
-//    CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-//    NSLog(@"%f",keyboardFrame.origin.y);
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -108,7 +93,7 @@
     }];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.emailTextField resignFirstResponder];
     [self.passwordTextField resignFirstResponder];
     [self.confirmPasswordTextField resignFirstResponder];
@@ -116,19 +101,45 @@
     [self.zipCodeTextField resignFirstResponder];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.25];
+    
+    if (textField == self.emailTextField) {
+        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    } else if (textField == self.passwordTextField) {
+        self.view.frame = CGRectMake(0, -45, self.view.frame.size.width, self.view.frame.size.height);
+    } else if (textField == self.confirmPasswordTextField) {
+        self.view.frame = CGRectMake(0, -90, self.view.frame.size.width, self.view.frame.size.height);
+    } else if (textField == self.screenNameTextField) {
+        self.view.frame = CGRectMake(0, -135, self.view.frame.size.width, self.view.frame.size.height);
+    } else if (textField == self.zipCodeTextField) {
+        self.view.frame = CGRectMake(0, -180, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    
+    [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:0.25];
+//    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+//    [UIView commitAnimations];
+}
+
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     if (textField.text.length > 0) {
         if (textField == self.emailTextField) {
             if (self.emailTextField.text.length > 5) {
                 if ([self validateEmailWithString:self.emailTextField.text] == true) {
-                    self.errorLabel.text = nil;
+                    self.emailErrorLabel.text = nil;
                     return true;
                 } else {
-                    self.errorLabel.text = @"Not a valid e-mail address.";
+                    self.emailErrorLabel.text = @"Not a valid e-mail address.";
                     return false;
                 }
             } else {
-                self.errorLabel.text = @"E-mail address is too short.";
+                self.emailErrorLabel.text = @"E-mail address is too short.";
                 return false;
             }
             
@@ -147,14 +158,14 @@
                 }
                 
                 if (lowerCaseLetter && digit) {
-                    self.errorLabel.text = nil;
+                    self.passwordErrorLabel.text = nil;
                     return true;
                 } else {
-                    self.errorLabel.text = @"Please ensure that you have at least one lower case letter and one digit in your password.";
+                    self.passwordErrorLabel.text = @"Please ensure that you have at least one lower case letter and one digit in your password.";
                     return false;
                 }
             } else {
-                self.errorLabel.text = @"Passwords must be 8-12 characters.";
+                self.passwordErrorLabel.text = @"Passwords must be 8-12 characters.";
                 return false;
             }
             
@@ -162,26 +173,30 @@
             NSString *password1 = self.passwordTextField.text;
             NSString *password2 = self.confirmPasswordTextField.text;
             if ([password1 isEqualToString:password2]) {
-                self.errorLabel.text = nil;
+                self.confirmPasswordErrorLabel.text = nil;
                 return true;
             } else {
-                self.errorLabel.text = @"Passwords do not match.";
+                self.confirmPasswordErrorLabel.text = @"Passwords do not match.";
                 return false;
             }
             
         } else if (textField == self.zipCodeTextField) {
             if ([self validateZipCodeWithString:self.zipCodeTextField.text] == true) {
-                self.errorLabel.text = nil;
+                self.zipCodeErrorLabel.text = nil;
                 [self.zipCodeTextField resignFirstResponder];
                 return true;
             } else {
-                self.errorLabel.text = @"Not a valid U.S. Postal Code.";
+                self.zipCodeErrorLabel.text = @"Not a valid U.S. Postal Code.";
                 return false;
             }
         }
+    } else if (textField.text.length == 0) {
+        self.emailErrorLabel.text = nil;
+        self.passwordErrorLabel.text = nil;
+        self.confirmPasswordErrorLabel.text = nil;
+        self.zipCodeErrorLabel.text = nil;
     }
     
-    self.errorLabel.text = nil;
     return true;
 }
 
@@ -192,9 +207,27 @@
 }
 
 - (BOOL)validateZipCodeWithString:(NSString *)zipCode {
-    NSString *zipRegex = @"^[0-9]{5}(-[0-9]{4})?$";
-    NSPredicate *zipTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@", zipRegex];
-    return [zipTest evaluateWithObject:zipCode];
+    NSString *zipCodeRegex = @"^[0-9]{5}(-[0-9]{4})?$";
+    NSPredicate *zipCodeTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@", zipCodeRegex];
+    return [zipCodeTest evaluateWithObject:zipCode];
+}
+
+- (void)setupViewController {
+    [self.navigationItem setTitle:@"Registration"];
+    [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
+    
+    self.emailErrorLabel.text = nil;
+    self.passwordErrorLabel.text = nil;
+    self.confirmPasswordErrorLabel.text = nil;
+    self.screenNameErrorLabel.text = nil;
+    self.zipCodeErrorLabel.text = nil;
+    
+    // Text Field Delegate Setup
+    [_emailTextField setRequired:YES];
+    [_emailTextField setEmailField:YES];
+    [_passwordTextField setRequired:YES];
+    [_confirmPasswordTextField setRequired:YES];
+    [_zipCodeTextField setRequired:YES];
 }
 
 @end
