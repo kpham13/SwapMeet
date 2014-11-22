@@ -102,25 +102,27 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.25];
+    [UIView animateWithDuration:0.25 animations:^{
+        if (textField == self.emailTextField) {
+            self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        } else if (textField == self.passwordTextField) {
+            self.view.frame = CGRectMake(0, -40, self.view.frame.size.width, self.view.frame.size.height);
+        } else if (textField == self.confirmPasswordTextField) {
+            self.view.frame = CGRectMake(0, -80, self.view.frame.size.width, self.view.frame.size.height);
+        } else if (textField == self.screenNameTextField) {
+            self.view.frame = CGRectMake(0, -120, self.view.frame.size.width, self.view.frame.size.height);
+        } else if (textField == self.zipCodeTextField) {
+            self.view.frame = CGRectMake(0, -160, self.view.frame.size.width, self.view.frame.size.height);
+        }
+    } completion:^(BOOL finished) {
+        NSLog(@"Done!");
+    }];
     
-    if (textField == self.emailTextField) {
-        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    } else if (textField == self.passwordTextField) {
-        self.view.frame = CGRectMake(0, -45, self.view.frame.size.width, self.view.frame.size.height);
-    } else if (textField == self.confirmPasswordTextField) {
-        self.view.frame = CGRectMake(0, -90, self.view.frame.size.width, self.view.frame.size.height);
-    } else if (textField == self.screenNameTextField) {
-        self.view.frame = CGRectMake(0, -135, self.view.frame.size.width, self.view.frame.size.height);
-    } else if (textField == self.zipCodeTextField) {
-        self.view.frame = CGRectMake(0, -180, self.view.frame.size.width, self.view.frame.size.height);
-    }
-    
-    [UIView commitAnimations];
+    // [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    //[self exitTextEditingMode];
 //    [UIView beginAnimations:nil context:nil];
 //    [UIView setAnimationDuration:0.25];
 //    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -212,9 +214,27 @@
     return [zipCodeTest evaluateWithObject:zipCode];
 }
 
+//- (void)beginTextEditingMode {
+//    [UIView animateWithDuration:5 animations:^{
+//        self.emailToPasswordConstraint.constant = 24;
+//        self.passwordToConfirmConstraint.constant = 24;
+//        self.confirmPasswordToScreenNameConstraint.constant = 24;
+//        self.screenNameToZipCodeConstraint.constant = 24;
+//    } completion:^(BOOL finished) {
+//        NSLog(@"Done!");
+//    }];
+//}
+
+//- (void)exitTextEditingMode {
+//    self.emailToPasswordConstraint.constant = 15;
+//    self.passwordToConfirmConstraint.constant = 15;
+//    self.confirmPasswordToScreenNameConstraint.constant = 15;
+//    self.screenNameToZipCodeConstraint.constant = 15;
+//}
+
 - (void)setupViewController {
     [self.navigationItem setTitle:@"Registration"];
-    [self.view setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
+    [self.contentView setBackgroundColor:[UIColor colorWithRed:242/255. green:242/255. blue:246/255. alpha:1.0]];
     
     self.emailErrorLabel.text = nil;
     self.passwordErrorLabel.text = nil;
