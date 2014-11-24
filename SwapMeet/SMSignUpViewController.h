@@ -11,25 +11,30 @@
 
 @interface SMSignUpViewController : UIViewController <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet SMTextField *emailTextField;
 @property (weak, nonatomic) IBOutlet SMTextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet SMTextField *confirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet SMTextField *screenNameTextField;
 @property (weak, nonatomic) IBOutlet SMTextField *zipCodeTextField;
 
-@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UILabel *emailErrorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *passwordErrorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *confirmPasswordErrorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *screenNameErrorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *zipCodeErrorLabel;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *emailToPasswordConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *passwordToConfirmConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *confirmPasswordToScreenNameConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *screenNameToZipCodeConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintEmailToPassword;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPasswordToConfirm;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintConfirmPasswordToScreenName;
 
 - (IBAction)signUpButton:(id)sender;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField;
 - (BOOL)validateEmailWithString:(NSString *)email;
+- (BOOL)validateZipCodeWithString:(NSString *)zipCode;
+- (void)setupViewController;
 
 @end
